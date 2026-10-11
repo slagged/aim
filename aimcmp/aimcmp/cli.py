@@ -96,6 +96,9 @@ def main(argv=None):
     report_options(project_cmp)
     builder = sub.add_parser('build', help='Upload sources and build a configured target on the SSH VM')
     builder.add_argument('project'); builder.add_argument('name')
+    coff = sub.add_parser('coff-compare', help='Compare selected COFF contributions with explicit symbol bindings')
+    coff.add_argument('original'); coff.add_argument('object_dir'); coff.add_argument('manifest')
+    coff.add_argument('--json')
     matrix = sub.add_parser('matrix', help='Build configured flag variants and rank comparison reports')
     matrix.add_argument('project'); matrix.add_argument('name'); matrix.add_argument('--output', required=True)
     analysis_options(matrix)
@@ -121,8 +124,15 @@ def main(argv=None):
     query_parser(sub, analysis_options, positive_integer)
     from .variants import add_parser as variants_parser, execute as variants_execute
     variants_parser(sub, analysis_options)
+    objects = sub.add_parser('objects', help='Extract byte-verified object and ABI observations from a BN export')
+    objects.add_argument('export', type=Path)
+    objects.add_argument('original', type=Path)
+    objects.add_argument('--output', type=Path, required=True)
     args = parser.parse_args(argv)
     try:
+        if args.command == 'objects':
+            from .object_analysis import main as object_main
+            return object_main([str(args.export), str(args.original), '--output', str(args.output)])
         if args.command=='variants':
             return variants_execute(args,load_target,analyze,write_report)
         if args.command in ('query','query-target'):
@@ -161,6 +171,15 @@ def main(argv=None):
             path = Path(args.json); path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(json.dumps(result, indent=2), encoding='utf-8')
             print(f'{len(result["functions"])} functions; {result["engine"]} {result["engine_version"]}'); return 0
+        if args.command == 'coff-compare':
+            from .coff import compare_contributions
+            manifest = json.loads(Path(args.manifest).read_text())
+            result = compare_contributions(args.original, args.object_dir, manifest)
+            write_report(result, args.json, None)
+            print(json.dumps({'exact': result['exact'], 'functions': [
+                {'id': row['id'], 'exact': row['exact'], 'size': row['original_size']}
+                for row in result['functions']]}))
+            return 0 if result['exact'] else 2
         if args.command == 'build':
             path, target = load_target(args.project, args.name)
             print(build(path, target)['log']); return 0

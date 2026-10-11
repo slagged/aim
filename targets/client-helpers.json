@@ -1,0 +1,214 @@
+{
+  "schema": 1,
+  "original_sha256": "1d150f88b23acdcec2f82d7f603f4f5d200a30fcb23f5fc87bd0af3d94728840",
+  "compiler": "VC7.1 13.10.3077",
+  "flags": "/O1 /MD /EHsc /GS",
+  "name_provenance": "Descriptive reconstructed names; original private symbols unavailable",
+  "functions": [
+    {
+      "id": "aim.guid_equal",
+      "object": "guid_equal.obj",
+      "address": "0x401650",
+      "size": 24,
+      "bindings": {
+        "_memcmp": "0x403970"
+      }
+    },
+    {
+      "id": "aim.file_time_before",
+      "object": "file_time_before.obj",
+      "address": "0x401c6b",
+      "size": 35,
+      "bindings": {}
+    },
+    {
+      "id": "aim.allocate_zeroed",
+      "object": "allocate_zeroed.obj",
+      "address": "0x402160",
+      "size": 37,
+      "bindings": {
+        "__imp__malloc": "0x404168",
+        "_memset": "0x403982"
+      }
+    },
+    {
+      "id": "aim.registry.body",
+      "object": "registry_writable.obj",
+      "section": ".text",
+      "address": "0x401b52",
+      "size": 140,
+      "bindings": {
+        "__EH_prolog": "0x4039a0",
+        "__imp_??0TBstr@XPRT@@QAE@PBD@Z": "0x404204",
+        "__imp_?Append@TBstr@XPRT@@QAEAAV12@PBD@Z": "0x4041fc",
+        "__imp_?GetMultibyteString@TBstr@XPRT@@QBEPBDXZ": "0x404214",
+        "__imp___access": "0x404170",
+        "__imp_??1TBstr@XPRT@@QAE@XZ": "0x404228",
+        "__except_list": "0x0",
+        "___CxxFrameHandler": "0x40398e"
+      },
+      "internal_bindings": [
+        {
+          "section": 4,
+          "offset": 0,
+          "address": "0x403dc6"
+        },
+        {
+          "section": 4,
+          "offset": 9,
+          "address": "0x403dcf"
+        },
+        {
+          "section": 5,
+          "offset": 0,
+          "address": "0x4045e4"
+        },
+        {
+          "section": 6,
+          "offset": 0,
+          "address": "0x404d4c"
+        },
+        {
+          "section": 6,
+          "offset": 8,
+          "address": "0x404d54"
+        }
+      ]
+    },
+    {
+      "id": "aim.registry.cleanup",
+      "object": "registry_writable.obj",
+      "section": ".text$x",
+      "address": "0x403dc6",
+      "size": 19,
+      "bindings": {
+        "__EH_prolog": "0x4039a0",
+        "__imp_??0TBstr@XPRT@@QAE@PBD@Z": "0x404204",
+        "__imp_?Append@TBstr@XPRT@@QAEAAV12@PBD@Z": "0x4041fc",
+        "__imp_?GetMultibyteString@TBstr@XPRT@@QBEPBDXZ": "0x404214",
+        "__imp___access": "0x404170",
+        "__imp_??1TBstr@XPRT@@QAE@XZ": "0x404228",
+        "__except_list": "0x0",
+        "___CxxFrameHandler": "0x40398e"
+      },
+      "internal_bindings": [
+        {
+          "section": 4,
+          "offset": 0,
+          "address": "0x403dc6"
+        },
+        {
+          "section": 4,
+          "offset": 9,
+          "address": "0x403dcf"
+        },
+        {
+          "section": 5,
+          "offset": 0,
+          "address": "0x4045e4"
+        },
+        {
+          "section": 6,
+          "offset": 0,
+          "address": "0x404d4c"
+        },
+        {
+          "section": 6,
+          "offset": 8,
+          "address": "0x404d54"
+        }
+      ]
+    },
+    {
+      "id": "aim.registry.unwind",
+      "object": "registry_writable.obj",
+      "section": ".xdata$x",
+      "address": "0x404d4c",
+      "size": 36,
+      "bindings": {
+        "__EH_prolog": "0x4039a0",
+        "__imp_??0TBstr@XPRT@@QAE@PBD@Z": "0x404204",
+        "__imp_?Append@TBstr@XPRT@@QAEAAV12@PBD@Z": "0x4041fc",
+        "__imp_?GetMultibyteString@TBstr@XPRT@@QBEPBDXZ": "0x404214",
+        "__imp___access": "0x404170",
+        "__imp_??1TBstr@XPRT@@QAE@XZ": "0x404228",
+        "__except_list": "0x0",
+        "___CxxFrameHandler": "0x40398e"
+      },
+      "internal_bindings": [
+        {
+          "section": 4,
+          "offset": 0,
+          "address": "0x403dc6"
+        },
+        {
+          "section": 4,
+          "offset": 9,
+          "address": "0x403dcf"
+        },
+        {
+          "section": 5,
+          "offset": 0,
+          "address": "0x4045e4"
+        },
+        {
+          "section": 6,
+          "offset": 0,
+          "address": "0x404d4c"
+        },
+        {
+          "section": 6,
+          "offset": 8,
+          "address": "0x404d54"
+        }
+      ]
+    },
+    {
+      "id": "aim.registry.string",
+      "object": "registry_writable.obj",
+      "section": ".rdata",
+      "address": "0x4045e4",
+      "size": 19,
+      "bindings": {
+        "__EH_prolog": "0x4039a0",
+        "__imp_??0TBstr@XPRT@@QAE@PBD@Z": "0x404204",
+        "__imp_?Append@TBstr@XPRT@@QAEAAV12@PBD@Z": "0x4041fc",
+        "__imp_?GetMultibyteString@TBstr@XPRT@@QBEPBDXZ": "0x404214",
+        "__imp___access": "0x404170",
+        "__imp_??1TBstr@XPRT@@QAE@XZ": "0x404228",
+        "__except_list": "0x0",
+        "___CxxFrameHandler": "0x40398e"
+      },
+      "internal_bindings": [
+        {
+          "section": 4,
+          "offset": 0,
+          "address": "0x403dc6"
+        },
+        {
+          "section": 4,
+          "offset": 9,
+          "address": "0x403dcf"
+        },
+        {
+          "section": 5,
+          "offset": 0,
+          "address": "0x4045e4"
+        },
+        {
+          "section": 6,
+          "offset": 0,
+          "address": "0x404d4c"
+        },
+        {
+          "section": 6,
+          "offset": 8,
+          "address": "0x404d54"
+        }
+      ]
+    }
+  ],
+  "abi_hypotheses": [
+    "XPRT::TBstr complete-object extent is eight bytes; base versus direct storage remains ambiguous."
+  ]
+}
