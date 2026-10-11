@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "kind": "aimcmp.mapping",
+  "original": {
+    "path": "../originals/AIM/ShareFile.exe",
+    "sha256": "e2b0eb44ec485fd72d8b84c64b3029c2007366b04ad08cdb16437f648647e172"
+  },
+  "types": [],
+  "records": [
+    {
+      "id": "ShareFile.function.WinMain",
+      "kind": "function",
+      "original": "0x401000",
+      "name": "WinMain",
+      "rebuilt": {
+        "symbol": "WinMain"
+      },
+      "type": "int __stdcall WinMain(void *instance, void *previous, char *command, int show)",
+      "confidence": "verified",
+      "evidence": [
+        "Exact raw function bytes and complete-file equality except timestamps; reports/iterations/ShareFile/latest.json",
+        "Reconstructed identifier and signature from the current source; original source spelling is unknown."
+      ]
+    }
+  ]
+}

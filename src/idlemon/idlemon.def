@@ -1,0 +1,9 @@
+LIBRARY idlemon
+EXPORTS
+    AimIdleShutdown @1
+    IdleKeybdHook @2
+    IdleMouseHook @3
+    IdleSetEvent @4
+    IdleStartup @5
+    IdleTimeSinceLastInput @6
+    IdleTimeSinceNextToLastInput @7

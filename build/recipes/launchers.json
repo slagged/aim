@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "profile": "../profiles/vc71.json",
+  "flags": "/O2 /Oi",
+  "compile_options": ["/Zl"],
+  "link_options": ["/nodefaultlib", "/entry:WinMain@16", "/subsystem:windows", "/base:0x400000", "/stack:0x1000"],
+  "libraries": ["kernel32.lib", "user32.lib", "advapi32.lib"],
+  "products": [
+    { "source": "launcher.cpp", "object": "builds/SendFile.obj", "binary": "builds/SendFile.exe", "map": "builds/SendFile.map" },
+    { "source": "launcher.cpp", "object": "builds/ShareFile.obj", "defines": ["AIM_ACTION=\\\"ShareFile\\\""], "binary": "builds/ShareFile.exe", "map": "builds/ShareFile.map" }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "name": "Visual C++ 7.1, stock VS .NET 2003",
+  "environment": "C:/VS2003/Common7/Tools/vsvars32.bat",
+  "tools": {
+    "cl.exe": { "path": "C:/VS2003/Vc7/bin/cl.exe", "version": "13.10.3077.0" },
+    "c1.dll": { "path": "C:/VS2003/Vc7/bin/c1.dll", "version": "13.10.3077.0" },
+    "c1xx.dll": { "path": "C:/VS2003/Vc7/bin/c1xx.dll", "version": "13.10.3077.0" },
+    "c2.dll": { "path": "C:/VS2003/Vc7/bin/c2.dll", "version": "13.10.3077.0" },
+    "link.exe": { "path": "C:/VS2003/Vc7/bin/link.exe", "version": "7.10.3077.0" },
+    "cvtres.exe": { "path": "C:/VS2003/Vc7/bin/cvtres.exe", "version": "7.10.3052.4" },
+    "rc.exe": { "path": "C:/VS2003/Vc7/bin/rc.exe", "version": "5.2.3668.0" }
+  }
+}

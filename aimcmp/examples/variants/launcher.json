@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "max_variants": 8,
+  "templates": {
+    "launcher.cpp": "launcher.template.cpp"
+  },
+  "axes": [
+    {
+      "name": "initialization",
+      "choices": [
+        {
+          "name": "before_zero",
+          "text": "executable[0] = 0;\n                ZeroMemory(&startup, sizeof(startup));\n                startup.cb = sizeof(startup);\n                ZeroMemory(&process, sizeof(process));"
+        },
+        {
+          "name": "after_zero",
+          "text": "ZeroMemory(&startup, sizeof(startup));\n                startup.cb = sizeof(startup);\n                ZeroMemory(&process, sizeof(process));\n                executable[0] = 0;"
+        }
+      ]
+    },
+    {
+      "name": "quoted_branch",
+      "choices": [
+        {
+          "name": "end_then_app",
+          "text": "char *end = buffer + 1;\n\n                        application = end;\n\n                        while (*end && *end != '\"')\n                            ++end;\n\n                        *end = 0;"
+        },
+        {
+          "name": "chained",
+          "text": "char *end;\n                        application = end = buffer + 1;\n                        while (*end && *end != '\"') ++end;\n                        *end = 0;"
+        }
+      ]
+    },
+    {
+      "name": "flags",
+      "choices": [
+        {
+          "name": "O2",
+          "flags": "/O2 /Oi"
+        },
+        {
+          "name": "O1",
+          "flags": "/O1 /Oi"
+        }
+      ]
+    }
+  ]
+}

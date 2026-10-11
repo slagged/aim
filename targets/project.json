@@ -1,0 +1,106 @@
+{
+  "schema": 1,
+  "targets": [
+    {
+      "name": "idlemon",
+      "original": "../originals/AIM/idlemon.dll",
+      "rebuilt": "builds/idlemon/idlemon.dll",
+      "map": "builds/idlemon/idlemon.map",
+      "build": {
+        "ssh": "build-vm",
+        "remote_dir": "C:/aim-build/idlemon",
+        "source_dir": "../src/idlemon",
+        "download_dir": "builds/idlemon",
+        "recipe": "../build/recipes/idlemon.json"
+      },
+      "mapping": "mappings/idlemon.json"
+    },
+    {
+      "name": "SendFile",
+      "original": "../originals/AIM/SendFile.exe",
+      "rebuilt": "builds/SendFile/SendFile.exe",
+      "map": "builds/SendFile/SendFile.map",
+      "build": {
+        "ssh": "build-vm",
+        "remote_dir": "C:/aim-build/launchers",
+        "source_dir": "../src/launchers",
+        "download_dir": "builds/SendFile",
+        "recipe": "../build/recipes/launchers.json"
+      },
+      "variants": [
+        {
+          "name": "O1_default",
+          "flags": "/O1 /Oi"
+        },
+        {
+          "name": "O1_frame",
+          "flags": "/O1 /Oi /Oy-"
+        },
+        {
+          "name": "O2_default",
+          "flags": "/O2 /Oi"
+        },
+        {
+          "name": "O2_frame",
+          "flags": "/O2 /Oi /Oy-"
+        },
+        {
+          "name": "Ox_default",
+          "flags": "/Ox /Oi"
+        },
+        {
+          "name": "Ox_frame",
+          "flags": "/Ox /Oi /Oy-"
+        }
+      ],
+      "mapping": "mappings/SendFile.json"
+    },
+    {
+      "name": "ShareFile",
+      "original": "../originals/AIM/ShareFile.exe",
+      "rebuilt": "builds/ShareFile/ShareFile.exe",
+      "map": "builds/ShareFile/ShareFile.map",
+      "build": {
+        "ssh": "build-vm",
+        "remote_dir": "C:/aim-build/launchers",
+        "source_dir": "../src/launchers",
+        "download_dir": "builds/ShareFile",
+        "recipe": "../build/recipes/launchers.json"
+      },
+      "variants": [
+        {
+          "name": "O1_default",
+          "flags": "/O1 /Oi"
+        },
+        {
+          "name": "O1_frame",
+          "flags": "/O1 /Oi /Oy-"
+        },
+        {
+          "name": "O2_default",
+          "flags": "/O2 /Oi"
+        },
+        {
+          "name": "O2_frame",
+          "flags": "/O2 /Oi /Oy-"
+        },
+        {
+          "name": "Ox_default",
+          "flags": "/Ox /Oi"
+        },
+        {
+          "name": "Ox_frame",
+          "flags": "/Ox /Oi /Oy-"
+        }
+      ],
+      "mapping": "mappings/ShareFile.json"
+    }
+  ],
+  "toolchain": {
+    "ssh": "build-vm",
+    "profile": "../build/profiles/vc71.json"
+  },
+  "batch_archive_tool": "C:/Tools/7-Zip/7z.exe",
+  "workspace_root": "..",
+  "local_config": "../.local/machine.json"
+}

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aimcmp"
+version = "0.1.0"
+description = "Binary Ninja assisted matching-decompilation comparison workbench"
+requires-python = ">=3.10"
+dependencies = ["pefile>=2023.2.7", "capstone>=5.0", "rpyc>=6.0"]
+
+[project.scripts]
+aimcmp = "aimcmp.cli:main"
+
+[tool.setuptools]
+packages = ["aimcmp"]
+
+[tool.setuptools.package-data]
+aimcmp = ["report.html"]

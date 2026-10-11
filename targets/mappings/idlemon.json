@@ -1,0 +1,238 @@
+{
+  "schema": 1,
+  "kind": "aimcmp.mapping",
+  "original": {
+    "path": "../originals/AIM/idlemon.dll",
+    "sha256": "2aea37788203e1f3935ce9d118bd11cb36bd326a16e8024bb3390ed53dde49ab"
+  },
+  "types": [
+    "typedef struct AIM_POINT { long x; long y; } AIM_POINT;"
+  ],
+  "records": [
+    {
+      "id": "idlemon.function.IdleTimeSinceLastInput",
+      "kind": "function",
+      "original": "0x1c001000",
+      "name": "IdleTimeSinceLastInput",
+      "rebuilt": {
+        "symbol": "IdleTimeSinceLastInput"
+      },
+      "type": "unsigned long IdleTimeSinceLastInput(void)",
+      "confidence": "verified",
+      "evidence": [
+        "Exact raw function bytes and complete-file equality except timestamps; reports/iterations/idlemon/latest.json",
+        "Reconstructed identifier and signature from the current source; original source spelling is unknown."
+      ]
+    },
+    {
+      "id": "idlemon.function.IdleTimeSinceNextToLastInput",
+      "kind": "function",
+      "original": "0x1c00100f",
+      "name": "IdleTimeSinceNextToLastInput",
+      "rebuilt": {
+        "symbol": "IdleTimeSinceNextToLastInput"
+      },
+      "type": "unsigned long IdleTimeSinceNextToLastInput(void)",
+      "confidence": "verified",
+      "evidence": [
+        "Exact raw function bytes and complete-file equality except timestamps; reports/iterations/idlemon/latest.json",
+        "Reconstructed identifier and signature from the current source; original source spelling is unknown."
+      ]
+    },
+    {
+      "id": "idlemon.function.IdleSetEvent",
+      "kind": "function",
+      "original": "0x1c00101e",
+      "name": "IdleSetEvent",
+      "rebuilt": {
+        "symbol": "IdleSetEvent"
+      },
+      "type": "void IdleSetEvent(void)",
+      "confidence": "verified",
+      "evidence": [
+        "Exact raw function bytes and complete-file equality except timestamps; reports/iterations/idlemon/latest.json",
+        "Reconstructed identifier and signature from the current source; original source spelling is unknown."
+      ]
+    },
+    {
+      "id": "idlemon.function.IdleKeybdHook",
+      "kind": "function",
+      "original": "0x1c001034",
+      "name": "IdleKeybdHook",
+      "rebuilt": {
+        "symbol": "IdleKeybdHook"
+      },
+      "type": "long __stdcall IdleKeybdHook(int code, unsigned int wparam, long lparam)",
+      "confidence": "verified",
+      "evidence": [
+        "Exact raw function bytes and complete-file equality except timestamps; reports/iterations/idlemon/latest.json",
+        "Reconstructed identifier and signature from the current source; original source spelling is unknown."
+      ]
+    },
+    {
+      "id": "idlemon.function.IdleMouseHook",
+      "kind": "function",
+      "original": "0x1c00105e",
+      "name": "IdleMouseHook",
+      "rebuilt": {
+        "symbol": "IdleMouseHook"
+      },
+      "type": "long __stdcall IdleMouseHook(int code, unsigned int wparam, long lparam)",
+      "confidence": "verified",
+      "evidence": [
+        "Exact raw function bytes and complete-file equality except timestamps; reports/iterations/idlemon/latest.json",
+        "Reconstructed identifier and signature from the current source; original source spelling is unknown."
+      ]
+    },
+    {
+      "id": "idlemon.function.IdleStartup",
+      "kind": "function",
+      "original": "0x1c0010c7",
+      "name": "IdleStartup",
+      "rebuilt": {
+        "symbol": "IdleStartup"
+      },
+      "type": "int IdleStartup(void)",
+      "confidence": "verified",
+      "evidence": [
+        "Exact raw function bytes and complete-file equality except timestamps; reports/iterations/idlemon/latest.json",
+        "Reconstructed identifier and signature from the current source; original source spelling is unknown."
+      ]
+    },
+    {
+      "id": "idlemon.function.AimIdleShutdown",
+      "kind": "function",
+      "original": "0x1c00114a",
+      "name": "AimIdleShutdown",
+      "rebuilt": {
+        "symbol": "AimIdleShutdown"
+      },
+      "type": "void AimIdleShutdown(void)",
+      "confidence": "verified",
+      "evidence": [
+        "Exact raw function bytes and complete-file equality except timestamps; reports/iterations/idlemon/latest.json",
+        "Reconstructed identifier and signature from the current source; original source spelling is unknown."
+      ]
+    },
+    {
+      "id": "idlemon.function.DllMain",
+      "kind": "function",
+      "original": "0x1c001180",
+      "name": "DllMain",
+      "rebuilt": {
+        "symbol": "DllMain"
+      },
+      "type": "int __stdcall DllMain(void *instance, unsigned long reason, void *reserved)",
+      "confidence": "verified",
+      "evidence": [
+        "Exact raw function bytes and complete-file equality except timestamps; reports/iterations/idlemon/latest.json",
+        "Reconstructed identifier and signature from the current source; original source spelling is unknown."
+      ]
+    },
+    {
+      "id": "idlemon.global.owner_process",
+      "kind": "global",
+      "original": "0x1c003000",
+      "name": "owner_process",
+      "rebuilt": {
+        "symbol": "owner_process"
+      },
+      "type": "unsigned long",
+      "confidence": "verified",
+      "evidence": [
+        "Reconstructed .aimshar declaration and linker MAP; identical whole-file layout except timestamps verifies the original address.",
+        "Identifiers/types describe the reconstruction; original source spelling is unknown."
+      ]
+    },
+    {
+      "id": "idlemon.global.last_mouse",
+      "kind": "global",
+      "original": "0x1c003004",
+      "name": "last_mouse",
+      "rebuilt": {
+        "symbol": "last_mouse"
+      },
+      "type": "AIM_POINT",
+      "confidence": "verified",
+      "evidence": [
+        "Reconstructed .aimshar declaration and linker MAP; identical whole-file layout except timestamps verifies the original address.",
+        "Identifiers/types describe the reconstruction; original source spelling is unknown."
+      ]
+    },
+    {
+      "id": "idlemon.global.keyboard_hook",
+      "kind": "global",
+      "original": "0x1c00300c",
+      "name": "keyboard_hook",
+      "rebuilt": {
+        "symbol": "keyboard_hook"
+      },
+      "type": "void *",
+      "confidence": "verified",
+      "evidence": [
+        "Reconstructed .aimshar declaration and linker MAP; identical whole-file layout except timestamps verifies the original address.",
+        "Identifiers/types describe the reconstruction; original source spelling is unknown."
+      ]
+    },
+    {
+      "id": "idlemon.global.mouse_hook",
+      "kind": "global",
+      "original": "0x1c003010",
+      "name": "mouse_hook",
+      "rebuilt": {
+        "symbol": "mouse_hook"
+      },
+      "type": "void *",
+      "confidence": "verified",
+      "evidence": [
+        "Reconstructed .aimshar declaration and linker MAP; identical whole-file layout except timestamps verifies the original address.",
+        "Identifiers/types describe the reconstruction; original source spelling is unknown."
+      ]
+    },
+    {
+      "id": "idlemon.global.last_input",
+      "kind": "global",
+      "original": "0x1c003014",
+      "name": "last_input",
+      "rebuilt": {
+        "symbol": "last_input"
+      },
+      "type": "unsigned long",
+      "confidence": "verified",
+      "evidence": [
+        "Reconstructed .aimshar declaration and linker MAP; identical whole-file layout except timestamps verifies the original address.",
+        "Identifiers/types describe the reconstruction; original source spelling is unknown."
+      ]
+    },
+    {
+      "id": "idlemon.global.previous_input",
+      "kind": "global",
+      "original": "0x1c003018",
+      "name": "previous_input",
+      "rebuilt": {
+        "symbol": "previous_input"
+      },
+      "type": "unsigned long",
+      "confidence": "verified",
+      "evidence": [
+        "Reconstructed .aimshar declaration and linker MAP; identical whole-file layout except timestamps verifies the original address.",
+        "Identifiers/types describe the reconstruction; original source spelling is unknown."
+      ]
+    },
+    {
+      "id": "idlemon.global.unused_state",
+      "kind": "global",
+      "original": "0x1c00301c",
+      "name": "unused_state",
+      "rebuilt": {
+        "symbol": "unused_state"
+      },
+      "type": "unsigned long",
+      "confidence": "verified",
+      "evidence": [
+        "Reconstructed .aimshar declaration and linker MAP; identical whole-file layout except timestamps verifies the original address.",
+        "Identifiers/types describe the reconstruction; original source spelling is unknown."
+      ]
+    }
+  ]
+}

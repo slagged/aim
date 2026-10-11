@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "kind": "aimcmp.mapping",
+  "original": {
+    "path": "../originals/AIM/SendFile.exe",
+    "sha256": "d79ffeafe9ed06e95e93d0d77a6c4f032de969642badbe57fdec07c9a38c7baf"
+  },
+  "types": [],
+  "records": [
+    {
+      "id": "SendFile.function.WinMain",
+      "kind": "function",
+      "original": "0x401000",
+      "name": "WinMain",
+      "rebuilt": {
+        "symbol": "WinMain"
+      },
+      "type": "int __stdcall WinMain(void *instance, void *previous, char *command, int show)",
+      "confidence": "verified",
+      "evidence": [
+        "Exact raw function bytes and complete-file equality except timestamps; reports/iterations/SendFile/latest.json",
+        "Reconstructed identifier and signature from the current source; original source spelling is unknown."
+      ]
+    }
+  ]
+}

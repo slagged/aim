@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "profile": "../profiles/vc71.json",
+  "flags": "/O1",
+  "compile_options": ["/Zl"],
+  "link_options": ["/dll", "/nodefaultlib", "/entry:DllMain@12", "/base:0x1c000000", "/heap:0x1000", "/section:.aimshar,RWS"],
+  "libraries": ["kernel32.lib", "user32.lib"],
+  "products": [
+    {
+      "source": "idlemon.c",
+      "object": "builds/idlemon.obj",
+      "resource": { "source": "idlemon.rc", "output": "builds/idlemon.res" },
+      "definition": "idlemon.def",
+      "binary": "builds/idlemon.dll",
+      "map": "builds/idlemon.map"
+    }
+  ]
+}

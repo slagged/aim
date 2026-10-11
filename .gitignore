@@ -1,0 +1,22 @@
+# Local original binaries and generated experiment evidence
+/originals/
+/aimcmp/builds/
+/aimcmp/reports/
+/aimcmp/checkpoints/
+/aimcmp/experiments/runs/
+/aimcmp/outputs/
+/aimcmp/.aimcmp-cache/
+/aimcmp/.venv/
+/.local/
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Target-local generated state
+/targets/builds/
+/targets/reports/
+/targets/checkpoints/
+/targets/experiments/
