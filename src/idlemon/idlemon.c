@@ -1,16 +1,12 @@
 #include <windows.h>
 
 /*
- * AIM's idle monitor records keyboard activity and changes in mouse position.
- * Hook callbacks update shared timestamps; the exported queries return the
- * elapsed time since the latest two recorded events.
- *
- * This is a matching reconstruction. Original private names and source types
- * are unknown, and observed quirks are deliberately retained.
+ * Track keyboard activity and mouse movement across processes. Keep the two
+ * most recent event times so AIM can ask how long the user has been idle.
  */
 
-/* The linker marks .aimshar readable, writable, and shared between processes.
- * Keep the declaration order: these globals' offsets are part of the match.
+/* Hook callbacks run in multiple processes. The shared section lets them
+ * update the same event history and hook state.
  */
 #pragma data_seg(".aimshar")
 
@@ -26,8 +22,8 @@ DWORD unused_state = 0;
 
 #pragma data_seg()
 
-/* Preserve the observed memory read when querying a timestamp that hook
- * callbacks in other processes can update. DWORD subtraction wraps naturally.
+/* Return milliseconds since the latest event. Read the shared timestamp each
+ * time; another process's hook callback may have updated it.
  */
 DWORD IdleTimeSinceLastInput(void) {
     return GetTickCount() - *(volatile DWORD *)&last_input;
@@ -37,13 +33,14 @@ DWORD IdleTimeSinceNextToLastInput(void) {
     return GetTickCount() - *(volatile DWORD *)&previous_input;
 }
 
+/* Retain the preceding event time before recording the new one. */
 void IdleSetEvent(void) {
     previous_input = last_input;
     last_input = GetTickCount();
 }
 
 LRESULT CALLBACK IdleKeybdHook(int code, WPARAM wparam, LPARAM lparam) {
-    /* Negative hook codes are forwarded without recording an event. */
+    /* Forward notifications that must not be processed by this hook. */
     if (code < 0)
         return CallNextHookEx(keyboard_hook, code, wparam, lparam);
 
@@ -56,16 +53,13 @@ LRESULT CALLBACK IdleKeybdHook(int code, WPARAM wparam, LPARAM lparam) {
 LRESULT CALLBACK IdleMouseHook(int code, WPARAM wparam, LPARAM lparam) {
     volatile MOUSEHOOKSTRUCT *mouse;
 
-    /* The original uses keyboard_hook on this path, even in the mouse hook. */
+    /* This mouse path unexpectedly forwards using the keyboard hook handle. */
     if (code < 0)
         return CallNextHookEx(keyboard_hook, code, wparam, lparam);
 
-    /* The volatile source shape preserves the original structure accesses;
-     * it does not establish that AOL used this declaration.
-     */
     mouse = (volatile MOUSEHOOKSTRUCT *)lparam;
 
-    /* Only a position change counts here; the mouse message itself is unused. */
+    /* Stationary clicks and wheel events do not reset the idle timer. */
     if (mouse && (mouse->pt.x != last_mouse.x || mouse->pt.y != last_mouse.y)) {
         last_mouse.x = mouse->pt.x;
         last_mouse.y = mouse->pt.y;
@@ -75,6 +69,7 @@ LRESULT CALLBACK IdleMouseHook(int code, WPARAM wparam, LPARAM lparam) {
     return CallNextHookEx(mouse_hook, code, wparam, lparam);
 }
 
+/* Install global input hooks and initialize both event times to startup. */
 int IdleStartup(void) {
     HMODULE module;
     HOOKPROC proc;
@@ -82,9 +77,7 @@ int IdleStartup(void) {
     owner_process = GetCurrentProcessId();
     module = GetModuleHandleA("IDLEMON.DLL");
 
-    /* Resolve the exported callbacks from the loaded DLL before installing
-     * global hooks. Failed lookups/installations leave the hook handles NULL.
-     */
+    /* Locate the hook callbacks through this DLL's exports. */
     keyboard_hook = NULL;
     proc = (HOOKPROC)GetProcAddress(module, "IdleKeybdHook");
     if (proc)
@@ -95,14 +88,14 @@ int IdleStartup(void) {
     if (proc)
         mouse_hook = SetWindowsHookExA(WH_MOUSE, proc, module, 0);
 
-    /* Both queries initially measure elapsed time since startup. */
     last_input = previous_input = GetTickCount();
     unused_state = 0;
 
-    /* The original reports success even if a hook could not be installed. */
+    /* Failed lookups or hook installations still return success. */
     return 0;
 }
 
+/* Remove installed hooks and clear the recorded process ID. */
 void AimIdleShutdown(void) {
     if (keyboard_hook) {
         UnhookWindowsHookEx(keyboard_hook);
@@ -118,7 +111,7 @@ void AimIdleShutdown(void) {
 }
 
 BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved) {
-    /* Hook installation is explicit through IdleStartup, not DLL attachment. */
+    /* Suppress thread notifications; input hooks are started explicitly. */
     if (reason == DLL_PROCESS_ATTACH)
         DisableThreadLibraryCalls(instance);
 

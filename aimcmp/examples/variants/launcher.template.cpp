@@ -1,20 +1,15 @@
 #include <windows.h>
 #include <string.h>
 
-/* One source builds both helpers; the ShareFile build overrides this action. */
+/* Select the AIM URL action for this helper. */
 #ifndef AIM_ACTION
 #define AIM_ACTION "SendFile"
 #endif
 
 /*
- * Forward a command-line file argument to the registered AIM URL handler:
+ * Open the command-line file argument in AIM's SendFile or ShareFile UI.
+ * Find the registered AIM executable, then launch it with an action URL:
  *     AIM:SendFile?FileName=<argument>
- * or AIM:ShareFile for the other build.
- *
- * The helper reads the handler's executable from the registry and constructs
- * a new process command line. This matching reconstruction preserves the
- * original parsing and cleanup quirks. It has been compiled and compared,
- * but has not been executed by the workbench.
  */
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
     int result = -1;
@@ -24,9 +19,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
     bool quoted = false;
 
     if (cursor) {
-        /* The original reserves this fixed amount beyond the input length.
-         * The buffer first holds the registry value, then the launch command.
-         */
+        /* Reuse one buffer for the registered handler and the launch command. */
         DWORD bytes = lstrlenA(cursor) + 0x10b;
         char *buffer = (char *)HeapAlloc(GetProcessHeap(), 0, bytes);
 
@@ -35,9 +28,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
         if (buffer) {
             *buffer = 0;
 
-            /* Skip our executable name, tracking quotes around that name.
-             * Keep the original condition: there is no terminating-NUL guard,
-             * so input without a separating space can read beyond the string.
+            /* Find the first space outside the executable name's quotes.
+             * There is no NUL stop: without a separating space, this loop
+             * reads past the end of the command line.
              */
             while ((*cursor && quoted) || *cursor != ' ') {
                 if (*cursor == '"')
@@ -46,7 +39,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
                 ++cursor;
             }
 
-            /* Keep the separating space as part of the forwarded argument. */
+            /* Forward the remaining command line, including its leading space. */
             command = cursor;
 
             if (*cursor) {
@@ -55,11 +48,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
                 HKEY key;
                 char executable[MAX_PATH];
 
-                /* Statement order reproduces the original initialization. */
                 {{initialization}}
 
-                /* Use the executable registered for aim: URLs. The original
-                 * does not check the value-query result before parsing it.
+                /* Read the command registered for aim: URLs. A successful
+                 * key open leads to parsing even if the value query fails.
                  */
                 if (RegOpenKeyExA(HKEY_CLASSES_ROOT, "aim\\shell\\open\\command", 0, KEY_READ, &key) == ERROR_SUCCESS) {
                     LONG length = bytes;
@@ -67,12 +59,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
                     RegCloseKey(key);
 
                     if (*buffer == '"') {
-                        /* Quoted registration: retain only the quoted path. */
+                        /* Drop the opening quote and terminate at the closing
+                         * quote, leaving only the executable path.
+                         */
                         {{quoted_branch}}
                     } else {
-                        /* Unquoted registration: trim backwards until the
-                         * remaining text ends in .exe, ignoring case. This
-                         * also retains the original short-string assumptions.
+                        /* Remove trailing handler arguments by searching
+                         * backwards for .exe. Values shorter than four bytes
+                         * put the starting pointer before the buffer.
                          */
                         char *end = buffer + strlen(buffer) - 4;
 
@@ -89,9 +83,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
                 if (lstrlenA(application) < MAX_PATH) {
                     lstrcpyA(executable, application);
 
-                    /* Arguments go into the URL verbatim, without escaping.
-                     * The original also leaves the returned process/thread
-                     * handles open after a successful launch.
+                    /* Quote the executable and append the file-action URL.
+                     * The argument is not URL-escaped: '&' and '?' in a file
+                     * name can change how AIM interprets the URL.
                      */
                     wsprintfA(
                         buffer,
@@ -101,15 +95,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
                         command
                     );
 
+                    /* Launch the registered executable directly. Returned
+                     * process and thread handles are left open.
+                     */
                     result = CreateProcessA(
                         executable, buffer, NULL, NULL, FALSE,
                         0, NULL, NULL, &startup, &process
                     ) ? 0 : -1;
                 }
 
-                /* Preserve the original cleanup scope: a path that skips
-                 * this argument block also skips freeing the allocation.
-                 */
+                /* Free the scratch buffer only on the argument-handling path. */
                 HeapFree(GetProcessHeap(), 0, buffer);
             }
         }
