@@ -150,6 +150,18 @@ and visible errors make the returned evidence easier to inspect.
 
 ## Daily workflow
 
+To stage the client executable's private resource and DLL import inputs, run
+`python build/prepare-client.py originals/AIM .local/client-build` from the
+repository root. This refreshes the staged source too, so repeat it after source
+edits. Then run `python -m aimcmp build ../targets/project.json aim` from
+`aimcmp/`. The build uses the VM selected in the local machine configuration.
+Resources are extracted from the pinned original; no executable code is copied.
+
+For a broad reconstruction pass, a compiled draft is a useful intermediate
+result. Keep drafted, behavior checked, and byte exact status separate in the
+mapping records. Unimplemented stubs do not count as drafted functions. Preserve
+exact helper comparisons while larger routines remain provisional.
+
 Read the report, investigate a specific difference, update source and ledger
 evidence, and run `iterate`. Save a checkpoint before a substantial experiment.
 Keep code comments focused on what the code does and surprising behavior; put

@@ -63,9 +63,14 @@ class RecipeTests(unittest.TestCase):
         project = load_project(path)
         for base, target in zip(public['targets'], project['targets']):
             config = target['build']
-            self.assertEqual(config['script'], 'aimcmp-build.cmd')
-            self.assertNotIn('build.cmd', config['files'])
             self.assertEqual(Path(config['artifacts'][0]).stem, target['name'])
-            self.assertEqual(config['flags'], config['recipe_data']['flags'])
-            self.assertEqual(len(config['_recipe_inputs']), 2)
+            if base['build'].get('recipe'):
+                self.assertEqual(config['script'], 'aimcmp-build.cmd')
+                self.assertNotIn('build.cmd', config['files'])
+                self.assertEqual(config['flags'], config['recipe_data']['flags'])
+                self.assertEqual(len(config['_recipe_inputs']), 2)
+            else:
+                self.assertEqual(config['script'], base['build']['script'])
+                self.assertEqual(config['files'], base['build']['files'])
+                self.assertNotIn('recipe_data', config)
             self.assertEqual(portable_target(public, target), base)

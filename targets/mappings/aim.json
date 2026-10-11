@@ -1,0 +1,771 @@
+{
+  "schema": 1,
+  "kind": "aimcmp.mapping",
+  "original": {
+    "path": "../originals/AIM/aim.exe",
+    "sha256": "1d150f88b23acdcec2f82d7f603f4f5d200a30fcb23f5fc87bd0af3d94728840"
+  },
+  "types": [],
+  "records": [
+    {
+      "id": "aim.function.unregister_component",
+      "kind": "function",
+      "original": "0x401000",
+      "name": "unregister_component",
+      "rebuilt": {
+        "symbol": "?unregister_component@@YGHPBU_GUID@@PBGPAX@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/components.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.register_protocols",
+      "kind": "function",
+      "original": "0x40100f",
+      "name": "register_protocols",
+      "rebuilt": {
+        "symbol": "?register_protocols@@YGHPAUHINSTANCE__@@PBD@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/registration.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.guid_equal",
+      "kind": "function",
+      "original": "0x401650",
+      "name": "guid_equal",
+      "rebuilt": {
+        "symbol": "?guid_equal@@YAHPBU_GUID@@0@Z"
+      },
+      "confidence": "verified",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Exact pinned COFF contribution comparison."
+      ],
+      "reconstruction": {
+        "source": "src/client/guid_equal.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": true
+      }
+    },
+    {
+      "id": "aim.function.dependency_attributes",
+      "kind": "function",
+      "original": "0x401668",
+      "name": "dependency_attributes",
+      "rebuilt": {
+        "symbol": "?dependency_attributes@@YAPAPBDPAUComponentContext@@PAPBD@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/components.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.query_file_version",
+      "kind": "function",
+      "original": "0x401827",
+      "name": "query_file_version",
+      "rebuilt": {
+        "symbol": "?query_file_version@@YAHPBD0PADH@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/components.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.record_component_error",
+      "kind": "function",
+      "original": "0x4018fe",
+      "name": "record_component_error",
+      "rebuilt": {
+        "symbol": "?record_component_error@@YAHPAUComponentContext@@PBD1@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/components.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.managed_component_attributes",
+      "kind": "function",
+      "original": "0x401966",
+      "name": "managed_component_attributes",
+      "rebuilt": {
+        "symbol": "?managed_component_attributes@@YAHPAUComponentContext@@PAPBD@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/components.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.component_end",
+      "kind": "function",
+      "original": "0x401b47",
+      "name": "component_end",
+      "rebuilt": {
+        "symbol": "?component_end@@YAXPAXPBD@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/components.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.registry_writable",
+      "kind": "function",
+      "original": "0x401b52",
+      "name": "registry_writable",
+      "rebuilt": {
+        "symbol": "?registry_writable@@YAHPBD@Z"
+      },
+      "confidence": "verified",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Exact pinned COFF contribution comparison."
+      ],
+      "reconstruction": {
+        "source": "src/client/registry_writable.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": true
+      }
+    },
+    {
+      "id": "aim.function.show_startup_error",
+      "kind": "function",
+      "original": "0x401bde",
+      "name": "show_startup_error",
+      "rebuilt": {
+        "symbol": "?show_startup_error@@YAHXZ"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/components.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.show_component_error",
+      "kind": "function",
+      "original": "0x401c11",
+      "name": "show_component_error",
+      "rebuilt": {
+        "symbol": "?show_component_error@@YAHXZ"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/components.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.file_time_before",
+      "kind": "function",
+      "original": "0x401c6b",
+      "name": "file_time_before",
+      "rebuilt": {
+        "symbol": "?file_time_before@@YA_NPBU_FILETIME@@0@Z"
+      },
+      "confidence": "verified",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Exact pinned COFF contribution comparison."
+      ],
+      "reconstruction": {
+        "source": "src/client/file_time_before.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": true
+      }
+    },
+    {
+      "id": "aim.function.restore_backups",
+      "kind": "function",
+      "original": "0x401c8e",
+      "name": "restore_backups",
+      "rebuilt": {
+        "symbol": "?restore_backups@@YAHPAUHINSTANCE__@@@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/registration.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.register_servers",
+      "kind": "function",
+      "original": "0x401f09",
+      "name": "register_servers",
+      "rebuilt": {
+        "symbol": "?register_servers@@YAHPAUHINSTANCE__@@PBD@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/registration.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.allocate_zeroed",
+      "kind": "function",
+      "original": "0x402160",
+      "name": "allocate_zeroed",
+      "rebuilt": {
+        "symbol": "?allocate_zeroed@@YAPAXI@Z"
+      },
+      "confidence": "verified",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Exact pinned COFF contribution comparison."
+      ],
+      "reconstruction": {
+        "source": "src/client/allocate_zeroed.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": true
+      }
+    },
+    {
+      "id": "aim.function.copy_dll_registration",
+      "kind": "function",
+      "original": "0x402185",
+      "name": "copy_dll_registration",
+      "rebuilt": {
+        "symbol": "?copy_dll_registration@@YGHPBU_GUID@@PBGPAX@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/components.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.copy_build_version",
+      "kind": "function",
+      "original": "0x4021b4",
+      "name": "copy_build_version",
+      "rebuilt": {
+        "symbol": "?copy_build_version@@YGHPBU_GUID@@PBGPAX@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/components.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.register_cool_utils",
+      "kind": "function",
+      "original": "0x4021e3",
+      "name": "register_cool_utils",
+      "rebuilt": {
+        "symbol": "?register_cool_utils@@YAXPBD@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/components.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.registry_needs_update",
+      "kind": "function",
+      "original": "0x4022e9",
+      "name": "registry_needs_update",
+      "rebuilt": {
+        "symbol": "?registry_needs_update@@YAHPBDPAH@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/components.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.assembly_attributes",
+      "kind": "function",
+      "original": "0x4023f2",
+      "name": "assembly_attributes",
+      "rebuilt": {
+        "symbol": "?assembly_attributes@@YAHPAUComponentContext@@PAPBD@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/components.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.component_start",
+      "kind": "function",
+      "original": "0x402652",
+      "name": "component_start",
+      "rebuilt": {
+        "symbol": "?component_start@@YAXPAXPBDPAPBD@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/components.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.parse_components",
+      "kind": "function",
+      "original": "0x4026bb",
+      "name": "parse_components",
+      "rebuilt": {
+        "symbol": "?parse_components@@YAHPBD00@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/components.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.parse_component_resource",
+      "kind": "function",
+      "original": "0x4027b2",
+      "name": "parse_component_resource",
+      "rebuilt": {
+        "symbol": "?parse_component_resource@@YAHPBD0@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/components.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.initialize_components",
+      "kind": "function",
+      "original": "0x402846",
+      "name": "initialize_components",
+      "rebuilt": {
+        "symbol": "?initialize_components@@YAHPAUHINSTANCE__@@H@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/components.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.describe_address",
+      "kind": "function",
+      "original": "0x402c05",
+      "name": "describe_address",
+      "rebuilt": {
+        "symbol": "?describe_address@@YAHPBXPADHPAIPAK@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/crash.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.exception_name",
+      "kind": "function",
+      "original": "0x402cf1",
+      "name": "exception_name",
+      "rebuilt": {
+        "symbol": "?exception_name@@YAPBDK@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/crash.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.report_property",
+      "kind": "function",
+      "original": "0x402e4e",
+      "name": "report_property",
+      "rebuilt": {
+        "symbol": "?report_property@@YAHPBD0ZZ"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/crash.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.report_calltrace",
+      "kind": "function",
+      "original": "0x402e75",
+      "name": "report_calltrace",
+      "rebuilt": {
+        "symbol": "?report_calltrace@@YAKPBU_CONTEXT@@@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/crash.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.report_exception",
+      "kind": "function",
+      "original": "0x402f49",
+      "name": "report_exception",
+      "rebuilt": {
+        "symbol": "?report_exception@@YAKPAU_EXCEPTION_POINTERS@@@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/crash.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.client_exception_filter",
+      "kind": "function",
+      "original": "0x40301f",
+      "name": "client_exception_filter",
+      "rebuilt": {
+        "symbol": "?client_exception_filter@@YGJPAU_EXCEPTION_POINTERS@@@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/crash.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.install_exception_filter",
+      "kind": "function",
+      "original": "0x40305a",
+      "name": "install_exception_filter",
+      "rebuilt": {
+        "symbol": "?install_exception_filter@@YAXXZ"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/crash.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.repair_shortcut",
+      "kind": "function",
+      "original": "0x403071",
+      "name": "repair_shortcut",
+      "rebuilt": {
+        "symbol": "?repair_shortcut@@YAXXZ"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/startup.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.classify_command",
+      "kind": "function",
+      "original": "0x40327d",
+      "name": "classify_command",
+      "rebuilt": {
+        "symbol": "?classify_command@@YAHPBD@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/startup.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.load_oscore",
+      "kind": "function",
+      "original": "0x40332b",
+      "name": "load_oscore",
+      "rebuilt": {
+        "symbol": "?load_oscore@@YAHPAUHINSTANCE__@@@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/startup.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.forward_to_instance",
+      "kind": "function",
+      "original": "0x403399",
+      "name": "forward_to_instance",
+      "rebuilt": {
+        "symbol": "?forward_to_instance@@YAHPAUHINSTANCE__@@PBD@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/startup.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.enable_aim_today",
+      "kind": "function",
+      "original": "0x40349a",
+      "name": "enable_aim_today",
+      "rebuilt": {
+        "symbol": "?enable_aim_today@@YAHH@Z"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/startup.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.explorer_installed",
+      "kind": "function",
+      "original": "0x4034c3",
+      "name": "explorer_installed",
+      "rebuilt": {
+        "symbol": "?explorer_installed@@YAHXZ"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/startup.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    },
+    {
+      "id": "aim.function.WinMain",
+      "kind": "function",
+      "original": "0x40354c",
+      "name": "WinMain",
+      "rebuilt": {
+        "symbol": "_WinMain@16"
+      },
+      "confidence": "hypothesis",
+      "evidence": [
+        "Reconstructed descriptive name; original private symbol name is unknown.",
+        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+      ],
+      "reconstruction": {
+        "source": "src/client/startup.cpp",
+        "drafted": true,
+        "behavior_checked": false,
+        "byte_exact": null
+      }
+    }
+  ]
+}

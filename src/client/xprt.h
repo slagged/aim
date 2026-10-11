@@ -16,9 +16,16 @@ class __declspec(dllimport) TBstr
 
 public:
     TBstr(const char *text);
+    TBstr(const unsigned short *text);
+    TBstr(const TBstr &text);
     ~TBstr();
     TBstr &Append(const char *text);
+    TBstr &Assign(const TBstr &text);
+    TBstr Left(int count) const;
+    int ReverseFind(unsigned short character) const;
     const char *GetMultibyteString() const;
+    const unsigned short *GetString() const;
+    int CompareNoCase(const unsigned short *text) const;
 };
 
 }

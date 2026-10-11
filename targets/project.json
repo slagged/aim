@@ -108,6 +108,47 @@
         }
       ],
       "mapping": "mappings/ShareFile.json"
+    },
+    {
+      "name": "aim",
+      "original": "../originals/AIM/aim.exe",
+      "rebuilt": "builds/aim/aim.exe",
+      "map": "builds/aim/aim.map",
+      "mapping": "mappings/aim.json",
+      "build": {
+        "ssh": "build-vm",
+        "remote_dir": "C:/aim-build/client-draft",
+        "source_dir": "../.local/client-build",
+        "download_dir": "builds/aim",
+        "script": "build.cmd",
+        "files": [
+          "build.cmd",
+          "fixture-manifest.json",
+          "src/allocate_zeroed.cpp",
+          "src/client.h",
+          "src/components.cpp",
+          "src/crash.cpp",
+          "src/file_time_before.cpp",
+          "src/guid_equal.cpp",
+          "src/import_aliases.h",
+          "src/registration.cpp",
+          "src/registry_writable.cpp",
+          "src/startup.cpp",
+          "src/xprt.h",
+          "deps/aim.res",
+          "deps/AIM_xmlp.def",
+          "deps/AIMToday.def",
+          "deps/oscore.def",
+          "deps/oscres.def",
+          "deps/Xpcs.def",
+          "deps/Xprt.def"
+        ],
+        "artifacts": [
+          "builds/aim.exe",
+          "builds/aim.map"
+        ],
+        "flags": "/O1 /MD /EHsc /GS"
+      }
     }
   ],
   "toolchain": {
