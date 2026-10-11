@@ -1,0 +1,12 @@
+[submodule "expatpp"]
+	path = vendor/expatpp
+	url = https://github.com/AndyDentFree/expatpp.git
+[submodule "expat"]
+	path = vendor/expat
+	url = https://github.com/libexpat/libexpat.git
+[submodule "nspr"]
+	path = vendor/nspr
+	url = https://github.com/mozilla/nspr.git
+[submodule "nss"]
+	path = vendor/nss
+	url = https://github.com/mozilla/nss.git

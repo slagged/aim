@@ -150,6 +150,19 @@ and visible errors make the returned evidence easier to inspect.
 
 ## Daily workflow
 
+Upstream libraries live in `vendor/` as pinned Git submodules. Initialize them
+with `git submodule update --init --recursive` from the repository root.
+`vendor/sources.json` records the relevant binaries, source roots, selection
+evidence, and unresolved revisions. A version-based pin is not a byte-match
+claim. Keep upstream edits in separate experimental checkouts or explicit patch
+files; preserve the submodules as reference source.
+
+Revision searches must fix the toolchain, flags, dependency revisions, and
+comparison functions. Treat build failures as untested candidates. Exact-match
+results need not be monotonic across revisions: scan releases first, then use
+bisection only for a property with a demonstrated boundary. Preserve all passing
+revisions rather than claiming a unique historical revision from identical code.
+
 To stage the client executable's private resource and DLL import inputs, run
 `python build/prepare-client.py originals/AIM .local/client-build` from the
 repository root. This refreshes the staged source too, so repeat it after source

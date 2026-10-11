@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "revision_source": "The superproject gitlinks pin the checkouts; candidate_ref records why each pin was selected.",
+  "libraries": [
+    {
+      "name": "expat",
+      "path": "vendor/expat",
+      "source_root": "expat",
+      "candidate_ref": "R_1_95_6",
+      "selection": "provisional",
+      "binaries": ["AIM_xmlp.dll", "xmlparse.dll", "xmltok.dll"],
+      "evidence": [
+        "The original DLLs export Expat parser and tokenizer APIs.",
+        "The expatpp header describes compatibility with Expat 1.95.6; that makes this a starting candidate, not evidence of AIM's exact revision.",
+        "AIM_xmlp.dll has VC7.1 Rich records; xmlparse.dll and xmltok.dll have older toolchain records. Treat their revision and build profiles independently."
+      ],
+      "byte_match_verified": false,
+      "license_files": ["expat/COPYING"]
+    },
+    {
+      "name": "expatpp",
+      "path": "vendor/expatpp",
+      "source_root": "src_pp",
+      "candidate_ref": "fc70ec7cd3a6af80a57e689fa917680e3adbe0a7",
+      "selection": "provisional",
+      "binaries": ["AIM_xmlp.dll"],
+      "evidence": [
+        "This is Andy Dent's standalone upstream repository, with expatpp and expatppNesting source.",
+        "The source header identifies a 29-Dec-2002 version compatible with Expat 1.95.6.",
+        "The Git history contains a 2018 SourceForge import rather than the original development history. Earlier revision searches need release archives or older mirrors.",
+        "AIM exports setTokensString and tokenToIndexNumber, which are absent from this checkout. skipWhiteSpace is present."
+      ],
+      "byte_match_verified": false,
+      "license_files": ["LICENSE"],
+      "dependency_policy": "Use the separately pinned vendor/expat for experiments; the upstream repository's bundled expat is historical reference data."
+    },
+    {
+      "name": "nspr",
+      "path": "vendor/nspr",
+      "source_root": ".",
+      "candidate_ref": "NSPR_4_4_1_RTM",
+      "selection": "version_evidence",
+      "binary_version": "4.4.1",
+      "binaries": ["nspr4.dll", "plc4.dll", "plds4.dll"],
+      "evidence": [
+        "All three original version resources identify NSPR 4.4.1.",
+        "The checkout's pr/include/prinit.h defines PR_VERSION as 4.4.1.",
+        "AOL_NSPR_4_4_1_BASE and NSPR_4_4_1_RTM resolve to the same commit in this mirror."
+      ],
+      "byte_match_verified": false,
+      "license_files": ["pr/include/prinit.h"]
+    },
+    {
+      "name": "nss",
+      "path": "vendor/nss",
+      "source_root": "security/nss",
+      "candidate_ref": "NSS_3_9_2_RTM",
+      "selection": "version_evidence",
+      "binary_version": "3.9.2",
+      "binaries": ["nss3.dll", "ssl3.dll", "smime3.dll", "softokn3.dll", "nssckbi.dll"],
+      "evidence": [
+        "The first four original DLLs identify NSS 3.9.2 in version resources and embedded build strings.",
+        "The checkout's security/nss/lib/nss/nss.h defines NSS_VERSION as 3.9.2.",
+        "nssckbi.dll belongs to the NSS family, but its built-in certificate data revision remains unpinned."
+      ],
+      "byte_match_verified": false,
+      "license_files": ["security/nss/lib/nss/nss.h"]
+    }
+  ]
+}
