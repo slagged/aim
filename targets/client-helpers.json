@@ -18,6 +18,389 @@
       "internal_bindings": []
     },
     {
+      "id": "aim.register_protocols.section.3",
+      "object": "registration.obj",
+      "section_index": 3,
+      "section": ".text",
+      "address": "0x40100f",
+      "size": 1601,
+      "bindings": {
+        "___security_cookie": "0x406024",
+        "__imp__GetModuleFileNameA@12": "0x404094",
+        "__imp__lstrcatA@8": "0x404090",
+        "__imp__RegCreateKeyExA@36": "0x404000",
+        "__imp__RegSetValueExA@24": "0x40400c",
+        "__imp__lstrlenA@4": "0x40408c",
+        "__imp__lstrcpyA@8": "0x404088",
+        "__imp__RegCloseKey@4": "0x404010",
+        "__imp__wsprintfA": "0x4041a8",
+        "__imp__RegOpenKeyA@12": "0x404014",
+        "@__security_check_cookie@4": "0x403961"
+      },
+      "internal_bindings": [
+        {
+          "section": 27,
+          "offset": 0,
+          "address": "0x40441c"
+        },
+        {
+          "section": 26,
+          "offset": 0,
+          "address": "0x404418"
+        },
+        {
+          "section": 25,
+          "offset": 0,
+          "address": "0x404414"
+        },
+        {
+          "section": 24,
+          "offset": 0,
+          "address": "0x4043f0"
+        },
+        {
+          "section": 23,
+          "offset": 0,
+          "address": "0x4043e0"
+        },
+        {
+          "section": 22,
+          "offset": 0,
+          "address": "0x4043cc"
+        },
+        {
+          "section": 21,
+          "offset": 0,
+          "address": "0x4043bc"
+        },
+        {
+          "section": 20,
+          "offset": 0,
+          "address": "0x404398"
+        },
+        {
+          "section": 19,
+          "offset": 0,
+          "address": "0x404390"
+        },
+        {
+          "section": 18,
+          "offset": 0,
+          "address": "0x404380"
+        },
+        {
+          "section": 17,
+          "offset": 0,
+          "address": "0x404358"
+        },
+        {
+          "section": 16,
+          "offset": 0,
+          "address": "0x404350"
+        },
+        {
+          "section": 15,
+          "offset": 0,
+          "address": "0x404348"
+        },
+        {
+          "section": 14,
+          "offset": 0,
+          "address": "0x404338"
+        },
+        {
+          "section": 13,
+          "offset": 0,
+          "address": "0x40432c"
+        },
+        {
+          "section": 12,
+          "offset": 0,
+          "address": "0x40431c"
+        },
+        {
+          "section": 11,
+          "offset": 0,
+          "address": "0x404314"
+        },
+        {
+          "section": 10,
+          "offset": 0,
+          "address": "0x4042f8"
+        },
+        {
+          "section": 9,
+          "offset": 0,
+          "address": "0x4042e8"
+        },
+        {
+          "section": 8,
+          "offset": 0,
+          "address": "0x4042dc"
+        },
+        {
+          "section": 7,
+          "offset": 0,
+          "address": "0x4042cc"
+        },
+        {
+          "section": 6,
+          "offset": 0,
+          "address": "0x4042c0"
+        },
+        {
+          "section": 5,
+          "offset": 0,
+          "address": "0x4042b8"
+        },
+        {
+          "section": 4,
+          "offset": 0,
+          "address": "0x40427c"
+        }
+      ]
+    },
+    {
+      "id": "aim.register_protocols.section.27",
+      "object": "registration.obj",
+      "section_index": 27,
+      "section": ".rdata",
+      "address": "0x40441c",
+      "size": 4,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.26",
+      "object": "registration.obj",
+      "section_index": 26,
+      "section": ".rdata",
+      "address": "0x404418",
+      "size": 1,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.25",
+      "object": "registration.obj",
+      "section_index": 25,
+      "section": ".rdata",
+      "address": "0x404414",
+      "size": 4,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.24",
+      "object": "registration.obj",
+      "section_index": 24,
+      "section": ".rdata",
+      "address": "0x4043f0",
+      "size": 36,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.23",
+      "object": "registration.obj",
+      "section_index": 23,
+      "section": ".rdata",
+      "address": "0x4043e0",
+      "size": 13,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.22",
+      "object": "registration.obj",
+      "section_index": 22,
+      "section": ".rdata",
+      "address": "0x4043cc",
+      "size": 19,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.21",
+      "object": "registration.obj",
+      "section_index": 21,
+      "section": ".rdata",
+      "address": "0x4043bc",
+      "size": 13,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.20",
+      "object": "registration.obj",
+      "section_index": 20,
+      "section": ".rdata",
+      "address": "0x404398",
+      "size": 36,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.19",
+      "object": "registration.obj",
+      "section_index": 19,
+      "section": ".rdata",
+      "address": "0x404390",
+      "size": 7,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.18",
+      "object": "registration.obj",
+      "section_index": 18,
+      "section": ".rdata",
+      "address": "0x404380",
+      "size": 15,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.17",
+      "object": "registration.obj",
+      "section_index": 17,
+      "section": ".rdata",
+      "address": "0x404358",
+      "size": 37,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.16",
+      "object": "registration.obj",
+      "section_index": 16,
+      "section": ".rdata",
+      "address": "0x404350",
+      "size": 5,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.15",
+      "object": "registration.obj",
+      "section_index": 15,
+      "section": ".rdata",
+      "address": "0x404348",
+      "size": 6,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.14",
+      "object": "registration.obj",
+      "section_index": 14,
+      "section": ".rdata",
+      "address": "0x404338",
+      "size": 14,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.13",
+      "object": "registration.obj",
+      "section_index": 13,
+      "section": ".rdata",
+      "address": "0x40432c",
+      "size": 11,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.12",
+      "object": "registration.obj",
+      "section_index": 12,
+      "section": ".rdata",
+      "address": "0x40431c",
+      "size": 13,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.11",
+      "object": "registration.obj",
+      "section_index": 11,
+      "section": ".rdata",
+      "address": "0x404314",
+      "size": 7,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.10",
+      "object": "registration.obj",
+      "section_index": 10,
+      "section": ".rdata",
+      "address": "0x4042f8",
+      "size": 25,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.9",
+      "object": "registration.obj",
+      "section_index": 9,
+      "section": ".rdata",
+      "address": "0x4042e8",
+      "size": 16,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.8",
+      "object": "registration.obj",
+      "section_index": 8,
+      "section": ".rdata",
+      "address": "0x4042dc",
+      "size": 10,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.7",
+      "object": "registration.obj",
+      "section_index": 7,
+      "section": ".rdata",
+      "address": "0x4042cc",
+      "size": 14,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.6",
+      "object": "registration.obj",
+      "section_index": 6,
+      "section": ".rdata",
+      "address": "0x4042c0",
+      "size": 12,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.5",
+      "object": "registration.obj",
+      "section_index": 5,
+      "section": ".rdata",
+      "address": "0x4042b8",
+      "size": 5,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_protocols.section.4",
+      "object": "registration.obj",
+      "section_index": 4,
+      "section": ".rdata",
+      "address": "0x40427c",
+      "size": 58,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
       "id": "aim.guid_equal.section.3",
       "object": "utilities.obj",
       "section_index": 3,
@@ -27,6 +410,296 @@
       "bindings": {
         "_memcmp": "0x403970"
       },
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.11",
+      "object": "components.obj",
+      "section_index": 11,
+      "section": ".text",
+      "address": "0x401668",
+      "size": 447,
+      "bindings": {
+        "__imp___stricmp": "0x404138",
+        "_strcpy": "0x403976",
+        "__imp__sprintf": "0x40418c"
+      },
+      "internal_bindings": [
+        {
+          "section": 29,
+          "offset": 0,
+          "address": "0x404550"
+        },
+        {
+          "section": 28,
+          "offset": 0,
+          "address": "0x40453c"
+        },
+        {
+          "section": 27,
+          "offset": 0,
+          "address": "0x404514"
+        },
+        {
+          "section": 26,
+          "offset": 0,
+          "address": "0x40450c"
+        },
+        {
+          "section": 25,
+          "offset": 0,
+          "address": "0x4044e4"
+        },
+        {
+          "section": 24,
+          "offset": 0,
+          "address": "0x4044cc"
+        },
+        {
+          "section": 23,
+          "offset": 0,
+          "address": "0x4044c0"
+        },
+        {
+          "section": 22,
+          "offset": 0,
+          "address": "0x40449c"
+        },
+        {
+          "section": 21,
+          "offset": 0,
+          "address": "0x404494"
+        },
+        {
+          "section": 20,
+          "offset": 0,
+          "address": "0x404470"
+        },
+        {
+          "section": 19,
+          "offset": 0,
+          "address": "0x40445c"
+        },
+        {
+          "section": 18,
+          "offset": 0,
+          "address": "0x404454"
+        },
+        {
+          "section": 17,
+          "offset": 0,
+          "address": "0x404448"
+        },
+        {
+          "section": 16,
+          "offset": 0,
+          "address": "0x404444"
+        },
+        {
+          "section": 4,
+          "offset": 400,
+          "address": "0x406248"
+        },
+        {
+          "section": 15,
+          "offset": 0,
+          "address": "0x40443c"
+        },
+        {
+          "section": 14,
+          "offset": 0,
+          "address": "0x40442c"
+        },
+        {
+          "section": 13,
+          "offset": 0,
+          "address": "0x404428"
+        },
+        {
+          "section": 12,
+          "offset": 0,
+          "address": "0x404420"
+        }
+      ]
+    },
+    {
+      "id": "aim.dependency_attributes.section.29",
+      "object": "components.obj",
+      "section_index": 29,
+      "section": ".rdata",
+      "address": "0x404550",
+      "size": 8,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.28",
+      "object": "components.obj",
+      "section_index": 28,
+      "section": ".rdata",
+      "address": "0x40453c",
+      "size": 18,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.27",
+      "object": "components.obj",
+      "section_index": 27,
+      "section": ".rdata",
+      "address": "0x404514",
+      "size": 40,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.26",
+      "object": "components.obj",
+      "section_index": 26,
+      "section": ".rdata",
+      "address": "0x40450c",
+      "size": 5,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.25",
+      "object": "components.obj",
+      "section_index": 25,
+      "section": ".rdata",
+      "address": "0x4044e4",
+      "size": 39,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.24",
+      "object": "components.obj",
+      "section_index": 24,
+      "section": ".rdata",
+      "address": "0x4044cc",
+      "size": 21,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.23",
+      "object": "components.obj",
+      "section_index": 23,
+      "section": ".rdata",
+      "address": "0x4044c0",
+      "size": 9,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.22",
+      "object": "components.obj",
+      "section_index": 22,
+      "section": ".rdata",
+      "address": "0x40449c",
+      "size": 34,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.21",
+      "object": "components.obj",
+      "section_index": 21,
+      "section": ".rdata",
+      "address": "0x404494",
+      "size": 5,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.20",
+      "object": "components.obj",
+      "section_index": 20,
+      "section": ".rdata",
+      "address": "0x404470",
+      "size": 33,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.19",
+      "object": "components.obj",
+      "section_index": 19,
+      "section": ".rdata",
+      "address": "0x40445c",
+      "size": 20,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.18",
+      "object": "components.obj",
+      "section_index": 18,
+      "section": ".rdata",
+      "address": "0x404454",
+      "size": 5,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.17",
+      "object": "components.obj",
+      "section_index": 17,
+      "section": ".rdata",
+      "address": "0x404448",
+      "size": 10,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.16",
+      "object": "components.obj",
+      "section_index": 16,
+      "section": ".rdata",
+      "address": "0x404444",
+      "size": 2,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.15",
+      "object": "components.obj",
+      "section_index": 15,
+      "section": ".rdata",
+      "address": "0x40443c",
+      "size": 5,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.14",
+      "object": "components.obj",
+      "section_index": 14,
+      "section": ".rdata",
+      "address": "0x40442c",
+      "size": 13,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.13",
+      "object": "components.obj",
+      "section_index": 13,
+      "section": ".rdata",
+      "address": "0x404428",
+      "size": 2,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.dependency_attributes.section.12",
+      "object": "components.obj",
+      "section_index": 12,
+      "section": ".rdata",
+      "address": "0x404420",
+      "size": 8,
+      "bindings": {},
       "internal_bindings": []
     },
     {
@@ -99,6 +772,209 @@
           "address": "0x4061c0"
         }
       ]
+    },
+    {
+      "id": "aim.managed_component_attributes.section.35",
+      "object": "components.obj",
+      "section_index": 35,
+      "section": ".text",
+      "address": "0x401966",
+      "size": 481,
+      "bindings": {
+        "___security_cookie": "0x406024",
+        "_strcpy": "0x403976",
+        "__imp___stricmp": "0x404138",
+        "__imp__xprt_strlcpy": "0x4041f8",
+        "_AimAppAddManagedComponent": "0x4038e8",
+        "@__security_check_cookie@4": "0x403961"
+      },
+      "internal_bindings": [
+        {
+          "section": 45,
+          "offset": 0,
+          "address": "0x4045dc"
+        },
+        {
+          "section": 44,
+          "offset": 0,
+          "address": "0x4045d4"
+        },
+        {
+          "section": 18,
+          "offset": 0,
+          "address": "0x404454"
+        },
+        {
+          "section": 43,
+          "offset": 0,
+          "address": "0x4045c4"
+        },
+        {
+          "section": 42,
+          "offset": 0,
+          "address": "0x4045b8"
+        },
+        {
+          "section": 41,
+          "offset": 0,
+          "address": "0x4045ac"
+        },
+        {
+          "section": 40,
+          "offset": 0,
+          "address": "0x40459c"
+        },
+        {
+          "section": 39,
+          "offset": 0,
+          "address": "0x404590"
+        },
+        {
+          "section": 38,
+          "offset": 0,
+          "address": "0x404580"
+        },
+        {
+          "section": 37,
+          "offset": 0,
+          "address": "0x404570"
+        },
+        {
+          "section": 36,
+          "offset": 0,
+          "address": "0x40455c"
+        },
+        {
+          "section": 16,
+          "offset": 0,
+          "address": "0x404444"
+        },
+        {
+          "section": 4,
+          "offset": 0,
+          "address": "0x406240"
+        }
+      ]
+    },
+    {
+      "id": "aim.managed_component_attributes.section.45",
+      "object": "components.obj",
+      "section_index": 45,
+      "section": ".rdata",
+      "address": "0x4045dc",
+      "size": 8,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.managed_component_attributes.section.44",
+      "object": "components.obj",
+      "section_index": 44,
+      "section": ".rdata",
+      "address": "0x4045d4",
+      "size": 6,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.managed_component_attributes.section.18",
+      "object": "components.obj",
+      "section_index": 18,
+      "section": ".rdata",
+      "address": "0x404454",
+      "size": 5,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.managed_component_attributes.section.43",
+      "object": "components.obj",
+      "section_index": 43,
+      "section": ".rdata",
+      "address": "0x4045c4",
+      "size": 14,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.managed_component_attributes.section.42",
+      "object": "components.obj",
+      "section_index": 42,
+      "section": ".rdata",
+      "address": "0x4045b8",
+      "size": 10,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.managed_component_attributes.section.41",
+      "object": "components.obj",
+      "section_index": 41,
+      "section": ".rdata",
+      "address": "0x4045ac",
+      "size": 12,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.managed_component_attributes.section.40",
+      "object": "components.obj",
+      "section_index": 40,
+      "section": ".rdata",
+      "address": "0x40459c",
+      "size": 15,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.managed_component_attributes.section.39",
+      "object": "components.obj",
+      "section_index": 39,
+      "section": ".rdata",
+      "address": "0x404590",
+      "size": 11,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.managed_component_attributes.section.38",
+      "object": "components.obj",
+      "section_index": 38,
+      "section": ".rdata",
+      "address": "0x404580",
+      "size": 15,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.managed_component_attributes.section.37",
+      "object": "components.obj",
+      "section_index": 37,
+      "section": ".rdata",
+      "address": "0x404570",
+      "size": 14,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.managed_component_attributes.section.36",
+      "object": "components.obj",
+      "section_index": 36,
+      "section": ".rdata",
+      "address": "0x40455c",
+      "size": 19,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.managed_component_attributes.section.16",
+      "object": "components.obj",
+      "section_index": 16,
+      "section": ".rdata",
+      "address": "0x404444",
+      "size": 2,
+      "bindings": {},
+      "internal_bindings": []
     },
     {
       "id": "aim.component_end.section.47",
@@ -1859,6 +2735,191 @@
       "section": ".rdata",
       "address": "0x404a1c",
       "size": 12,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.WinMain.section.27",
+      "object": "startup.obj",
+      "section_index": 27,
+      "section": ".text",
+      "address": "0x40354c",
+      "size": 858,
+      "bindings": {
+        "___security_cookie": "0x406024",
+        "__imp__OleInitialize@4": "0x404234",
+        "__imp__XpcsInitialize@4": "0x4041ec",
+        "__imp__isspace": "0x404148",
+        "__imp__lstrlenA@4": "0x40408c",
+        "_strlen": "0x4039c6",
+        "__imp___strnicmp": "0x40414c",
+        "__imp__strrchr": "0x40417c",
+        "__imp__malloc": "0x404168",
+        "__imp__sprintf": "0x40418c",
+        "__imp___stricmp": "0x404138",
+        "?restore_backups@@YAHPAUHINSTANCE__@@@Z": "0x401c8e",
+        "__imp__CreateMutexA@12": "0x404058",
+        "__imp__GetLastError@0": "0x40409c",
+        "?register_servers@@YAHPAUHINSTANCE__@@PBD@Z": "0x401f09",
+        "__imp__lstrcmpiA@8": "0x404060",
+        "?initialize_components@@YAHPAUHINSTANCE__@@H@Z": "0x402846",
+        "_OscoreRun@12": "0x40390c",
+        "_memset": "0x403982",
+        "__imp__GetVersionExA@4": "0x404064",
+        "__imp__GetTempPathA@8": "0x404068",
+        "__imp__SetCurrentDirectoryA@4": "0x40406c",
+        "__imp__FindFirstFileA@8": "0x4040b0",
+        "__imp__DeleteFileA@4": "0x4040a0",
+        "__imp__FindNextFileA@8": "0x4040ac",
+        "__imp__FindClose@4": "0x4040a8",
+        "__imp__free": "0x404164",
+        "_AIMToday_destroyWindow": "0x403918",
+        "_AIMToday_uninit": "0x403912",
+        "__imp__CloseHandle@4": "0x404070",
+        "__imp__XpcsUninitialize@0": "0x4041d4",
+        "__imp__OleUninitialize@0": "0x404238",
+        "@__security_check_cookie@4": "0x403961"
+      },
+      "internal_bindings": [
+        {
+          "section": 34,
+          "offset": 0,
+          "address": "0x404a94"
+        },
+        {
+          "section": 33,
+          "offset": 0,
+          "address": "0x404a8c"
+        },
+        {
+          "section": 32,
+          "offset": 0,
+          "address": "0x404a84"
+        },
+        {
+          "section": 31,
+          "offset": 0,
+          "address": "0x404a7c"
+        },
+        {
+          "section": 30,
+          "offset": 0,
+          "address": "0x404a6c"
+        },
+        {
+          "section": 14,
+          "offset": 0,
+          "address": "0x403399"
+        },
+        {
+          "section": 23,
+          "offset": 0,
+          "address": "0x4034c3"
+        },
+        {
+          "section": 21,
+          "offset": 0,
+          "address": "0x40349a"
+        },
+        {
+          "section": 29,
+          "offset": 0,
+          "address": "0x404a64"
+        },
+        {
+          "section": 12,
+          "offset": 0,
+          "address": "0x406aa4"
+        },
+        {
+          "section": 10,
+          "offset": 0,
+          "address": "0x40332b"
+        },
+        {
+          "section": 8,
+          "offset": 0,
+          "address": "0x40327d"
+        },
+        {
+          "section": 3,
+          "offset": 0,
+          "address": "0x403071"
+        },
+        {
+          "section": 28,
+          "offset": 0,
+          "address": "0x404a5c"
+        }
+      ]
+    },
+    {
+      "id": "aim.WinMain.section.34",
+      "object": "startup.obj",
+      "section_index": 34,
+      "section": ".rdata",
+      "address": "0x404a94",
+      "size": 13,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.WinMain.section.33",
+      "object": "startup.obj",
+      "section_index": 33,
+      "section": ".rdata",
+      "address": "0x404a8c",
+      "size": 5,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.WinMain.section.32",
+      "object": "startup.obj",
+      "section_index": 32,
+      "section": ".rdata",
+      "address": "0x404a84",
+      "size": 5,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.WinMain.section.31",
+      "object": "startup.obj",
+      "section_index": 31,
+      "section": ".rdata",
+      "address": "0x404a7c",
+      "size": 7,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.WinMain.section.30",
+      "object": "startup.obj",
+      "section_index": 30,
+      "section": ".rdata",
+      "address": "0x404a6c",
+      "size": 16,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.WinMain.section.29",
+      "object": "startup.obj",
+      "section_index": 29,
+      "section": ".rdata",
+      "address": "0x404a64",
+      "size": 7,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.WinMain.section.28",
+      "object": "startup.obj",
+      "section_index": 28,
+      "section": ".rdata",
+      "address": "0x404a5c",
+      "size": 7,
       "bindings": {},
       "internal_bindings": []
     }

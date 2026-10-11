@@ -33,18 +33,19 @@
       "original": "0x40100f",
       "name": "register_protocols",
       "rebuilt": {
-        "symbol": "?register_protocols@@YGHPAUHINSTANCE__@@PBD@Z"
+        "symbol": "?register_protocols@@YGXPAUHINSTANCE__@@PBD@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json.",
+        "A void-return source produces the exact body and its callers ignore the result; this does not uniquely establish the original return declaration."
       ],
       "reconstruction": {
         "source": "src/client/registration.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": false
+        "byte_exact": true
       }
     },
     {
@@ -75,16 +76,16 @@
       "rebuilt": {
         "symbol": "?dependency_attributes@@YAPAPBDPAUComponentContext@@PAPBD@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": false
+        "byte_exact": true
       }
     },
     {
@@ -135,16 +136,17 @@
       "rebuilt": {
         "symbol": "?managed_component_attributes@@YAHPAUComponentContext@@PAPBD@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": false
+        "byte_exact": true,
+        "codegen_debt": "One narrow volatile access preserves an original store/load; an ordinary source explanation remains unresolved."
       }
     },
     {
@@ -756,16 +758,17 @@
       "rebuilt": {
         "symbol": "_WinMain@16"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/startup.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": false
+        "byte_exact": true,
+        "codegen_debt": "One narrow volatile access preserves an original store/load; an ordinary source explanation remains unresolved."
       }
     }
   ]

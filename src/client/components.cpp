@@ -46,7 +46,7 @@ int __stdcall copy_build_version(const GUID *id, const unsigned short *value, vo
 }
 
 // each dependency supplies the version scheme used by its children.
-const char **dependency_attributes(ComponentContext *context, const char **attributes)
+const char **dependency_attributes(ComponentContext *context, const char **input)
 {
     context->register_needed = 0;
     context->load = 0;
@@ -54,42 +54,43 @@ const char **dependency_attributes(ComponentContext *context, const char **attri
     context->xpcs_directory = 0;
     context->class_token[0] = 0;
 
-    const char **cursor = attributes;
+    const char **cursor = input;
     if (*cursor) {
+        const char **attributes = cursor;
         do {
-        const char *name = cursor[0];
-        const char *value = cursor[1];
-        if (!_stricmp("version", name)) {
-            if (!_stricmp("cool_build_number", value)) {
-                value = "2289";
-                strcpy(context->version_query, "\\StringFileInfo\\040904b0\\ProductVersion");
-                strcpy(context->class_query, "\\StringFileInfo\\040904b0\\ModuleClassID");
-            } else if (!_stricmp("version_build_number", value)) {
-                value = "6089";
-                sprintf(context->version_query, "\\StringFileInfo\\%s\\ProductVersion", "040904E4");
-                sprintf(context->class_query, "\\StringFileInfo\\%s\\ModuleClassID", "040904E4");
-            } else {
-                value = "UNKNOWN VERSION TAG";
+            const char *name = cursor[0];
+            const char *value = cursor[1];
+            if (!_stricmp("version", name)) {
+                if (!_stricmp("cool_build_number", value)) {
+                    value = "2289";
+                    strcpy(context->version_query, "\\StringFileInfo\\040904b0\\ProductVersion");
+                    strcpy(context->class_query, "\\StringFileInfo\\040904b0\\ModuleClassID");
+                } else if (!_stricmp("version_build_number", value)) {
+                    value = "6089";
+                    sprintf(context->version_query, "\\StringFileInfo\\%s\\ProductVersion", "040904E4");
+                    sprintf(context->class_query, "\\StringFileInfo\\%s\\ModuleClassID", "040904E4");
+                } else {
+                    value = "UNKNOWN VERSION TAG";
+                }
+                strcpy(context->version, value);
+            } else if (!_stricmp("name", name)) {
+                strcpy(context->name, value);
+            } else if (!_stricmp("regNeeded", name)) {
+                if (!_stricmp("Y", value))
+                    context->register_needed = registrations_changed;
+            } else if (!_stricmp("load", name)) {
+                if (!_stricmp("Y", value))
+                    context->load = 1;
+            } else if (!_stricmp("checkVersion", name)) {
+                if (!_stricmp("N", value))
+                    context->check_version = 0;
+            } else if (!_stricmp("xpcsDir", name)) {
+                if (!_stricmp("Y", value))
+                    context->xpcs_directory = 1;
             }
-            strcpy(context->version, value);
-        } else if (!_stricmp("name", name)) {
-            strcpy(context->name, value);
-        } else if (!_stricmp("regNeeded", name)) {
-            if (!_stricmp("Y", value))
-                context->register_needed = registrations_changed;
-        } else if (!_stricmp("load", name)) {
-            if (!_stricmp("Y", value))
-                context->load = 1;
-        } else if (!_stricmp("checkVersion", name)) {
-            if (!_stricmp("N", value))
-                context->check_version = 0;
-        } else if (!_stricmp("xpcsDir", name)) {
-            if (!_stricmp("Y", value))
-                context->xpcs_directory = 1;
-        }
-        cursor = attributes + 2;
-        attributes = cursor;
-    } while (*cursor);
+            cursor = attributes + 2;
+            attributes = cursor;
+        } while (*cursor);
     }
     return cursor;
 }
@@ -150,27 +151,29 @@ int managed_component_attributes(ComponentContext *context, const char **attribu
     strcpy(name, "NO NAME");
     const char **cursor = attributes;
     if (*cursor) {
+        // This initial store is redundant; its ordinary source shape is unresolved.
+        *reinterpret_cast<const char **volatile *>(&attributes) = cursor;
         do {
-        const char *key = cursor[0];
-        const char *value = cursor[1];
-        if (!_stricmp("clsid", key)) {
-            has_clsid = 1;
-            xprt_strlcpy(clsid, value, sizeof(clsid));
-        } else if (!_stricmp("name", key)) {
-            xprt_strlcpy(name, value, sizeof(name));
-        } else if (!_stricmp("create_option", key)) {
-            if (!_stricmp("ON_DEMAND", value)) creation = 8;
-            else if (!_stricmp("ON_SIGNEDON", value)) creation = 4;
-            else if (!_stricmp("ON_SYSTEM_INIT", value)) creation = 1;
-        } else if (!_stricmp("keep_alive", key)) {
-            if (!_stricmp("UNTIL_NOTREFED", value)) lifetime = 4;
-            else if (!_stricmp("UNTIL_SIGNOFF", value)) lifetime = 2;
-        } else if (!_stricmp("auto_reg_listeners", key) && !_stricmp("Y", value)) {
-            auto_listeners = 1;
-        }
-        cursor = attributes + 2;
-        attributes = cursor;
-    } while (*cursor);
+            const char *key = cursor[0];
+            const char *value = cursor[1];
+            if (!_stricmp("clsid", key)) {
+                has_clsid = 1;
+                xprt_strlcpy(clsid, value, sizeof(clsid));
+            } else if (!_stricmp("name", key)) {
+                xprt_strlcpy(name, value, sizeof(name));
+            } else if (!_stricmp("create_option", key)) {
+                if (!_stricmp("ON_DEMAND", value)) creation = 8;
+                else if (!_stricmp("ON_SIGNEDON", value)) creation = 4;
+                else if (!_stricmp("ON_SYSTEM_INIT", value)) creation = 1;
+            } else if (!_stricmp("keep_alive", key)) {
+                if (!_stricmp("UNTIL_NOTREFED", value)) lifetime = 4;
+                else if (!_stricmp("UNTIL_SIGNOFF", value)) lifetime = 2;
+            } else if (!_stricmp("auto_reg_listeners", key) && !_stricmp("Y", value)) {
+                auto_listeners = 1;
+            }
+            cursor = attributes + 2;
+            attributes = cursor;
+        } while (*cursor);
     }
     int result;
     if (has_clsid && AimAppAddManagedComponent(clsid, context->filename, context->leaf_name, name,

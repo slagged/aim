@@ -88,7 +88,7 @@ extern const GUID build_registration;
 int __stdcall unregister_component(const GUID *, const unsigned short *, void *);
 int __stdcall copy_dll_registration(const GUID *, const unsigned short *, void *);
 int __stdcall copy_build_version(const GUID *, const unsigned short *, void *);
-int __stdcall register_protocols(HMODULE, const char *);
+void __stdcall register_protocols(HMODULE, const char *);
 int register_servers(HMODULE, const char *);
 void register_cool_utils(const char *);
 int restore_backups(HINSTANCE);

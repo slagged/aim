@@ -3,153 +3,152 @@
 #include <string.h>
 #include <io.h>
 
-// Publish the aim: URL handler and its automation COM identity.
-int __stdcall register_protocols(HMODULE instance, const char *directory)
+// Publish the aim: URL handler and its automation COM identity. Failed writes
+// do not prevent attempts to register the remaining keys.
+void __stdcall register_protocols(HMODULE instance, const char *directory)
 {
     char command[0x10c];
     char value[0x104];
     HKEY key;
     HKEY child;
     DWORD disposition;
-    int result;
     if (!GetModuleFileNameA(instance, command, 0x104))
-        return 0;
-        // The command leaves both the executable path and argument unquoted.
-        lstrcatA(command, " %1");
-        if (!RegCreateKeyExA(HKEY_CLASSES_ROOT, "aim", 0, "", 0,
-                KEY_READ | KEY_WRITE, 0, &key, &disposition)) {
-            lstrcpyA(value, "URL: AOL Instant Messenger Protocol");
-            RegSetValueExA(key, "", 0, REG_SZ,
-                reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
-            value[0] = 0;
-            RegSetValueExA(key, "URL Protocol", 0, REG_SZ,
-                reinterpret_cast<const BYTE *>(value), 1);
-            if (!RegCreateKeyExA(key, "shell\\open\\command", 0, "", 0,
-                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
-                RegSetValueExA(child, "", 0, REG_SZ,
-                    reinterpret_cast<const BYTE *>(command), lstrlenA(command) + 1);
-                if (child)
-                    RegCloseKey(child);
-            }
-            if (key)
-                RegCloseKey(key);
+        return;
+    // The command leaves both the executable path and argument unquoted.
+    lstrcatA(command, " %1");
+    if (!RegCreateKeyExA(HKEY_CLASSES_ROOT, "aim", 0, "", 0,
+            KEY_READ | KEY_WRITE, 0, &key, &disposition)) {
+        lstrcpyA(value, "URL: AOL Instant Messenger Protocol");
+        RegSetValueExA(key, "", 0, REG_SZ,
+            reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+        value[0] = 0;
+        RegSetValueExA(key, "URL Protocol", 0, REG_SZ,
+            reinterpret_cast<const BYTE *>(value), 1);
+        if (!RegCreateKeyExA(key, "shell\\open\\command", 0, "", 0,
+                KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+            RegSetValueExA(child, "", 0, REG_SZ,
+                reinterpret_cast<const BYTE *>(command), lstrlenA(command) + 1);
+            if (child)
+                RegCloseKey(child);
         }
+        if (key)
+            RegCloseKey(key);
+    }
 
-        if (!RegCreateKeyExA(HKEY_CLASSES_ROOT, "AIM.Protocol", 0, "", 0,
-                KEY_READ | KEY_WRITE, 0, &key, &disposition)) {
-            lstrcpyA(value, "AIM OLE Automation Protocol Handler");
-            RegSetValueExA(key, "", 0, REG_SZ,
-                reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
-            if (!RegCreateKeyExA(key, "CurVer", 0, "", 0,
-                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
-                RegSetValueExA(child, "", 0, REG_SZ,
-                    reinterpret_cast<const BYTE *>("AIM.Protocol.1"), lstrlenA("AIM.Protocol.1") + 1);
-                if (child)
-                    RegCloseKey(child);
-            }
-            wsprintfA(value, "{%s}", "BAEB32D0-732D-11d2-8BF4-0060B0A4A9EA");
-            if (!RegCreateKeyExA(key, "CLSID", 0, "", 0,
-                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
-                RegSetValueExA(child, "", 0, REG_SZ,
-                    reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
-                if (child)
-                    RegCloseKey(child);
-            }
-            if (!RegCreateKeyExA(key, "NotInsertable", 0, "", 0,
-                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
-                value[0] = 0;
-                RegSetValueExA(child, "", 0, REG_SZ,
-                    reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
-                if (child)
-                    RegCloseKey(child);
-            }
-            if (key)
-                RegCloseKey(key);
-        }
-
-        if (!RegCreateKeyExA(HKEY_CLASSES_ROOT, "AIM.Protocol.1", 0, "", 0,
-                KEY_READ | KEY_WRITE, 0, &key, &disposition)) {
-            lstrcpyA(value, "AIM OLE Automation Protocol Handler");
-            RegSetValueExA(key, "", 0, REG_SZ,
-                reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
-            wsprintfA(value, "{%s}", "BAEB32D0-732D-11d2-8BF4-0060B0A4A9EA");
-            if (!RegCreateKeyExA(key, "CLSID", 0, "", 0,
-                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
-                RegSetValueExA(child, "", 0, REG_SZ,
-                    reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
-                if (child)
-                    RegCloseKey(child);
-            }
-            if (!RegCreateKeyExA(key, "NotInsertable", 0, "", 0,
-                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
-                value[0] = 0;
-                RegSetValueExA(child, "", 0, REG_SZ,
-                    reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
-                if (child)
-                    RegCloseKey(child);
-            }
-            if (key)
-                RegCloseKey(key);
-        }
-
-        wsprintfA(value, "CLSID\\{%s}", "BAEB32D0-732D-11d2-8BF4-0060B0A4A9EA");
-        if (!RegCreateKeyExA(HKEY_CLASSES_ROOT, value, 0, "", 0,
-                KEY_READ | KEY_WRITE, 0, &key, &disposition)) {
-            lstrcpyA(value, "AIM OLE Automation Protocol Handler");
-            RegSetValueExA(key, "", 0, REG_SZ,
-                reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
-            if (!RegCreateKeyExA(key, "Programmable", 0, "", 0,
-                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
-                value[0] = 0;
-                RegSetValueExA(child, "", 0, REG_SZ,
-                    reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
-                if (child)
-                    RegCloseKey(child);
-            }
-            if (!RegCreateKeyExA(key, "ProgID", 0, "", 0,
-                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
-                RegSetValueExA(child, "", 0, REG_SZ,
-                    reinterpret_cast<const BYTE *>("AIM.Protocol.1"), lstrlenA("AIM.Protocol.1") + 1);
-                if (child)
-                    RegCloseKey(child);
-            }
-            if (!RegCreateKeyExA(key, "VersionIndependentProgID", 0, "", 0,
-                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
-                RegSetValueExA(child, "", 0, REG_SZ,
-                    reinterpret_cast<const BYTE *>("AIM.Protocol"), lstrlenA("AIM.Protocol") + 1);
-                if (child)
-                    RegCloseKey(child);
-            }
-            if (!RegCreateKeyExA(key, "InprocHandler32", 0, "", 0,
-                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
-                lstrcpyA(value, "ole32.dll");
-                RegSetValueExA(child, "", 0, REG_SZ,
-                    reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
-                if (child)
-                    RegCloseKey(child);
-            }
-            if (!RegCreateKeyExA(key, "LocalServer32", 0, "", 0,
-                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
-                wsprintfA(value, "%s%s", directory, "aimauto.exe");
-                RegSetValueExA(child, "", 0, REG_SZ,
-                    reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
-                if (child)
-                    RegCloseKey(child);
-            }
-            if (key)
-                RegCloseKey(key);
-        }
-
-        result = RegOpenKeyA(HKEY_CURRENT_USER,
-            "Software\\Netscape\\Netscape Navigator\\Automation Protocols", &key);
-        if (!result) {
-            result = RegSetValueExA(key, "aim", 0, REG_SZ,
+    if (!RegCreateKeyExA(HKEY_CLASSES_ROOT, "AIM.Protocol", 0, "", 0,
+            KEY_READ | KEY_WRITE, 0, &key, &disposition)) {
+        lstrcpyA(value, "AIM OLE Automation Protocol Handler");
+        RegSetValueExA(key, "", 0, REG_SZ,
+            reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+        if (!RegCreateKeyExA(key, "CurVer", 0, "", 0,
+                KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+            RegSetValueExA(child, "", 0, REG_SZ,
                 reinterpret_cast<const BYTE *>("AIM.Protocol.1"), lstrlenA("AIM.Protocol.1") + 1);
-            if (key)
-                result = RegCloseKey(key);
+            if (child)
+                RegCloseKey(child);
         }
+        wsprintfA(value, "{%s}", "BAEB32D0-732D-11d2-8BF4-0060B0A4A9EA");
+        if (!RegCreateKeyExA(key, "CLSID", 0, "", 0,
+                KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+            RegSetValueExA(child, "", 0, REG_SZ,
+                reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+            if (child)
+                RegCloseKey(child);
+        }
+        if (!RegCreateKeyExA(key, "NotInsertable", 0, "", 0,
+                KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+            value[0] = 0;
+            RegSetValueExA(child, "", 0, REG_SZ,
+                reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+            if (child)
+                RegCloseKey(child);
+        }
+        if (key)
+            RegCloseKey(key);
+    }
 
-    return result;
+    if (!RegCreateKeyExA(HKEY_CLASSES_ROOT, "AIM.Protocol.1", 0, "", 0,
+            KEY_READ | KEY_WRITE, 0, &key, &disposition)) {
+        lstrcpyA(value, "AIM OLE Automation Protocol Handler");
+        RegSetValueExA(key, "", 0, REG_SZ,
+            reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+        wsprintfA(value, "{%s}", "BAEB32D0-732D-11d2-8BF4-0060B0A4A9EA");
+        if (!RegCreateKeyExA(key, "CLSID", 0, "", 0,
+                KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+            RegSetValueExA(child, "", 0, REG_SZ,
+                reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+            if (child)
+                RegCloseKey(child);
+        }
+        if (!RegCreateKeyExA(key, "NotInsertable", 0, "", 0,
+                KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+            value[0] = 0;
+            RegSetValueExA(child, "", 0, REG_SZ,
+                reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+            if (child)
+                RegCloseKey(child);
+        }
+        if (key)
+            RegCloseKey(key);
+    }
+
+    wsprintfA(value, "CLSID\\{%s}", "BAEB32D0-732D-11d2-8BF4-0060B0A4A9EA");
+    if (!RegCreateKeyExA(HKEY_CLASSES_ROOT, value, 0, "", 0,
+            KEY_READ | KEY_WRITE, 0, &key, &disposition)) {
+        lstrcpyA(value, "AIM OLE Automation Protocol Handler");
+        RegSetValueExA(key, "", 0, REG_SZ,
+            reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+        if (!RegCreateKeyExA(key, "Programmable", 0, "", 0,
+                KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+            value[0] = 0;
+            RegSetValueExA(child, "", 0, REG_SZ,
+                reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+            if (child)
+                RegCloseKey(child);
+        }
+        if (!RegCreateKeyExA(key, "ProgID", 0, "", 0,
+                KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+            RegSetValueExA(child, "", 0, REG_SZ,
+                reinterpret_cast<const BYTE *>("AIM.Protocol.1"), lstrlenA("AIM.Protocol.1") + 1);
+            if (child)
+                RegCloseKey(child);
+        }
+        if (!RegCreateKeyExA(key, "VersionIndependentProgID", 0, "", 0,
+                KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+            RegSetValueExA(child, "", 0, REG_SZ,
+                reinterpret_cast<const BYTE *>("AIM.Protocol"), lstrlenA("AIM.Protocol") + 1);
+            if (child)
+                RegCloseKey(child);
+        }
+        if (!RegCreateKeyExA(key, "InprocHandler32", 0, "", 0,
+                KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+            lstrcpyA(value, "ole32.dll");
+            RegSetValueExA(child, "", 0, REG_SZ,
+                reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+            if (child)
+                RegCloseKey(child);
+        }
+        if (!RegCreateKeyExA(key, "LocalServer32", 0, "", 0,
+                KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+            wsprintfA(value, "%s%s", directory, "aimauto.exe");
+            RegSetValueExA(child, "", 0, REG_SZ,
+                reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+            if (child)
+                RegCloseKey(child);
+        }
+        if (key)
+            RegCloseKey(key);
+    }
+
+    if (!RegOpenKeyA(HKEY_CURRENT_USER,
+        "Software\\Netscape\\Netscape Navigator\\Automation Protocols", &key)) {
+        RegSetValueExA(key, "aim", 0, REG_SZ,
+            reinterpret_cast<const BYTE *>("AIM.Protocol.1"), lstrlenA("AIM.Protocol.1") + 1);
+        if (key)
+            RegCloseKey(key);
+    }
+
+    return;
 }
 
 

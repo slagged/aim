@@ -230,7 +230,8 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE, LPSTR raw_command, int show)
             }
             if (allocated_command) free(allocated_command);
             if (today) enable_aim_today(0);
-            result = reinterpret_cast<int>(instance);
+            // OSCORE reuses instance for its exit result; read it after cleanup.
+            result = reinterpret_cast<int>(*reinterpret_cast<volatile HINSTANCE *>(&instance));
         }
     } else {
         result = 0;
