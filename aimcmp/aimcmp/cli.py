@@ -113,7 +113,7 @@ def main(argv=None):
     project_cmp = sub.add_parser('target', help='Compare a configured project target')
     project_cmp.add_argument('project'); project_cmp.add_argument('name'); project_cmp.add_argument('--build', action='store_true')
     report_options(project_cmp)
-    builder = sub.add_parser('build', help='Upload sources and build a configured target on the SSH VM')
+    builder = sub.add_parser('build', help='Build a configured target locally or over SSH')
     builder.add_argument('project'); builder.add_argument('name')
     coff = sub.add_parser('coff-compare', help='Compare selected COFF contributions with explicit symbol bindings')
     coff.add_argument('original'); coff.add_argument('object_dir'); coff.add_argument('manifest')

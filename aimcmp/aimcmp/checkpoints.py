@@ -5,6 +5,7 @@ import copy
 import json
 import os
 import re
+import shutil
 import uuid
 import pefile
 from .pe import sha256
@@ -145,8 +146,11 @@ def tool_inventory(project, folder):
     config = project.get('toolchain')
     if not config:
         return {'status':'unconfigured', 'tools':[], 'note':'No compiler-tool inventory configured; analysis versions remain in the report.'}
-    host = config['ssh']
-    if not re.fullmatch(r'[A-Za-z0-9_.-]+', host):
+    backend = config.get('backend', 'ssh')
+    if backend not in ('local', 'ssh'):
+        raise ValueError('Unknown toolchain backend')
+    host = config.get('ssh')
+    if backend == 'ssh' and not re.fullmatch(r'[A-Za-z0-9_.-]+', host or ''):
         raise ValueError('Invalid toolchain SSH alias')
     tools = []
     for name, remote in config['files'].items():
@@ -155,15 +159,20 @@ def tool_inventory(project, folder):
             raise ValueError('Toolchain files must be simple absolute Windows paths')
         path = folder/'toolchain'/name
         path.parent.mkdir(parents=True, exist_ok=True)
-        run(['scp','-o','BatchMode=yes',host+':'+remote,str(path)])
+        if backend == 'local':
+            shutil.copyfile(remote, path)
+        else:
+            run(['scp','-o','BatchMode=yes',host+':'+remote,str(path)])
         pe = pefile.PE(data=path.read_bytes())
         fixed = getattr(pe, 'VS_FIXEDFILEINFO', [])
         version = None
         if fixed:
             v = fixed[0]
             version = '.'.join(str(n) for n in (v.FileVersionMS>>16, v.FileVersionMS&65535, v.FileVersionLS>>16, v.FileVersionLS&65535))
-        tools.append({'name':name, 'remote_path':remote, 'version':version, 'sha256':sha256(path)})
-    return {'status':'captured', 'ssh':host, 'tools':tools,
+        tools.append({'name':name, 'local_path' if backend == 'local' else 'remote_path':remote,
+                      'version':version, 'sha256':sha256(path)})
+        pe.close()
+    return {'status':'captured', 'backend':backend, **({'ssh':host} if backend == 'ssh' else {}), 'tools':tools,
             'note':'Configured tool files captured after the build; build-script bytes record the selected toolchain environment.'}
 
 
@@ -193,7 +202,8 @@ def save_checkpoint(project_path, target, name, args, analyze, report_writer):
             frozen['mapping'] = (folder/'mapping.json').relative_to(root).as_posix()
         config['source_dir'] = (folder/'sources').relative_to(root).as_posix()
         config['download_dir'] = (folder/'artifacts').relative_to(root).as_posix()
-        config['remote_dir'] = config['remote_dir'].rstrip('/\\')+'/checkpoints/'+name+'-'+uuid.uuid4().hex[:8]
+        if config.get('backend', 'ssh') == 'ssh':
+            config['remote_dir'] = config['remote_dir'].rstrip('/\\')+'/checkpoints/'+name+'-'+uuid.uuid4().hex[:8]
         for key in ('rebuilt', 'map'):
             if target.get(key):
                 frozen[key] = config['download_dir']+'/'+Path(target[key]).name

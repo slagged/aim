@@ -1,15 +1,16 @@
-"""Configurable source fragments, one isolated remote batch, explicit promotion."""
+"""Configurable source fragments, isolated local or remote builds, explicit promotion."""
 from pathlib import Path
 import copy
 import itertools
 import json
 import math
 import re
+import shutil
 import stat
 import sys
 import uuid
 import zipfile
-from .build import run
+from .build import run, local_run, effective_recipe
 from .pe import Image, sha256
 from .compare import compare
 from .iteration import compact_report, render_text
@@ -139,7 +140,10 @@ def run_variants(project_path, target, spec_path, name, args, analyze, writer):
             if not isinstance(flags,str) or not re.fullmatch(r'[A-Za-z0-9 /:_.+-]*',flags):
                 raise ValueError('Variant flags contain unsupported characters')
         archive_tool = spec.get('archive_tool',project.get('batch_archive_tool'))
-        if not archive_tool:
+        backend = config.get('backend', 'ssh')
+        if backend not in ('ssh', 'local'):
+            raise ValueError('Unknown variant build backend')
+        if backend == 'ssh' and not archive_tool:
             raise ValueError('Set batch_archive_tool to the VM 7z.exe path')
         base_files = {}
         for file in config['files']:
@@ -174,7 +178,7 @@ def run_variants(project_path, target, spec_path, name, args, analyze, writer):
                 source = validate_destination(root,Path(path),project_path,root/target['original'])
                 remember(root,checkpoint,cm,source,'recipe/'+str(index)+'/'+source.name,'recipe')
             if config.get('recipe_data'):
-                (checkpoint/'sources'/config['script']).write_text(render_recipe(config['recipe_data']),encoding='utf-8',newline='')
+                (checkpoint/'sources'/config['script']).write_text(render_recipe(effective_recipe(config)),encoding='utf-8',newline='')
             (checkpoint/'sources/aimcmp-flags.txt').write_text(cm['restore_target']['build']['flags']+'\n',encoding='ascii')
         write_json(folder/'specification.json',spec)
         write_json(folder/'target-recipe.json',target)
@@ -185,24 +189,38 @@ def run_variants(project_path, target, spec_path, name, args, analyze, writer):
             destination.write_text(text,encoding='utf-8')
             resolved_spec['templates'][file] = 'templates/'+file
         write_json(folder/'specification-resolved.json',resolved_spec)
-        lines = ['@echo off','cd /d "%~dp0"']
-        for variant,checkpoint,cm in frozen:
-            lines += ['pushd '+variant['id'],'call '+config['script']+' > build.log 2>&1',
-                      'echo %errorlevel% > exit-code.txt','popd']
-        lines += ['"'+archive_tool.replace('/','\\')+'" a -tzip artifacts.zip .\\v*','exit /b %errorlevel%']
-        (folder/'run.cmd').write_text('\r\n'.join(lines)+'\r\n',encoding='ascii')
-        with zipfile.ZipFile(folder/'sources.zip','w',zipfile.ZIP_DEFLATED) as zipped:
-            zipped.write(folder/'run.cmd','run.cmd')
-            for variant,checkpoint,cm in frozen:
-                for source in (checkpoint/'sources').rglob('*'):
-                    if source.is_file():
-                        zipped.write(source,variant['id']+'/'+source.relative_to(checkpoint/'sources').as_posix())
-        remote = config['remote_dir'].rstrip('/\\')+'/variants/'+name+'-'+uuid.uuid4().hex[:8]
-        manifest['remote_dir'] = remote
         manifest['status'] = 'building'
+        manifest['backend'] = backend
         write_json(folder/'run.json',manifest)
-        remote_batch(config['ssh'],remote,archive_tool,folder)
-        safe_extract(folder/'artifacts.zip',folder/'returned')
+        if backend == 'local':
+            for variant, checkpoint, cm in frozen:
+                returned = folder/'returned'/variant['id']
+                shutil.copytree(checkpoint/'sources', returned)
+                try:
+                    output = local_run(config['environment'], returned/config['script'], config.get('timeout_seconds', 300))
+                    code = 0
+                except Exception as error:
+                    output, code = str(error), 1
+                (returned/'build.log').write_text(output, encoding='utf-8')
+                (returned/'exit-code.txt').write_text(str(code), encoding='ascii')
+        else:
+            lines = ['@echo off','cd /d "%~dp0"']
+            for variant,checkpoint,cm in frozen:
+                lines += ['pushd '+variant['id'],'call '+config['script']+' > build.log 2>&1',
+                          'echo %errorlevel% > exit-code.txt','popd']
+            lines += ['"'+archive_tool.replace('/','\\')+'" a -tzip artifacts.zip .\\v*','exit /b %errorlevel%']
+            (folder/'run.cmd').write_text('\r\n'.join(lines)+'\r\n',encoding='ascii')
+            with zipfile.ZipFile(folder/'sources.zip','w',zipfile.ZIP_DEFLATED) as zipped:
+                zipped.write(folder/'run.cmd','run.cmd')
+                for variant,checkpoint,cm in frozen:
+                    for source in (checkpoint/'sources').rglob('*'):
+                        if source.is_file():
+                            zipped.write(source,variant['id']+'/'+source.relative_to(checkpoint/'sources').as_posix())
+            remote = config['remote_dir'].rstrip('/\\')+'/variants/'+name+'-'+uuid.uuid4().hex[:8]
+            manifest['remote_dir'] = remote
+            write_json(folder/'run.json',manifest)
+            remote_batch(config['ssh'],remote,archive_tool,folder)
+            safe_extract(folder/'artifacts.zip',folder/'returned')
         tools = tool_inventory(project,folder)
         left = Image(root/target['original'])
         if sha256(left.path)!=manifest['original_sha256']:
@@ -217,7 +235,7 @@ def run_variants(project_path, target, spec_path, name, args, analyze, writer):
             try:
                 returned = folder/'returned'/variant['id']
                 if not (returned/'exit-code.txt').is_file():
-                    raise RuntimeError('Remote variant has no exit status')
+                    raise RuntimeError('Variant has no exit status')
                 code = int((returned/'exit-code.txt').read_text().strip())
                 copy_file(returned/'build.log',checkpoint/'build.log')
                 if code:

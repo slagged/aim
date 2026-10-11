@@ -52,3 +52,14 @@ class ConfigTests(unittest.TestCase):
         self.assertNotIn('timeout_seconds', portable['build'])
         self.assertEqual(portable['build']['flags'], '/O1')
         self.assertEqual(target['build']['ssh'], 'local-vm')
+
+    def test_local_backend_paths_stay_out_of_portable_target(self):
+        self.local({'schema':1, 'targets':{'fixture':{'backend':'local', 'environment':'D:/native/env.cmd'}},
+                    'toolchain':{'backend':'local', 'files':{'cl.exe':'D:/native/cl.exe'}}})
+        effective = load_project(self.path)
+        self.assertEqual(effective['toolchain']['backend'], 'local')
+        target = effective['targets'][0]
+        self.assertEqual(target['build']['environment'], 'D:/native/env.cmd')
+        portable = portable_target(self.base, target)
+        self.assertNotIn('environment', portable['build'])
+        self.assertNotIn('backend', portable['build'])

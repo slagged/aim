@@ -3,6 +3,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 import json
+import shutil
 import tempfile
 import unittest
 import zipfile
@@ -85,6 +86,32 @@ class VariantWorkflowTests(unittest.TestCase):
         self.assertEqual((self.root/'sources/candidate.c').read_text(),'frozen source\n')
         source = self.root/'checkpoints/fixture/experiment-v0000/sources/candidate.c'
         self.assertEqual(source.read_text(),'source good')
+
+    def test_local_batch_keeps_failed_variant_without_ssh_or_archiver(self):
+        self.target['build'].update(backend='local', environment='C:/native/env.cmd')
+        self.target['build'].pop('remote_dir')
+        self.target['build'].pop('ssh')
+        project = json.loads(self.project.read_text())
+        project['targets'][0] = self.target
+        project.pop('batch_archive_tool')
+        self.project.write_text(json.dumps(project))
+        def compile(environment, script, timeout):
+            directory = script.parent
+            if (directory/'candidate.c').read_text() == 'source bad':
+                raise RuntimeError('compiler error C2143')
+            (directory/'builds').mkdir()
+            for file in ('candidate.dll', 'candidate.map'):
+                shutil.copyfile(self.root/'artifacts'/file, directory/'builds'/file)
+            return 'compiled locally'
+        with patch('aimcmp.variants.local_run', side_effect=compile), patch('aimcmp.variants.remote_batch') as remote, patch('aimcmp.variants.print'):
+            manifest, status = run_variants(self.project, self.target, self.spec, 'local-experiment',
+                self.args, lambda image,args:pe_snapshot(image), write_report)
+            remote.assert_not_called()
+        self.assertEqual(status, 1)
+        self.assertEqual(manifest['backend'], 'local')
+        self.assertTrue(manifest['records'][0]['summary']['code_sections_exact'])
+        self.assertEqual(manifest['records'][1]['status'], 'failed')
+        self.assertFalse((self.root/'experiments/runs/fixture/local-experiment/artifacts.zip').exists())
 
     def test_promotion_is_explicit_verifies_bytes_and_preserves_edits(self):
         self.run_matrix()

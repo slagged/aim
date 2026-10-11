@@ -45,9 +45,13 @@ Find project state at its source:
 
 Original binaries and generated artifacts are excluded from Git. Supply originals
 at their configured locations. Remote builds require SSH/SCP access to the configured
-Windows machine. Analysis requires the Binary Ninja RPyC service with access to the
-binary paths; consult command help for connection options. Machine-specific settings
-belong in the ignored local config.
+Windows machine. Local builds require Windows and a compiler environment batch
+file. Set `backend: "local"` and `environment` in each target's ignored machine
+override; set the tool inventory's `backend` to `local` and its `files` to the
+corresponding local tools. Local builds, flag matrices, variant batches, and
+compiler inventory capture then use no SSH. Analysis requires the Binary Ninja
+RPyC service with access to the binary paths; consult command help for connection
+options. Machine-specific settings belong in the ignored local config.
 
 ## 1. Read comparison reports
 
@@ -73,7 +77,7 @@ python -m aimcmp iterate $project $target --require-exact
 python -m aimcmp iterate --help
 ```
 
-`iterate` uploads configured inputs, builds remotely, retrieves artifacts and MAP
+`iterate` builds configured inputs locally or over SSH, collects artifacts and MAP
 files, analyzes both images, and writes comparisons and stage diagnostics.
 `--require-exact` checks executable-section bytes; it does not require whole-file
 equality. Use the report to determine the result and preserve failure diagnostics.
@@ -260,9 +264,9 @@ To stage the client executable's private resource and DLL import inputs, run
 `python build/prepare-client.py originals/AIM .local/client-build` from the
 repository root. This refreshes the staged source too, so repeat it after source
 edits. Then run `python -m aimcmp build ../targets/project.json aim` from
-`aimcmp/`. The build uses the VM selected in the local machine configuration.
+`aimcmp/`. The build uses the backend selected in the local machine configuration.
 Resources are extracted from the pinned original; no executable code is copied.
-The build also downloads objects used by the exact contribution checks. From
+The build also collects objects used by the exact contribution checks. From
 `aimcmp/`, run `python -m aimcmp coff-compare ../originals/AIM/aim.exe ../targets/builds/aim ../targets/client-helpers.json`
 to check those contributions with explicit relocation bindings.
 Grouped source files can produce several same-named COFF sections. A comparison

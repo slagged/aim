@@ -5,7 +5,7 @@ import json
 from .recipes import load_recipe
 
 
-MACHINE_BUILD_FIELDS = {'ssh', 'remote_dir', 'timeout_seconds'}
+MACHINE_BUILD_FIELDS = {'ssh', 'remote_dir', 'timeout_seconds', 'backend', 'environment'}
 
 
 def resolve_recipes(project, path):
@@ -55,9 +55,11 @@ def load_project(path):
         targets[name]['build'].update(overrides)
     if 'toolchain' in local:
         overrides = local['toolchain']
-        if not isinstance(overrides, dict) or set(overrides) - {'ssh', 'files'}:
-            raise ValueError('Local toolchain configuration may only override ssh and files')
+        if not isinstance(overrides, dict) or set(overrides) - {'ssh', 'files', 'backend'}:
+            raise ValueError('Local toolchain configuration may only override backend, ssh and files')
         toolchain = project.setdefault('toolchain', {})
+        if 'backend' in overrides:
+            toolchain['backend'] = overrides['backend']
         if 'ssh' in overrides:
             toolchain['ssh'] = overrides['ssh']
         if 'files' in overrides:
