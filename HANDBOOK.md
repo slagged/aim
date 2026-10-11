@@ -150,6 +150,99 @@ and visible errors make the returned evidence easier to inspect.
 
 ## Daily workflow
 
+### Test decompiler annotations
+
+Keep a contract's `type_confidence` separate from a function body's match status.
+Verified type annotations require `type_verification` (`byte-match` or `probe`)
+and specific `type_evidence`. Structured type declarations likewise carry their
+own confidence and evidence. Legacy declaration strings and unclassified
+signatures are excluded from verified-only analysis. Imported contracts use
+`kind: import` and the exact `DLL!decorated_symbol` identity, checked against the
+pinned original. For call-count studies, record `physical_parameter_count`,
+including the receiver and any hidden result argument.
+
+From `aimcmp/`, run a focused experiment with explicitly selected functions:
+
+```powershell
+python -m aimcmp annotation-study ../originals/AIM/aim.exe ../targets/mappings/aim-contracts.json --function 0x402846 --output ../.local/analysis/annotations/xprt
+```
+
+The runner freezes the metric definitions and ledger before collection, then
+loads the hash-verified PE independently for baseline, verified, and hypothesis
+analyses. It records BN version, settings, collector and annotation-engine hashes,
+import types, HLIL, and per-function deltas. It uses no saved database or analysis
+cache. Keep each experiment's output in its own ignored directory.
+Check `status.json` before using a report: a failed rerun does not make an older
+report current.
+
+Read hypothesis changes separately from verified changes. Counts describe BN
+output, not correctness; a simpler decompilation can still be wrong. Explicit
+conversion nodes are counted because BN has no dedicated HLIL cast operation.
+Result-type divergences are diagnostics, including legitimate conversions.
+Existing Windows library types remain part of the baseline. Own EH observations
+still supply lifetime evidence that HLIL omits. Types from rebuilt PDBs inherit
+the confidence of our declarations.
+
+For a cached annotated snapshot, use `snapshot --mapping ...
+--annotation-layer verified`; `--annotation-layer all` also applies hypotheses.
+Each layer has a separate content-keyed cache identity.
+
+### Hone a function
+
+```powershell
+python -m aimcmp hone ../targets/project.json aim WinMain --cache ../.local/analysis/honing-cache --json ../.local/client-build/winmain-honing.json
+```
+
+The short view shows the first instruction divergence, its classification,
+nearby call liveness and reaching definitions, late-load candidates, syntactic
+zero counts, and prior attempts. Use `--full` for the complete JSON evidence.
+By default it reads `.local/analysis/honing/ledger.json` under the configured
+workspace root; `--ledger` selects another history. A target's optional
+`honing_bindings` points to a hash-pinned COFF manifest for known reference
+identities. Unresolved references remain visible separately from instruction
+changes. Canonical equality is an allocation diagnostic, not an exact match.
+
+ABI registers retain their identities. Preserved-register saves/restores are
+checked separately from canonicalized body uses, and branch destinations are
+compared after alignment. Liveness includes all general registers internally,
+but the call view displays EBX/ESI/EDI/EBP and EBP-relative storage. Partial
+writes and overlapping accesses are conservative; EBP-relative storage is not
+source identity. ESP-relative slots and memory aliasing are unresolved. Calls
+may modify storage through escaped pointers. Unknown control-flow paths are
+flagged rather than treated as complete evidence.
+
+Use `hone-log check` before compiling a proposed retry, and `hone-log add`
+afterward. Both require the function's ledger ID, pinned original SHA-256,
+compiler flags, a captured tool inventory, and actual compiler-preprocessed
+source. Token hashing ignores comments, whitespace, and compiler line markers;
+strings, token boundaries, and pragmas remain significant. Flags and tool hashes
+are part of the duplicate key. Raw source with unexpanded directives is rejected.
+Capture preprocessing with the same include paths, forced includes, macros,
+language mode, and compiler used for the build; VC7.1's `/EP` produces suitable
+input. Preserve preprocessing failures as failures rather than hashing partial
+output. A report hash alone does not prove the source produced its artifact;
+retain the build/checkpoint evidence alongside the entry.
+
+```powershell
+python -m aimcmp hone-log check ../.local/analysis/honing/ledger.json aim.function.WinMain --original-sha256 <hash> --preprocessed <compiler-output.i> --toolchain <captured-tools.json> --flags '<compiler-options>'
+python -m aimcmp hone-log add --help
+python -m aimcmp hone-log stop --help
+```
+
+Each attempt states a hypothesis and mutation family. Assessed attempts require
+a report; build failures and untested sources never receive an assessment.
+Use `baseline` to record an unchanged candidate; it does not count as a tried
+mutation family when declaring a plateau.
+Families include declaration/first-use order, initialization placement, named
+intermediates, reload-at-use, if/else inversion, comparison operand order, and
+zero-constant uses. Render alternatives through the existing variant templates;
+the family names do not authorize blind rewrites of arbitrary C++ expressions.
+
+Before stopping at a plateau, record `hone-log stop` with a concrete reason,
+remaining mismatch classification, and tried families. The command rejects an
+empty explanation and families without recorded attempts. This is a workflow
+requirement; the tool cannot prevent an agent from ending its turn outside it.
+
 Upstream libraries live in `vendor/` as pinned Git submodules. Initialize them
 with `git submodule update --init --recursive` from the repository root.
 `vendor/sources.json` records the relevant binaries, source roots, selection

@@ -1,0 +1,220 @@
+{
+  "schema": 1,
+  "kind": "aimcmp.mapping",
+  "original": {
+    "path": "../originals/AIM/aim.exe",
+    "sha256": "1d150f88b23acdcec2f82d7f603f4f5d200a30fcb23f5fc87bd0af3d94728840"
+  },
+  "types": [
+    {
+      "id": "aim.type.tbstr.opaque",
+      "declaration": "typedef struct AIM_TBstr AIM_TBstr;",
+      "confidence": "verified",
+      "verification": "probe",
+      "evidence": [
+        "Decorated imports and VC7.1 declaration probes establish a TBstr receiver. This opaque declaration makes no field, size, or hierarchy claim."
+      ]
+    },
+    {
+      "id": "aim.type.tbstr.layout",
+      "declaration": "struct AIM_TBstr { unsigned short *wide; char *multibyte; };",
+      "confidence": "hypothesis",
+      "evidence": [
+        "Observed offsets 0 and 4 and eight-byte storage are consistent with these fields. Complete-object versus nonvirtual-base identity, member names and precise field types remain hypotheses."
+      ]
+    }
+  ],
+  "records": [
+    {
+      "id": "aim.contract.TBstr_Left",
+      "kind": "import",
+      "original": "0x40420c",
+      "name": "?Left@TBstr@XPRT@@QBE?AV12@H@Z",
+      "import": "XPRT.DLL!?Left@TBstr@XPRT@@QBE?AV12@H@Z",
+      "confidence": "verified",
+      "evidence": [
+        "PE import identity in hash-pinned original. Friendly role: TBstr_Left"
+      ],
+      "type": "AIM_TBstr * (__thiscall *)(const AIM_TBstr *self, AIM_TBstr *result, int count)",
+      "type_confidence": "verified",
+      "type_evidence": [
+        "Pinned VC7.1 declaration probe plus original call setup/destruction establish ECX receiver, stack result pointer followed by count, EAX result storage. Nonvirtual-base identity remains unresolved."
+      ],
+      "physical_parameter_count": 3,
+      "type_verification": "probe"
+    },
+    {
+      "id": "aim.contract.TBstr_GetMultibyteString",
+      "kind": "import",
+      "original": "0x404214",
+      "name": "?GetMultibyteString@TBstr@XPRT@@QBEPBDXZ",
+      "import": "XPRT.DLL!?GetMultibyteString@TBstr@XPRT@@QBEPBDXZ",
+      "confidence": "verified",
+      "evidence": [
+        "PE import identity in hash-pinned original. Friendly role: TBstr_GetMultibyteString"
+      ],
+      "type": "const char * (__thiscall *)(const AIM_TBstr *self)",
+      "type_confidence": "verified",
+      "type_evidence": [
+        "Decorated export signature and exact matched callers establish pointer return and ECX receiver with no explicit stack arguments."
+      ],
+      "physical_parameter_count": 1,
+      "type_verification": "byte-match"
+    },
+    {
+      "id": "aim.contract.TBstr_GetString",
+      "kind": "import",
+      "original": "0x404218",
+      "name": "?GetString@TBstr@XPRT@@QBEPBGXZ",
+      "import": "XPRT.DLL!?GetString@TBstr@XPRT@@QBEPBGXZ",
+      "confidence": "verified",
+      "evidence": [
+        "PE import identity in hash-pinned original. Friendly role: TBstr_GetString"
+      ],
+      "type": "const unsigned short * (__thiscall *)(const AIM_TBstr *self)",
+      "type_confidence": "verified",
+      "type_evidence": [
+        "Decorated export signature and exact unregister_component caller establish wide pointer return and ECX receiver."
+      ],
+      "physical_parameter_count": 1,
+      "type_verification": "byte-match"
+    },
+    {
+      "id": "aim.contract.TBstr_ReverseFind",
+      "kind": "import",
+      "original": "0x404210",
+      "name": "?ReverseFind@TBstr@XPRT@@QBEHG@Z",
+      "import": "XPRT.DLL!?ReverseFind@TBstr@XPRT@@QBEHG@Z",
+      "confidence": "verified",
+      "evidence": [
+        "PE import identity in hash-pinned original. Friendly role: TBstr_ReverseFind"
+      ],
+      "type": "int (__thiscall *)(const AIM_TBstr *self, unsigned short character)",
+      "type_confidence": "verified",
+      "type_evidence": [
+        "Decorated export signature and exact set_cool_utils caller establish unsigned-short argument, signed int return and ECX receiver."
+      ],
+      "physical_parameter_count": 2,
+      "type_verification": "byte-match"
+    },
+    {
+      "id": "aim.contract.TBstr_CompareNoCase",
+      "kind": "import",
+      "original": "0x40421c",
+      "name": "?CompareNoCase@TBstr@XPRT@@QBEHPBG@Z",
+      "import": "XPRT.DLL!?CompareNoCase@TBstr@XPRT@@QBEHPBG@Z",
+      "confidence": "verified",
+      "evidence": [
+        "PE import identity in hash-pinned original. Friendly role: TBstr_CompareNoCase"
+      ],
+      "type": "int (__thiscall *)(const AIM_TBstr *self, const unsigned short *text)",
+      "type_confidence": "supported",
+      "type_evidence": [
+        "Decorated import encodes thiscall, const receiver, wide pointer argument and int return; not independently isolated by a compiler probe."
+      ],
+      "physical_parameter_count": 2
+    },
+    {
+      "id": "aim.contract.TBstr_Assign",
+      "kind": "import",
+      "original": "0x404200",
+      "name": "?Assign@TBstr@XPRT@@QAEAAV12@ABV12@@Z",
+      "import": "XPRT.DLL!?Assign@TBstr@XPRT@@QAEAAV12@ABV12@@Z",
+      "confidence": "verified",
+      "evidence": [
+        "PE import identity in hash-pinned original. Friendly role: TBstr_Assign"
+      ],
+      "type": "AIM_TBstr * (__thiscall *)(AIM_TBstr *self, const AIM_TBstr *text)",
+      "type_confidence": "supported",
+      "type_evidence": [
+        "Decorated import encodes reference return and reference parameter; represented as physical pointers. This representation remains a working contract."
+      ],
+      "physical_parameter_count": 2
+    },
+    {
+      "id": "aim.contract.TBstr_Append",
+      "kind": "import",
+      "original": "0x4041fc",
+      "name": "?Append@TBstr@XPRT@@QAEAAV12@PBD@Z",
+      "import": "XPRT.DLL!?Append@TBstr@XPRT@@QAEAAV12@PBD@Z",
+      "confidence": "verified",
+      "evidence": [
+        "PE import identity in hash-pinned original. Friendly role: TBstr_Append"
+      ],
+      "type": "AIM_TBstr * (__thiscall *)(AIM_TBstr *self, const char *text)",
+      "type_confidence": "supported",
+      "type_evidence": [
+        "Decorated import encodes reference return and char pointer argument; physical reference representation remains a working contract."
+      ],
+      "physical_parameter_count": 2
+    },
+    {
+      "id": "aim.contract.TBstr_FromMultibyte",
+      "kind": "import",
+      "original": "0x404204",
+      "name": "??0TBstr@XPRT@@QAE@PBD@Z",
+      "import": "XPRT.DLL!??0TBstr@XPRT@@QAE@PBD@Z",
+      "confidence": "verified",
+      "evidence": [
+        "PE import identity in hash-pinned original. Friendly role: TBstr_FromMultibyte"
+      ],
+      "type": "void (__thiscall *)(AIM_TBstr *self, const char *text)",
+      "type_confidence": "supported",
+      "type_evidence": [
+        "Decorated constructor arguments are known; void models source semantics without asserting the unused EAX value."
+      ],
+      "physical_parameter_count": 2
+    },
+    {
+      "id": "aim.contract.TBstr_FromWide",
+      "kind": "import",
+      "original": "0x404224",
+      "name": "??0TBstr@XPRT@@QAE@PBG@Z",
+      "import": "XPRT.DLL!??0TBstr@XPRT@@QAE@PBG@Z",
+      "confidence": "verified",
+      "evidence": [
+        "PE import identity in hash-pinned original. Friendly role: TBstr_FromWide"
+      ],
+      "type": "void (__thiscall *)(AIM_TBstr *self, const unsigned short *text)",
+      "type_confidence": "supported",
+      "type_evidence": [
+        "Decorated constructor arguments are known; void models source semantics without asserting the unused EAX value."
+      ],
+      "physical_parameter_count": 2
+    },
+    {
+      "id": "aim.contract.TBstr_Copy",
+      "kind": "import",
+      "original": "0x404208",
+      "name": "??0TBstr@XPRT@@QAE@ABV01@@Z",
+      "import": "XPRT.DLL!??0TBstr@XPRT@@QAE@ABV01@@Z",
+      "confidence": "verified",
+      "evidence": [
+        "PE import identity in hash-pinned original. Friendly role: TBstr_Copy"
+      ],
+      "type": "void (__thiscall *)(AIM_TBstr *self, const AIM_TBstr *text)",
+      "type_confidence": "supported",
+      "type_evidence": [
+        "Decorated copy-constructor argument is known; void models source semantics without asserting the unused EAX value."
+      ],
+      "physical_parameter_count": 2
+    },
+    {
+      "id": "aim.contract.TBstr_Destroy",
+      "kind": "import",
+      "original": "0x404228",
+      "name": "??1TBstr@XPRT@@QAE@XZ",
+      "import": "XPRT.DLL!??1TBstr@XPRT@@QAE@XZ",
+      "confidence": "verified",
+      "evidence": [
+        "PE import identity in hash-pinned original. Friendly role: TBstr_Destroy"
+      ],
+      "type": "void (__thiscall *)(AIM_TBstr *self)",
+      "type_confidence": "supported",
+      "type_evidence": [
+        "Decorated destructor convention and receiver are known; void models source semantics, without claiming an unused physical return value."
+      ],
+      "physical_parameter_count": 1
+    }
+  ]
+}

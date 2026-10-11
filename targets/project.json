@@ -150,7 +150,8 @@
           "builds/startup.obj"
         ],
         "flags": "/O1 /MD /EHsc /GS"
-      }
+      },
+      "honing_bindings": "client-helpers.json"
     }
   ],
   "toolchain": {

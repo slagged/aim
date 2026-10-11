@@ -188,7 +188,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE, LPSTR raw_command, int show)
     restore_backups(instance);
     HANDLE mutex = CreateMutexA(0, FALSE, "_Oscar_AppMutex");
     DWORD mutex_error = GetLastError();
-    int result = 0;
+    int result;
     if (mutex_error != ERROR_ALREADY_EXISTS || (!registration_only && !forward_to_instance(instance, command))) {
         int today = explorer_installed();
         if (today) enable_aim_today(1);
@@ -232,6 +232,8 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE, LPSTR raw_command, int show)
             if (today) enable_aim_today(0);
             result = reinterpret_cast<int>(instance);
         }
+    } else {
+        result = 0;
     }
     CloseHandle(mutex);
     XpcsUninitialize();

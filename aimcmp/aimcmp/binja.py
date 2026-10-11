@@ -12,6 +12,8 @@ from .pe import Image, sha256
 def snapshot(path, cache_dir, host='127.0.0.1', port=18812, refresh=False, annotations=None):
     path = Path(path).resolve()
     digest = sha256(path)
+    if annotations and annotations.get('original_sha256') and annotations['original_sha256'] != digest:
+        raise ValueError('Annotation input does not match the pinned original')
     cache_dir = Path(cache_dir)
     cache_dir.mkdir(parents=True, exist_ok=True)
     conn = rpyc.connect(host, port, config={'sync_request_timeout': 120})
@@ -20,7 +22,7 @@ def snapshot(path, cache_dir, host='127.0.0.1', port=18812, refresh=False, annot
         version = str(bn.core_version())
         safe_version = ''.join(c if c.isalnum() else '_' for c in version)
         annotation_key = '-mapping-'+hashlib.sha256(json.dumps(annotations, sort_keys=True).encode()).hexdigest() if annotations else ''
-        cache_path = cache_dir / f'{digest}-{safe_version}-v4{annotation_key}.json'
+        cache_path = cache_dir / f'{digest}-{safe_version}-v5{annotation_key}.json'
         if cache_path.exists() and not refresh:
             result = json.loads(cache_path.read_text())
             result['path'] = str(path)

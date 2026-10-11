@@ -22,8 +22,14 @@ def validate(ledger):
         raise ValueError('Mapping original must contain a SHA-256')
     if not isinstance(ledger.get('records'), list):
         raise ValueError('Mapping records must be a list')
-    if not isinstance(ledger.get('types', []), list) or any(not isinstance(t, str) for t in ledger.get('types', [])):
-        raise ValueError('Mapping types must be a list of C declarations')
+    if not isinstance(ledger.get('types', []), list):
+        raise ValueError('Mapping types must be a list')
+    for entry in ledger.get('types', []):
+        if isinstance(entry, str):
+            continue  # Legacy declarations have no verified provenance.
+        if not isinstance(entry, dict) or not isinstance(entry.get('declaration'), str):
+            raise ValueError('Mapping types require a C declaration')
+        validate_evidence(entry)
     ids, addresses = set(), set()
     for row in ledger['records']:
         if not isinstance(row, dict):
@@ -34,8 +40,8 @@ def validate(ledger):
         if row['id'] in ids:
             raise ValueError('Duplicate mapping ID: '+row['id'])
         ids.add(row['id'])
-        if row.get('kind') not in ('function', 'global'):
-            raise ValueError('Mapping kind must be function or global')
+        if row.get('kind') not in ('function', 'global', 'import'):
+            raise ValueError('Mapping kind must be function, global, or import')
         address = number(row['original'])
         if address in addresses:
             raise ValueError('Original addresses must be unique')
@@ -46,6 +52,15 @@ def validate(ledger):
             raise ValueError('Evidence must be a list of strings')
         if row.get('type') is not None and not isinstance(row['type'], str):
             raise ValueError('Type must be a C declaration string')
+        if row.get('type_confidence') is not None:
+            validate_evidence({'confidence': row['type_confidence'],
+                               'evidence': row.get('type_evidence'),
+                               'verification': row.get('type_verification')})
+        if row.get('kind') == 'import' and not isinstance(row.get('import'), str):
+            raise ValueError('Import annotations require the exact DLL!symbol identity')
+        if row.get('physical_parameter_count') is not None and (type(row['physical_parameter_count']) is not int
+                                                              or row['physical_parameter_count'] < 0):
+            raise ValueError('Physical parameter count must be a nonnegative integer')
         selector = row.get('rebuilt')
         if selector is None:
             continue
@@ -58,6 +73,16 @@ def validate(ledger):
             continue
         raise ValueError('Rebuilt selector requires a symbol, or an address pinned to a SHA-256')
     return ledger
+
+
+def validate_evidence(entry):
+    if entry.get('confidence') not in ('hypothesis', 'supported', 'verified'):
+        raise ValueError('Annotation requires a confidence tier')
+    if not isinstance(entry.get('evidence'), list) or not entry['evidence'] or any(
+            not isinstance(e, str) or not e.strip() for e in entry['evidence']):
+        raise ValueError('Annotation requires nonempty evidence')
+    if entry['confidence'] == 'verified' and entry.get('verification') not in ('byte-match', 'probe'):
+        raise ValueError('Verified contracts require byte-match or probe verification')
 
 
 def create(original):
@@ -86,6 +111,8 @@ def check_original(ledger, image):
     for row in ledger['records']:
         if not image.section(number(row['original'])):
             raise ValueError('Original mapping lies outside image sections: '+row['id'])
+        if row['kind'] == 'import' and image.imports.get(number(row['original'])) != row['import']:
+            raise ValueError('Import identity does not match original: '+row['id'])
 
 
 def symbols(image, snapshot=None):
@@ -121,23 +148,46 @@ def select(row, image, snapshot=None):
     return address
 
 
-def annotations(ledger, image, side):
+def annotations(ledger, image, side, layer='all'):
     """Resolve annotations before analysis using MAP/export symbols only."""
     if not ledger or ledger.get('kind') != 'aimcmp.mapping':
         return None
     validate(ledger)
+    if layer not in ('all', 'verified'):
+        raise ValueError('Annotation layer must be all or verified')
     if side == 'original':
         check_original(ledger, image)
     rows = []
     used = set()
     for row in ledger['records']:
+        if row['kind'] == 'import' and side != 'original':
+            continue
         address = number(row['original']) if side == 'original' else select(row, image)
         if address is not None:
             if address in used:
                 raise ValueError('Annotation addresses must be one-to-one')
             used.add(address)
-            rows.append(dict(row, address=address))
-    return {'types': ledger.get('types', []), 'records': rows}
+            item = dict(row, address=address)
+            # A matched body does not verify every declaration used to build it.
+            if layer == 'verified':
+                if row.get('type_confidence') != 'verified':
+                    item.pop('type', None)
+                if row['kind'] == 'import' and not item.get('type'):
+                    continue  # The PE already supplies its exact import symbol.
+                if row['confidence'] != 'verified' and not item.get('type'):
+                    continue
+            rows.append(item)
+    passes = []
+    for tier in ('verified', 'hypothesis'):
+        declarations = []
+        for entry in ledger.get('types', []):
+            confidence = entry.get('confidence') if isinstance(entry, dict) else 'hypothesis'
+            if (confidence == 'verified') == (tier == 'verified'):
+                declarations.append(entry['declaration'] if isinstance(entry, dict) else entry)
+        if tier == 'verified' or layer == 'all':
+            passes.append({'layer': tier, 'types': declarations})
+    return {'types': [], 'type_layers': passes, 'records': rows, 'layer': layer,
+            'original_sha256': ledger['original']['sha256'] if side == 'original' else None}
 
 
 def resolve(mapping, left, right, left_snapshot, right_snapshot):
@@ -148,6 +198,8 @@ def resolve(mapping, left, right, left_snapshot, right_snapshot):
               'ledger_sha256': hashlib.sha256(json.dumps(mapping, sort_keys=True).encode()).hexdigest()}
     used = set()
     for row in mapping['records']:
+        if row['kind'] == 'import':
+            continue
         address = select(row, right, right_snapshot)
         resolved = dict(row, original_address=number(row['original']), rebuilt_address=address)
         result['records'].append(resolved)
@@ -163,8 +215,10 @@ def resolve(mapping, left, right, left_snapshot, right_snapshot):
 
 def apply(bn, bv, data):
     """Only called for workbench-owned views; errors abort annotation analysis."""
-    if data.get('types'):
-        parsed = bv.parse_types_from_string('\n'.join(data['types']))
+    for declarations in [data.get('types', [])] + [p['types'] for p in data.get('type_layers', [])]:
+        if not declarations:
+            continue
+        parsed = bv.parse_types_from_string('\n'.join(declarations))
         for name in list(parsed.types):
             bv.define_user_type(str(name), parsed.types[name])
     applied = []
@@ -181,12 +235,18 @@ def apply(bn, bv, data):
                     function.set_user_type(bv.parse_type_string(row['type'])[0])
                 observed_type = str(function.type)
             elif row.get('type'):
+                if row['kind'] == 'import':
+                    symbol = bv.get_symbol_at(address)
+                    if symbol is None or str(symbol.raw_name) != row['import'].split('!', 1)[1]:
+                        raise ValueError('BN import symbol identity mismatch')
                 bv.define_user_data_var(address, bv.parse_type_string(row['type'])[0], row['name'])
                 observed_type = str(bv.get_data_var_at(address).type)
             else:
                 bv.define_user_symbol(bn.Symbol(bn.SymbolType.DataSymbol, address, row['name']))
             applied.append({'id': row['id'], 'address': address, 'name': row['name'],
-                            'type': row.get('type'), 'confidence': row['confidence']})
+                            'type': row.get('type'), 'confidence': row['confidence'],
+                            'type_confidence': row.get('type_confidence'),
+                            'type_evidence': row.get('type_evidence', [])})
             applied[-1]['observed_type'] = observed_type
         except Exception as exc:
             raise ValueError('Cannot apply mapping '+row['id']+': '+str(exc)) from exc

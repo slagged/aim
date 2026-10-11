@@ -87,7 +87,26 @@ def main(argv=None):
     snap = sub.add_parser('snapshot', help='Cache function boundaries, CFGs and HLIL from Binary Ninja')
     snap.add_argument('binary'); snap.add_argument('--map'); snap.add_argument('--json', required=True)
     snap.add_argument('--mapping'); snap.add_argument('--side', choices=['original', 'rebuilt'], default='original')
+    snap.add_argument('--annotation-layer', choices=['all', 'verified'], default='all')
     analysis_options(snap)
+    honing = sub.add_parser('hone', help='Show first divergence, allocation classification, liveness and experiment history')
+    honing.add_argument('project'); honing.add_argument('name'); honing.add_argument('function')
+    honing.add_argument('--ledger'); honing.add_argument('--bindings'); honing.add_argument('--json'); honing.add_argument('--full', action='store_true')
+    analysis_options(honing)
+    log = sub.add_parser('hone-log', help='Deduplicate attempts and record explicit plateau reasons')
+    log.add_argument('action', choices=['check', 'add', 'stop'])
+    log.add_argument('ledger'); log.add_argument('function'); log.add_argument('--original-sha256', required=True)
+    log.add_argument('--preprocessed'); log.add_argument('--toolchain'); log.add_argument('--flags')
+    log.add_argument('--hypothesis'); log.add_argument('--family')
+    log.add_argument('--outcome', choices=['assessed', 'build-failed', 'untested'])
+    log.add_argument('--report'); log.add_argument('--reason'); log.add_argument('--classification')
+    log.add_argument('--tried-family', action='append')
+    study_parser = sub.add_parser('annotation-study', help='Compare fresh baseline, verified, and hypothesis BN views')
+    study_parser.add_argument('binary'); study_parser.add_argument('mapping')
+    study_parser.add_argument('--output', required=True)
+    study_parser.add_argument('--function', action='append', required=True, type=lambda s: int(s, 0))
+    study_parser.add_argument('--bn-host', default='127.0.0.1')
+    study_parser.add_argument('--bn-port', default=18812, type=int)
     cmp = sub.add_parser('compare', help='Compare two binaries directly')
     cmp.add_argument('original'); cmp.add_argument('rebuilt'); cmp.add_argument('--map'); cmp.add_argument('--mapping')
     report_options(cmp)
@@ -130,6 +149,37 @@ def main(argv=None):
     objects.add_argument('--output', type=Path, required=True)
     args = parser.parse_args(argv)
     try:
+        if args.command == 'hone':
+            from .honing import hone, compact
+            path, target = load_target(args.project, args.name)
+            report = hone(path, target, args.function, args, analyze)
+            write_report(report, args.json, None)
+            print(json.dumps(report, indent=2) if args.full else compact(report))
+            return 0
+        if args.command == 'hone-log':
+            from .honing_ledger import identity, check, record, plateau
+            if args.action == 'stop':
+                result = plateau(args.ledger, args.function, args.original_sha256, args.reason or '',
+                                 args.classification or '', args.tried_family or [])
+            else:
+                if not args.preprocessed or not args.toolchain or args.flags is None:
+                    raise ValueError('Attempt requires --preprocessed, --toolchain and --flags')
+                item = identity(args.function, args.original_sha256, args.flags,
+                                json.loads(Path(args.toolchain).read_text(encoding='utf-8')),
+                                Path(args.preprocessed).read_text(encoding='utf-8'))
+                if args.action == 'check':
+                    previous = check(args.ledger, item)
+                    result = {'duplicate': previous is not None, 'previous': previous, 'identity': item}
+                else:
+                    report = json.loads(Path(args.report).read_text(encoding='utf-8')) if args.report else None
+                    result = record(args.ledger, item, args.hypothesis or '', args.family, args.outcome, report)
+            print(json.dumps(result, indent=2))
+            return 0
+        if args.command == 'annotation-study':
+            from .annotation_study import study
+            report = study(args.binary, args.mapping, args.output, sorted(set(args.function)), args.bn_host, args.bn_port)
+            print(json.dumps(report['functions'], indent=2))
+            return int(any(f['errors'] for f in report['functions']))
         if args.command == 'objects':
             from .object_analysis import main as object_main
             return object_main([str(args.export), str(args.original), '--output', str(args.output)])
@@ -166,7 +216,7 @@ def main(argv=None):
             image = Image(args.binary, args.map)
             if args.mapping:
                 ledger = json.loads(Path(args.mapping).read_text(encoding='utf-8'))
-                args.mapping_annotations = annotations(ledger, image, args.side)
+                args.mapping_annotations = annotations(ledger, image, args.side, args.annotation_layer)
             result = analyze(image, args)
             path = Path(args.json); path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(json.dumps(result, indent=2), encoding='utf-8')
