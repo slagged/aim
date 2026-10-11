@@ -41,12 +41,14 @@ def render_recipe(recipe):
              'if not exist builds mkdir builds', 'set "AIMCMP_CFLAGS='+flags+'"',
              'if exist aimcmp-flags.txt set /p AIMCMP_CFLAGS=<aimcmp-flags.txt']
     for product in recipe['products']:
-        source, obj = safe_path(product['source']), safe_path(product['object'])
         definitions = safe_options(['/D'+value for value in product.get('defines', [])])
-        lines += [('cl /nologo %AIMCMP_CFLAGS% '+safe_options(recipe['compile_options'])+
-                   ' /c '+definitions+' /Fo'+obj+' '+source).replace('  ', ' '),
-                  'if errorlevel 1 exit /b 1']
-        objects = [obj]
+        objects = []
+        for unit in [product] + product.get('additional_sources', []):
+            source, obj = safe_path(unit['source']), safe_path(unit['object'])
+            lines += [('cl /nologo %AIMCMP_CFLAGS% '+safe_options(recipe['compile_options'])+
+                       ' /c '+definitions+' /Fo'+obj+' '+source).replace('  ', ' '),
+                      'if errorlevel 1 exit /b 1']
+            objects.append(obj)
         if product.get('resource'):
             resource = product['resource']
             output = safe_path(resource['output'])

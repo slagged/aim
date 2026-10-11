@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "kind": "aimcmp.mapping",
+  "original": {
+    "path": "../originals/AIM/coolsos.dll",
+    "sha256": "f1057bdc712496e1ec4d919462a89c0351095bd4b8a26dc3a45935a00e4f72af"
+  },
+  "types": [
+    "struct COOL_SOS_MODULE_STATE { void *instance; unsigned char reserved[96]; };"
+  ],
+  "records": [
+    {
+      "id": "coolsos.function.DllMain",
+      "kind": "function",
+      "original": "0x40201000",
+      "name": "DllMain",
+      "rebuilt": {
+        "symbol": "DllMain"
+      },
+      "type": "int __stdcall DllMain(void *instance, unsigned long reason, void *reserved)",
+      "confidence": "verified",
+      "evidence": [
+        "Attach stores the instance, suppresses thread notifications, and calls ModuleInit; detach calls ModuleTerm.",
+        "Exact raw executable-section bytes; reports/iterations/coolsos/latest.json. Internal source names are reconstructed."
+      ]
+    },
+    {
+      "id": "coolsos.function.DllEntryPoint",
+      "kind": "function",
+      "original": "0x4020103d",
+      "name": "DllEntryPoint",
+      "rebuilt": {
+        "symbol": "DllEntryPoint"
+      },
+      "type": "int __stdcall DllEntryPoint(void *instance, unsigned long reason, void *reserved)",
+      "confidence": "verified",
+      "evidence": [
+        "Loader entry is a tail jump to DllMain.",
+        "Exact raw executable-section bytes; reports/iterations/coolsos/latest.json. Internal source names are reconstructed."
+      ]
+    },
+    {
+      "id": "coolsos.function.ModuleInit",
+      "kind": "function",
+      "original": "0x40201042",
+      "name": "ModuleInit",
+      "rebuilt": {
+        "symbol": "?ModuleInit@@YA_NPAUHINSTANCE__@@@Z"
+      },
+      "type": "bool ModuleInit(void *instance)",
+      "confidence": "verified",
+      "evidence": [
+        "Returns true in AL; caller zero-extends the result.",
+        "Exact raw executable-section bytes; reports/iterations/coolsos/latest.json. Internal source names are reconstructed."
+      ]
+    },
+    {
+      "id": "coolsos.function.ModuleTerm",
+      "kind": "function",
+      "original": "0x40201045",
+      "name": "ModuleTerm",
+      "rebuilt": {
+        "symbol": "?ModuleTerm@@YAXXZ"
+      },
+      "type": "void ModuleTerm(void)",
+      "confidence": "verified",
+      "evidence": [
+        "Empty return; caller still invokes it on process detach.",
+        "Exact raw executable-section bytes; reports/iterations/coolsos/latest.json. Internal source names are reconstructed."
+      ]
+    },
+    {
+      "id": "coolsos.function.DllCanUnloadNow",
+      "kind": "function",
+      "original": "0x40201046",
+      "name": "DllCanUnloadNow",
+      "rebuilt": {
+        "symbol": "DllCanUnloadNow"
+      },
+      "type": "long __stdcall DllCanUnloadNow(void)",
+      "confidence": "verified",
+      "evidence": [
+        "One shared S_OK-returning body also implements DllRegisterServer and DllUnregisterServer.",
+        "Exact raw executable-section bytes; reports/iterations/coolsos/latest.json. Internal source names are reconstructed."
+      ]
+    },
+    {
+      "id": "coolsos.function.DllGetClassObject",
+      "kind": "function",
+      "original": "0x40201049",
+      "name": "DllGetClassObject",
+      "rebuilt": {
+        "symbol": "DllGetClassObject"
+      },
+      "type": "long __stdcall DllGetClassObject(void *clsid, void *iid, void **object)",
+      "confidence": "verified",
+      "evidence": [
+        "Returns E_FAIL (0x80004005), pops 12 argument bytes, and does not write to object.",
+        "Exact raw executable-section bytes; reports/iterations/coolsos/latest.json. Internal source names are reconstructed."
+      ]
+    },
+    {
+      "id": "coolsos.global.module",
+      "kind": "global",
+      "original": "0x40203000",
+      "name": "module",
+      "rebuilt": {
+        "symbol": "?module@@3UModuleState@@A"
+      },
+      "type": "struct COOL_SOS_MODULE_STATE",
+      "confidence": "supported",
+      "evidence": [
+        "Original .data reserves 100 zero-initialized bytes; only the first DWORD is written by DllMain. Remaining field identities are unknown."
+      ]
+    }
+  ]
+}

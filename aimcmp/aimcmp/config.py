@@ -19,7 +19,9 @@ def resolve_recipes(project, path):
             config.setdefault('script', 'aimcmp-build.cmd')
             files = []
             for product in recipe['products']:
-                for filename in [product['source'], product.get('definition'), product.get('resource', {}).get('source')]:
+                filenames = [product['source'], product.get('definition'), product.get('resource', {}).get('source')]
+                filenames += [unit['source'] for unit in product.get('additional_sources', [])]
+                for filename in filenames:
                     if filename and filename not in files:
                         files.append(filename)
             config.setdefault('files', files)

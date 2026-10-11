@@ -2,6 +2,20 @@
   "schema": 1,
   "targets": [
     {
+      "name": "coolsos",
+      "original": "../originals/AIM/coolsos.dll",
+      "rebuilt": "builds/coolsos/coolsos.dll",
+      "map": "builds/coolsos/coolsos.map",
+      "build": {
+        "ssh": "build-vm",
+        "remote_dir": "C:/aim-build/coolsos",
+        "source_dir": "../src/cool/coolsos",
+        "download_dir": "builds/coolsos",
+        "recipe": "../build/recipes/coolsos.json"
+      },
+      "mapping": "mappings/coolsos.json"
+    },
+    {
       "name": "idlemon",
       "original": "../originals/AIM/idlemon.dll",
       "rebuilt": "builds/idlemon/idlemon.dll",

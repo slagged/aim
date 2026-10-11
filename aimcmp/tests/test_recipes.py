@@ -29,6 +29,22 @@ class RecipeTests(unittest.TestCase):
         self.assertIn('/stack:0x1000', script)
         self.assertIn('set /p AIMCMP_CFLAGS=<aimcmp-flags.txt', script)
 
+    def test_multiple_translation_units_are_compiled_uploaded_and_linked_in_order(self):
+        script = render_recipe(self.recipe('coolsos'))
+        self.assertIn('/Fobuilds\\coolsos.obj coolsos.cpp', script)
+        self.assertIn('/Fobuilds\\module.obj module.cpp', script)
+        self.assertIn('builds\\coolsos.obj builds\\module.obj builds\\coolsos.res kernel32.lib', script)
+        project = load_project(REPO/'targets/project.json')
+        target = next(t for t in project['targets'] if t['name'] == 'coolsos')
+        self.assertIn('module.cpp', target['build']['files'])
+        self.assertIn('coolsos.cpp', target['build']['files'])
+
+    def test_additional_translation_unit_paths_cannot_escape(self):
+        recipe = self.recipe('coolsos')
+        recipe['products'][0]['additional_sources'][0]['object'] = '../outside.obj'
+        with self.assertRaisesRegex(ValueError, 'relative paths'):
+            render_recipe(recipe)
+
     def test_command_injection_and_path_escape_are_rejected(self):
         recipe = self.recipe('launchers')
         for bad in ('/O2 & exit', '/O2\nexit'):

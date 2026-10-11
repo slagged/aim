@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "profile": "../profiles/vc71.json",
+  "flags": "/O1",
+  "compile_options": ["/Zl"],
+  "link_options": ["/dll", "/nodefaultlib", "/entry:DllEntryPoint@12", "/base:0x40200000"],
+  "libraries": ["kernel32.lib"],
+  "products": [
+    {
+      "source": "coolsos.cpp",
+      "object": "builds/coolsos.obj",
+      "additional_sources": [{ "source": "module.cpp", "object": "builds/module.obj" }],
+      "resource": { "source": "coolsos.rc", "output": "builds/coolsos.res" },
+      "definition": "coolsos.def",
+      "binary": "builds/coolsos.dll",
+      "map": "builds/coolsos.map"
+    }
+  ]
+}
