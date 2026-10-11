@@ -15,16 +15,16 @@
       "rebuilt": {
         "symbol": "?unregister_component@@YGHPBU_GUID@@PBGPAX@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -44,7 +44,7 @@
         "source": "src/client/registration.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": false
       }
     },
     {
@@ -58,10 +58,10 @@
       "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Exact pinned COFF contribution comparison."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
-        "source": "src/client/guid_equal.cpp",
+        "source": "src/client/utilities.cpp",
         "drafted": true,
         "behavior_checked": false,
         "byte_exact": true
@@ -84,7 +84,7 @@
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": false
       }
     },
     {
@@ -95,16 +95,16 @@
       "rebuilt": {
         "symbol": "?query_file_version@@YAHPBD0PADH@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -115,16 +115,16 @@
       "rebuilt": {
         "symbol": "?record_component_error@@YAHPAUComponentContext@@PBD1@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -144,7 +144,7 @@
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": false
       }
     },
     {
@@ -155,16 +155,16 @@
       "rebuilt": {
         "symbol": "?component_end@@YAXPAXPBD@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -178,10 +178,10 @@
       "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Exact pinned COFF contribution comparison."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
-        "source": "src/client/registry_writable.cpp",
+        "source": "src/client/registration.cpp",
         "drafted": true,
         "behavior_checked": false,
         "byte_exact": true
@@ -195,16 +195,16 @@
       "rebuilt": {
         "symbol": "?show_startup_error@@YAHXZ"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -215,16 +215,16 @@
       "rebuilt": {
         "symbol": "?show_component_error@@YAHXZ"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -238,10 +238,10 @@
       "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Exact pinned COFF contribution comparison."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
-        "source": "src/client/file_time_before.cpp",
+        "source": "src/client/utilities.cpp",
         "drafted": true,
         "behavior_checked": false,
         "byte_exact": true
@@ -264,7 +264,7 @@
         "source": "src/client/registration.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": false
       }
     },
     {
@@ -275,16 +275,16 @@
       "rebuilt": {
         "symbol": "?register_servers@@YAHPAUHINSTANCE__@@PBD@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/registration.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -298,10 +298,10 @@
       "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Exact pinned COFF contribution comparison."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
-        "source": "src/client/allocate_zeroed.cpp",
+        "source": "src/client/utilities.cpp",
         "drafted": true,
         "behavior_checked": false,
         "byte_exact": true
@@ -315,16 +315,16 @@
       "rebuilt": {
         "symbol": "?copy_dll_registration@@YGHPBU_GUID@@PBGPAX@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -335,16 +335,16 @@
       "rebuilt": {
         "symbol": "?copy_build_version@@YGHPBU_GUID@@PBGPAX@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -355,16 +355,17 @@
       "rebuilt": {
         "symbol": "?register_cool_utils@@YAXPBD@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "VC7.1 /O1 /MD /EHsc /GS: the 262-byte body, 46-byte exception cleanup and 60-byte unwind contribution match after explicit COFF relocation binding; targets/client-helpers.json. Runtime execution is untested.",
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
-        "source": "src/client/components.cpp",
+        "source": "src/client/registration.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -375,16 +376,16 @@
       "rebuilt": {
         "symbol": "?registry_needs_update@@YAHPBDPAH@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -404,7 +405,7 @@
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": false
       }
     },
     {
@@ -415,16 +416,16 @@
       "rebuilt": {
         "symbol": "?component_start@@YAXPAXPBDPAPBD@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -435,16 +436,16 @@
       "rebuilt": {
         "symbol": "?parse_components@@YAHPBD00@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -455,16 +456,16 @@
       "rebuilt": {
         "symbol": "?parse_component_resource@@YAHPBD0@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -484,7 +485,7 @@
         "source": "src/client/components.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": false
       }
     },
     {
@@ -495,16 +496,16 @@
       "rebuilt": {
         "symbol": "?describe_address@@YAHPBXPADHPAIPAK@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/crash.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -515,16 +516,16 @@
       "rebuilt": {
         "symbol": "?exception_name@@YAPBDK@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/crash.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -535,16 +536,16 @@
       "rebuilt": {
         "symbol": "?report_property@@YAHPBD0ZZ"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/crash.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -555,16 +556,16 @@
       "rebuilt": {
         "symbol": "?report_calltrace@@YAKPBU_CONTEXT@@@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/crash.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -575,16 +576,16 @@
       "rebuilt": {
         "symbol": "?report_exception@@YAKPAU_EXCEPTION_POINTERS@@@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/crash.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -595,16 +596,16 @@
       "rebuilt": {
         "symbol": "?client_exception_filter@@YGJPAU_EXCEPTION_POINTERS@@@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/crash.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -613,18 +614,18 @@
       "original": "0x40305a",
       "name": "install_exception_filter",
       "rebuilt": {
-        "symbol": "?install_exception_filter@@YAXXZ"
+        "symbol": "?install_exception_filter@@YIPAXPAX@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/crash.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -635,16 +636,16 @@
       "rebuilt": {
         "symbol": "?repair_shortcut@@YAXXZ"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/startup.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -655,16 +656,16 @@
       "rebuilt": {
         "symbol": "?classify_command@@YAHPBD@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/startup.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -675,16 +676,16 @@
       "rebuilt": {
         "symbol": "?load_oscore@@YAHPAUHINSTANCE__@@@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/startup.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -704,7 +705,7 @@
         "source": "src/client/startup.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": false
       }
     },
     {
@@ -715,16 +716,16 @@
       "rebuilt": {
         "symbol": "?enable_aim_today@@YAHH@Z"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/startup.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -735,16 +736,16 @@
       "rebuilt": {
         "symbol": "?explorer_installed@@YAHXZ"
       },
-      "confidence": "hypothesis",
+      "confidence": "verified",
       "evidence": [
         "Reconstructed descriptive name; original private symbol name is unknown.",
-        "Broad source draft from the original assembly and decompilation; runtime equivalence is untested."
+        "Exact pinned COFF contribution comparison, including referenced literal and exception-support contributions; see targets/client-helpers.json."
       ],
       "reconstruction": {
         "source": "src/client/startup.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": true
       }
     },
     {
@@ -764,7 +765,7 @@
         "source": "src/client/startup.cpp",
         "drafted": true,
         "behavior_checked": false,
-        "byte_exact": null
+        "byte_exact": false
       }
     }
   ]

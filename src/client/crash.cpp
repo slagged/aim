@@ -2,9 +2,12 @@
 #include <stdarg.h>
 
 static LPTOP_LEVEL_EXCEPTION_FILTER previous_filter;
-static int reporting_exception;
+static bool reporting_exception;
 static char exception_text[0x104];
 static char report_text[0x308];
+static char trace_property[0x20];
+static char trace_module[0x104];
+static char exception_module[0x104];
 
 // turn an address into a module name and section-relative offset.
 int describe_address(const void *address, char *filename, int capacity, unsigned int *section, DWORD *offset)
@@ -23,11 +26,12 @@ int describe_address(const void *address, char *filename, int capacity, unsigned
     DWORD rva = static_cast<const BYTE *>(address) - base;
     IMAGE_SECTION_HEADER *header = IMAGE_FIRST_SECTION(nt);
     for (unsigned int i = 0; i < nt->FileHeader.NumberOfSections; ++i, ++header) {
+        DWORD section_rva = header->VirtualAddress;
         DWORD size = header->SizeOfRawData > header->Misc.VirtualSize ? header->SizeOfRawData : header->Misc.VirtualSize;
         // The original accepts the endpoint, despite PE ranges being half-open.
-        if (rva >= header->VirtualAddress && rva <= header->VirtualAddress + size) {
+        if (rva >= section_rva && rva <= section_rva + size) {
             *section = i + 1;
-            *offset = rva - header->VirtualAddress;
+            *offset = rva - section_rva;
             return 0;
         }
     }
@@ -83,36 +87,38 @@ DWORD report_calltrace(const CONTEXT *context)
 {
     DWORD *frame = reinterpret_cast<DWORD *>(context->Ebp);
     DWORD address = context->Eip;
-    char module[0x104];
-    char property[0x20];
+    trace_module[0] = 0;
     unsigned int section;
     DWORD offset;
-    describe_address(reinterpret_cast<void *>(address), module, sizeof(module), &section, &offset);
-    wsprintfA(property, "CALLTRACE%d", 1);
-    report_property(property, "%08X %08X %s", frame, address, module);
-    for (int index = 2;; ++index) {
-        if (IsBadReadPtr(frame, 8)) return 1;
+    describe_address(reinterpret_cast<void *>(address), trace_module, sizeof(trace_module), &section, &offset);
+    int index = 1;
+    wsprintfA(trace_property, "CALLTRACE%d", index++);
+    report_property(trace_property, "%08X %08X %s", frame, address, trace_module);
+    for (;;) {
+        DWORD readable = IsBadReadPtr(frame, 8);
+        if (readable) return readable;
         address = frame[1];
         DWORD *previous = frame;
         frame = reinterpret_cast<DWORD *>(frame[0]);
         if ((reinterpret_cast<DWORD>(frame) & 3) || frame <= previous) return address;
-        describe_address(reinterpret_cast<void *>(address), module, sizeof(module), &section, &offset);
-        wsprintfA(property, "CALLTRACE%d", index);
-        report_property(property, "%08X %08X %s", frame, address, module);
+        trace_module[0] = 0;
+        describe_address(reinterpret_cast<void *>(address), trace_module, sizeof(trace_module), &section, &offset);
+        wsprintfA(trace_property, "CALLTRACE%d", index++);
+        report_property(trace_property, "%08X %08X %s", frame, address, trace_module);
     }
 }
 
 // report the fault site and the complete x86 register snapshot.
 DWORD report_exception(EXCEPTION_POINTERS *exception)
 {
-    char module[0x104];
     unsigned int section = 0;
+    EXCEPTION_POINTERS *information = exception;
+    EXCEPTION_RECORD *record = information->ExceptionRecord;
     DWORD offset = 0;
-    EXCEPTION_RECORD *record = exception->ExceptionRecord;
-    describe_address(record->ExceptionAddress, module, sizeof(module), &section, &offset);
-    report_property("TYPE", "%s @%02X:%08X(%08X) did %08X-%s", module, section, offset,
+    describe_address(record->ExceptionAddress, exception_module, sizeof(exception_module), &section, &offset);
+    report_property("TYPE", "%s @%02X:%08X(%08X) did %08X-%s", exception_module, section, offset,
         record->ExceptionAddress, record->ExceptionCode, exception_name(record->ExceptionCode));
-    CONTEXT *context = exception->ContextRecord;
+    CONTEXT *context = information->ContextRecord;
     report_property("REGS", "AX:%08X CS:%04X IP:%08X FLGS:%08X BX:%08X SS:%04X SP:%08X BP:%08X CX:%08X DS:%04X SI:%08X FS:%04X DX:%08X ES:%04X DI:%08X GS:%04X",
         context->Eax, context->SegCs, context->Eip, context->EFlags,
         context->Ebx, context->SegSs, context->Esp, context->Ebp,
@@ -134,7 +140,8 @@ LONG WINAPI client_exception_filter(EXCEPTION_POINTERS *exception)
 }
 
 // no caller was recovered in the application prefix.
-void install_exception_filter()
+void *__fastcall install_exception_filter(void *receiver)
 {
     previous_filter = SetUnhandledExceptionFilter(client_exception_filter);
+    return receiver;
 }

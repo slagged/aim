@@ -3,63 +3,155 @@
 #include <string.h>
 #include <io.h>
 
-// Write a string value only after opening its key successfully.
-static LONG registry_string(HKEY root, const char *path, const char *name, const char *value)
-{
-    HKEY key = 0;
-    DWORD disposition;
-    LONG result = RegCreateKeyExA(root, path, 0, 0, REG_OPTION_NON_VOLATILE,
-        KEY_ALL_ACCESS, 0, &key, &disposition);
-    if (!result)
-        result = RegSetValueExA(key, name, 0, REG_SZ,
-            reinterpret_cast<const BYTE *>(value), strlen(value) + 1);
-    if (key)
-        RegCloseKey(key);
-    return result;
-}
-
-// publish the aim: URL handler and its automation COM identity.
+// Publish the aim: URL handler and its automation COM identity.
 int __stdcall register_protocols(HMODULE instance, const char *directory)
 {
-    char command[0x104];
-    if (!GetModuleFileNameA(instance, command, sizeof(command)))
+    char command[0x10c];
+    char value[0x104];
+    HKEY key;
+    HKEY child;
+    DWORD disposition;
+    int result;
+    if (!GetModuleFileNameA(instance, command, 0x104))
         return 0;
-    // The historical command uses an unquoted executable path and argument.
-    lstrcatA(command, " %1");
-    registry_string(HKEY_CLASSES_ROOT, "aim", "", "URL: AOL Instant Messenger Protocol");
-    registry_string(HKEY_CLASSES_ROOT, "aim", "URL Protocol", "");
-    registry_string(HKEY_CLASSES_ROOT, "aim\\shell\\open\\command", "", command);
+        // The command leaves both the executable path and argument unquoted.
+        lstrcatA(command, " %1");
+        if (!RegCreateKeyExA(HKEY_CLASSES_ROOT, "aim", 0, "", 0,
+                KEY_READ | KEY_WRITE, 0, &key, &disposition)) {
+            lstrcpyA(value, "URL: AOL Instant Messenger Protocol");
+            RegSetValueExA(key, "", 0, REG_SZ,
+                reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+            value[0] = 0;
+            RegSetValueExA(key, "URL Protocol", 0, REG_SZ,
+                reinterpret_cast<const BYTE *>(value), 1);
+            if (!RegCreateKeyExA(key, "shell\\open\\command", 0, "", 0,
+                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+                RegSetValueExA(child, "", 0, REG_SZ,
+                    reinterpret_cast<const BYTE *>(command), lstrlenA(command) + 1);
+                if (child)
+                    RegCloseKey(child);
+            }
+            if (key)
+                RegCloseKey(key);
+        }
 
-    const char *class_id = "{BAEB32D0-732D-11d2-8BF4-0060B0A4A9EA}";
-    const char *description = "AIM OLE Automation Protocol Handler";
-    registry_string(HKEY_CLASSES_ROOT, "AIM.Protocol", "", description);
-    registry_string(HKEY_CLASSES_ROOT, "AIM.Protocol\\CurVer", "", "AIM.Protocol.1");
-    registry_string(HKEY_CLASSES_ROOT, "AIM.Protocol\\CLSID", "", class_id);
-    registry_string(HKEY_CLASSES_ROOT, "AIM.Protocol\\NotInsertable", "", "");
-    registry_string(HKEY_CLASSES_ROOT, "AIM.Protocol.1", "", description);
-    registry_string(HKEY_CLASSES_ROOT, "AIM.Protocol.1\\CLSID", "", class_id);
-    registry_string(HKEY_CLASSES_ROOT, "AIM.Protocol.1\\NotInsertable", "", "");
+        if (!RegCreateKeyExA(HKEY_CLASSES_ROOT, "AIM.Protocol", 0, "", 0,
+                KEY_READ | KEY_WRITE, 0, &key, &disposition)) {
+            lstrcpyA(value, "AIM OLE Automation Protocol Handler");
+            RegSetValueExA(key, "", 0, REG_SZ,
+                reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+            if (!RegCreateKeyExA(key, "CurVer", 0, "", 0,
+                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+                RegSetValueExA(child, "", 0, REG_SZ,
+                    reinterpret_cast<const BYTE *>("AIM.Protocol.1"), lstrlenA("AIM.Protocol.1") + 1);
+                if (child)
+                    RegCloseKey(child);
+            }
+            wsprintfA(value, "{%s}", "BAEB32D0-732D-11d2-8BF4-0060B0A4A9EA");
+            if (!RegCreateKeyExA(key, "CLSID", 0, "", 0,
+                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+                RegSetValueExA(child, "", 0, REG_SZ,
+                    reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+                if (child)
+                    RegCloseKey(child);
+            }
+            if (!RegCreateKeyExA(key, "NotInsertable", 0, "", 0,
+                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+                value[0] = 0;
+                RegSetValueExA(child, "", 0, REG_SZ,
+                    reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+                if (child)
+                    RegCloseKey(child);
+            }
+            if (key)
+                RegCloseKey(key);
+        }
 
-    char path[0x104];
-    sprintf(path, "CLSID\\%s", class_id);
-    registry_string(HKEY_CLASSES_ROOT, path, "", description);
-    const char *keys[] = {"Programmable", "ProgID", "VersionIndependentProgID", "InprocHandler32", "LocalServer32"};
-    char server[0x104];
-    sprintf(server, "%saimauto.exe", directory);
-    const char *values[] = {"", "AIM.Protocol.1", "AIM.Protocol", "ole32.dll", server};
-    for (int i = 0; i < 5; ++i) {
-        sprintf(path, "CLSID\\%s\\%s", class_id, keys[i]);
-        registry_string(HKEY_CLASSES_ROOT, path, "", values[i]);
-    }
-    HKEY navigator = 0;
-    LONG result = RegOpenKeyA(HKEY_CURRENT_USER,
-        "Software\\Netscape\\Netscape Navigator\\Automation Protocols", &navigator);
-    if (!result)
-        result = RegSetValueExA(navigator, "aim", 0, REG_SZ,
-            reinterpret_cast<const BYTE *>("AIM.Protocol.1"), strlen("AIM.Protocol.1") + 1);
-    if (navigator) RegCloseKey(navigator);
+        if (!RegCreateKeyExA(HKEY_CLASSES_ROOT, "AIM.Protocol.1", 0, "", 0,
+                KEY_READ | KEY_WRITE, 0, &key, &disposition)) {
+            lstrcpyA(value, "AIM OLE Automation Protocol Handler");
+            RegSetValueExA(key, "", 0, REG_SZ,
+                reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+            wsprintfA(value, "{%s}", "BAEB32D0-732D-11d2-8BF4-0060B0A4A9EA");
+            if (!RegCreateKeyExA(key, "CLSID", 0, "", 0,
+                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+                RegSetValueExA(child, "", 0, REG_SZ,
+                    reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+                if (child)
+                    RegCloseKey(child);
+            }
+            if (!RegCreateKeyExA(key, "NotInsertable", 0, "", 0,
+                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+                value[0] = 0;
+                RegSetValueExA(child, "", 0, REG_SZ,
+                    reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+                if (child)
+                    RegCloseKey(child);
+            }
+            if (key)
+                RegCloseKey(key);
+        }
+
+        wsprintfA(value, "CLSID\\{%s}", "BAEB32D0-732D-11d2-8BF4-0060B0A4A9EA");
+        if (!RegCreateKeyExA(HKEY_CLASSES_ROOT, value, 0, "", 0,
+                KEY_READ | KEY_WRITE, 0, &key, &disposition)) {
+            lstrcpyA(value, "AIM OLE Automation Protocol Handler");
+            RegSetValueExA(key, "", 0, REG_SZ,
+                reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+            if (!RegCreateKeyExA(key, "Programmable", 0, "", 0,
+                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+                value[0] = 0;
+                RegSetValueExA(child, "", 0, REG_SZ,
+                    reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+                if (child)
+                    RegCloseKey(child);
+            }
+            if (!RegCreateKeyExA(key, "ProgID", 0, "", 0,
+                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+                RegSetValueExA(child, "", 0, REG_SZ,
+                    reinterpret_cast<const BYTE *>("AIM.Protocol.1"), lstrlenA("AIM.Protocol.1") + 1);
+                if (child)
+                    RegCloseKey(child);
+            }
+            if (!RegCreateKeyExA(key, "VersionIndependentProgID", 0, "", 0,
+                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+                RegSetValueExA(child, "", 0, REG_SZ,
+                    reinterpret_cast<const BYTE *>("AIM.Protocol"), lstrlenA("AIM.Protocol") + 1);
+                if (child)
+                    RegCloseKey(child);
+            }
+            if (!RegCreateKeyExA(key, "InprocHandler32", 0, "", 0,
+                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+                lstrcpyA(value, "ole32.dll");
+                RegSetValueExA(child, "", 0, REG_SZ,
+                    reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+                if (child)
+                    RegCloseKey(child);
+            }
+            if (!RegCreateKeyExA(key, "LocalServer32", 0, "", 0,
+                    KEY_READ | KEY_WRITE, 0, &child, &disposition)) {
+                wsprintfA(value, "%s%s", directory, "aimauto.exe");
+                RegSetValueExA(child, "", 0, REG_SZ,
+                    reinterpret_cast<const BYTE *>(value), lstrlenA(value) + 1);
+                if (child)
+                    RegCloseKey(child);
+            }
+            if (key)
+                RegCloseKey(key);
+        }
+
+        result = RegOpenKeyA(HKEY_CURRENT_USER,
+            "Software\\Netscape\\Netscape Navigator\\Automation Protocols", &key);
+        if (!result) {
+            result = RegSetValueExA(key, "aim", 0, REG_SZ,
+                reinterpret_cast<const BYTE *>("AIM.Protocol.1"), lstrlenA("AIM.Protocol.1") + 1);
+            if (key)
+                result = RegCloseKey(key);
+        }
+
     return result;
 }
+
 
 // recover a missing installed file from the newest six-character
 // backup stem, then remove leftover backups matching that stem.
@@ -67,52 +159,63 @@ int restore_backups(HINSTANCE instance)
 {
     char filename[0x104];
     char pattern[0x104];
-    if (!GetModuleFileNameA(0, filename, sizeof(filename)))
+    if (!GetModuleFileNameA(GetModuleHandleA(0), filename, sizeof(filename)))
         return show_startup_error();
     char *leaf = strrchr(filename, '\\');
     if (leaf)
         leaf[1] = 0;
-    int directory_length = strlen(filename);
-    strcpy(pattern, filename);
-    for (unsigned int id = 2; LoadStringA(instance, id, filename + directory_length,
-            sizeof(filename) - directory_length); ++id) {
-        strcpy(pattern + directory_length, filename + directory_length);
+    lstrcpyA(pattern, filename);
+    int directory_length = lstrlenA(filename);
+    unsigned int id = 2;
+    while (LoadStringA(instance, id, filename + directory_length,
+            sizeof(filename) - directory_length)) {
+        ++id;
+        if (!lstrlenA(filename + directory_length))
+            break;
+        lstrcpyA(pattern + directory_length, filename + directory_length);
+        HANDLE search;
         char *extension = strrchr(filename, '.');
         pattern[directory_length + 6] = 0;
         lstrcatA(pattern, "~*");
-        if (extension) lstrcatA(pattern, extension);
+        if (extension)
+            lstrcatA(pattern, extension);
         WIN32_FIND_DATAA entry;
         if (_access(filename, 0) != 0) {
             FILETIME newest = {0, 0};
-            char backup[0x104] = "";
-            HANDLE search = FindFirstFileA(pattern, &entry);
+            search = FindFirstFileA(pattern, &entry);
             if (search != INVALID_HANDLE_VALUE) {
                 do {
-                    if (entry.cFileName[6] == '~' && file_time_before(&newest, &entry.ftLastWriteTime)) {
+                    // This tests the working path, which changes when a newer
+                    // backup is selected, rather than the current search result.
+                    if (pattern[directory_length + 6] == '~'
+                            && file_time_before(&newest, &entry.ftLastWriteTime)) {
                         newest = entry.ftLastWriteTime;
-                        strcpy(backup, entry.cFileName);
+                        lstrcpyA(pattern + directory_length, entry.cFileName);
                     }
-                } while (FindNextFileA(search, &entry));
-                FindClose(search);
-            }
-            if (newest.dwHighDateTime || newest.dwLowDateTime) {
-                char source[0x104];
-                strncpy(source, filename, directory_length);
-                strcpy(source + directory_length, backup);
-                MoveFileA(source, filename);
+                    if (!FindNextFileA(search, &entry)) {
+                        FindClose(search);
+                        search = INVALID_HANDLE_VALUE;
+                    }
+                } while (search != INVALID_HANDLE_VALUE);
+                if (newest.dwLowDateTime || newest.dwHighDateTime)
+                    MoveFileA(pattern, filename);
             }
         }
-        HANDLE search = FindFirstFileA(pattern, &entry);
+        pattern[directory_length + 6] = 0;
+        lstrcatA(pattern, "~*");
+        if (extension)
+            lstrcatA(pattern, extension);
+        search = FindFirstFileA(pattern, &entry);
         if (search != INVALID_HANDLE_VALUE) {
             do {
-                if (entry.cFileName[6] == '~') {
-                    char backup[0x104];
-                    strncpy(backup, filename, directory_length);
-                    strcpy(backup + directory_length, entry.cFileName);
-                    DeleteFileA(backup);
+                lstrcpyA(pattern + directory_length, entry.cFileName);
+                if (!FindNextFileA(search, &entry)) {
+                    FindClose(search);
+                    search = INVALID_HANDLE_VALUE;
                 }
-            } while (FindNextFileA(search, &entry));
-            FindClose(search);
+                if (pattern[directory_length + 6] == '~')
+                    DeleteFileA(pattern);
+            } while (search != INVALID_HANDLE_VALUE);
         }
     }
     return 1;
@@ -123,18 +226,23 @@ int restore_backups(HINSTANCE instance)
 int register_servers(HMODULE instance, const char *procedure)
 {
     char executable[0x104];
-    GetModuleFileNameA(GetModuleHandleA(0), executable, sizeof(executable));
+    if (!GetModuleFileNameA(GetModuleHandleA(0), executable, sizeof(executable)))
+        return show_startup_error();
     XPRT::TBstr directory(executable);
     directory.Assign(directory.Left(directory.ReverseFind('\\') + 1));
     register_protocols(instance, directory.GetMultibyteString());
     if (!procedure || !*procedure)
         procedure = "DllRegisterServer";
     typedef HRESULT (__stdcall *RegisterServer)();
+    const char *servers[] = {"AimApi.dll", "rtvideo.dll", 0};
+    const char *server_name = servers[0];
+    const char **server;
     int result = 1;
-    const char *servers[] = {"AimApi.dll", "rtvideo.dll"};
-    for (int i = 0; i < 2; ++i) {
+    server = servers;
+    do {
+        {
         XPRT::TBstr filename(directory);
-        filename.Append(servers[i]);
+        filename.Append(server_name);
         HMODULE library = LoadLibraryA(filename.GetMultibyteString());
         if (library) {
             RegisterServer registration = reinterpret_cast<RegisterServer>(GetProcAddress(library, procedure));
@@ -142,13 +250,13 @@ int register_servers(HMODULE instance, const char *procedure)
             else result = 0;
         }
         FreeLibrary(library);
-    }
-    const GUID boxely_class = {0x189504b8, 0x50d1, 0x4aa8, {0xb4, 0xd6, 0x95, 0xc8, 0xf5, 0x8a, 0x64, 0x14}};
+        }
+        server_name = *++server;
+    } while (server_name);
+    static const GUID boxely_class = {0x189504b8, 0x50d1, 0x4aa8, {0xb4, 0xd6, 0x95, 0xc8, 0xf5, 0x8a, 0x64, 0x14}};
     IUnknown *object;
     if (CoCreateInstance(boxely_class, 0, CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER,
-            IID_IUnknown, reinterpret_cast<void **>(&object)) >= 0) {
-        object->Release();
-    } else {
+            IID_IUnknown, reinterpret_cast<void **>(&object)) < 0) {
         XPRT::TBstr filename(directory);
         filename.Append("sb.dll");
         HMODULE library = LoadLibraryA(filename.GetMultibyteString());
@@ -158,6 +266,49 @@ int register_servers(HMODULE instance, const char *procedure)
             else result = 0;
             FreeLibrary(library);
         }
+    } else {
+        object->Release();
     }
     return result;
+}
+
+// An existing registry must be writable. If it is absent, check whether its
+// containing directory is writable so the registry can be created there.
+int registry_writable(const char *directory)
+{
+    XPRT::TBstr registry(directory);
+    registry.Append("\\Xpcs Registry.dat");
+
+    int writable;
+    if (_access(registry.GetMultibyteString(), 2) != -1)
+        writable = 1;
+    else if (_access(registry.GetMultibyteString(), 0) == -1
+            && _access(directory, 2) != -1)
+        writable = 1;
+    else
+        writable = 0;
+
+    return writable;
+}
+
+// Associate three utility classes with the installed CoolUtils DLL in XPCS.
+void register_cool_utils(const char *directory)
+{
+    XPRT::TBstr filename(directory);
+    filename.Append("CoolUtils.dll");
+
+    // Conversion and registration failures are ignored. Each temporary string
+    // is destroyed after conversion, while the DLL path remains live throughout.
+    GUID id;
+    XpcsCLSIDFromString(
+        XPRT::TBstr("{648EDF60-2501-11d3-90DC-0060B088CB02}").GetString(), &id);
+    XpcsRegisterClass(&id, filename.GetString());
+
+    XpcsCLSIDFromString(
+        XPRT::TBstr("{8C18D311-BF86-11d2-8AA9-0060B0A4B986}").GetString(), &id);
+    XpcsRegisterClass(&id, filename.GetString());
+
+    XpcsCLSIDFromString(
+        XPRT::TBstr("{99485411-9FF2-11d2-8A80-0060B0A4B986}").GetString(), &id);
+    XpcsRegisterClass(&id, filename.GetString());
 }

@@ -22,6 +22,11 @@ def compare_contributions(original, object_dir, manifest):
                 raise ValueError('COFF object path escapes its directory')
             raw = path.read_bytes()
             sections = section_signature(raw)
+            if 'section_index' in item:
+                index = item['section_index']
+                if type(index) is not int or not 1 <= index <= len(sections):
+                    raise ValueError('Invalid one-based COFF section index')
+                sections = [sections[index - 1]]
             if 'section' in item:
                 sections = [s for s in sections if s['name'] == item['section']]
             else:

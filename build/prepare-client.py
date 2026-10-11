@@ -81,6 +81,7 @@ def prepare(originals, destination):
     # Preserve undecorated DLL export names while providing stdcall COFF names.
     for name, size in STDCALL_IMPORTS.items():
         aliases.append('#pragma comment(linker, "/alternatename:__imp__%s@%d=__imp__%s")' % (name, size, name))
+        aliases.append('#pragma comment(linker, "/alternatename:_%s@%d=_%s")' % (name, size, name))
     for name in imports['xpcs.dll']:
         aliases.append('#pragma comment(linker, "/alternatename:__imp_%s=__imp__%s")' % (name, name))
     aliases.append('#endif')

@@ -6,19 +6,19 @@
 
 // These declarations describe DLL call boundaries, not recovered class trees.
 extern "C" {
-__declspec(dllimport) int __stdcall OscoreRun(HINSTANCE, const char *, int);
-__declspec(dllimport) int __stdcall OscoreInitLpShare(HINSTANCE, const char *);
-__declspec(dllimport) int __stdcall OscoreShutdownOtherInstance(int);
-__declspec(dllimport) int __cdecl ErrorBox(HMODULE, unsigned int, ...);
-__declspec(dllimport) int __stdcall PHSetString(const char *, const char *, const char *);
-__declspec(dllimport) int __cdecl PHSetGeneralInfo();
-__declspec(dllimport) HRESULT __cdecl AimAppAddManagedComponent(const char *,
+int __stdcall OscoreRun(HINSTANCE, const char *, int);
+int __stdcall OscoreInitLpShare(HINSTANCE, const char *);
+int __stdcall OscoreShutdownOtherInstance(int);
+int __cdecl ErrorBox(HMODULE, unsigned int, ...);
+int __stdcall PHSetString(const char *, const char *, const char *);
+int __cdecl PHSetGeneralInfo();
+HRESULT __cdecl AimAppAddManagedComponent(const char *,
     const char *, const char *, const char *, int, int, int, int, int);
-__declspec(dllimport) int __cdecl AIMToday_init();
-__declspec(dllimport) int __stdcall AIMToday_createWindow(int);
-__declspec(dllimport) int __cdecl AIMToday_destroyWindow();
-__declspec(dllimport) int __cdecl AIMToday_uninit();
-__declspec(dllimport) int __stdcall RDBLoadString(HINSTANCE, unsigned int, char *, int);
+int __cdecl AIMToday_init();
+int __stdcall AIMToday_createWindow(int);
+int __cdecl AIMToday_destroyWindow();
+int __cdecl AIMToday_uninit();
+int __stdcall RDBLoadString(HINSTANCE, unsigned int, char *, int);
 
 typedef int (__stdcall *RegistrationVisitor)(const GUID *, const unsigned short *, void *);
 __declspec(dllimport) int __stdcall XpcsInitialize(int);
@@ -37,14 +37,14 @@ __declspec(dllimport) extern unsigned short *(__cdecl *xprt_wcscpy)(unsigned sho
 typedef void *XmlParser;
 typedef void (__cdecl *XmlStart)(void *, const char *, const char **);
 typedef void (__cdecl *XmlEnd)(void *, const char *);
-__declspec(dllimport) XmlParser __cdecl XML_ParserCreate(const char *);
-__declspec(dllimport) void __cdecl XML_SetUserData(XmlParser, void *);
-__declspec(dllimport) void __cdecl XML_SetElementHandler(XmlParser, XmlStart, XmlEnd);
-__declspec(dllimport) int __cdecl XML_Parse(XmlParser, const char *, int, int);
-__declspec(dllimport) int __cdecl XML_GetCurrentLineNumber(XmlParser);
-__declspec(dllimport) int __cdecl XML_GetErrorCode(XmlParser);
-__declspec(dllimport) const char *__cdecl XML_ErrorString(int);
-__declspec(dllimport) void __cdecl XML_ParserFree(XmlParser);
+XmlParser __cdecl XML_ParserCreate(const char *);
+void __cdecl XML_SetUserData(XmlParser, void *);
+void __cdecl XML_SetElementHandler(XmlParser, XmlStart, XmlEnd);
+int __cdecl XML_Parse(XmlParser, const char *, int, int);
+int __cdecl XML_GetCurrentLineNumber(XmlParser);
+int __cdecl XML_GetErrorCode(XmlParser);
+const char *__cdecl XML_ErrorString(int);
+void __cdecl XML_ParserFree(XmlParser);
 }
 
 int guid_equal(const GUID *, const GUID *);

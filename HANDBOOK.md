@@ -169,6 +169,12 @@ repository root. This refreshes the staged source too, so repeat it after source
 edits. Then run `python -m aimcmp build ../targets/project.json aim` from
 `aimcmp/`. The build uses the VM selected in the local machine configuration.
 Resources are extracted from the pinned original; no executable code is copied.
+The build also downloads objects used by the exact contribution checks. From
+`aimcmp/`, run `python -m aimcmp coff-compare ../originals/AIM/aim.exe ../targets/builds/aim ../targets/client-helpers.json`
+to check those contributions with explicit relocation bindings.
+Grouped source files can produce several same-named COFF sections. A comparison
+record's one-based `section_index` selects its contribution; keep its internal
+relocation bindings aligned with the rebuilt object's section table.
 
 For a broad reconstruction pass, a compiled draft is a useful intermediate
 result. Keep drafted, behavior checked, and byte exact status separate in the

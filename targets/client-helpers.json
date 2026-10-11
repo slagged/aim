@@ -3,212 +3,1867 @@
   "original_sha256": "1d150f88b23acdcec2f82d7f603f4f5d200a30fcb23f5fc87bd0af3d94728840",
   "compiler": "VC7.1 13.10.3077",
   "flags": "/O1 /MD /EHsc /GS",
-  "name_provenance": "Descriptive reconstructed names; original private symbols unavailable",
+  "name_provenance": "Descriptive reconstruction names; original private symbols unavailable",
   "functions": [
     {
-      "id": "aim.guid_equal",
-      "object": "guid_equal.obj",
+      "id": "aim.unregister_component.section.5",
+      "object": "components.obj",
+      "section_index": 5,
+      "section": ".text",
+      "address": "0x401000",
+      "size": 15,
+      "bindings": {
+        "__imp__XpcsUnregisterClass@4": "0x4041e4"
+      },
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.guid_equal.section.3",
+      "object": "utilities.obj",
+      "section_index": 3,
+      "section": ".text",
       "address": "0x401650",
       "size": 24,
       "bindings": {
         "_memcmp": "0x403970"
-      }
+      },
+      "internal_bindings": []
     },
     {
-      "id": "aim.file_time_before",
-      "object": "file_time_before.obj",
+      "id": "aim.query_file_version.section.31",
+      "object": "components.obj",
+      "section_index": 31,
+      "section": ".text",
+      "address": "0x401827",
+      "size": 215,
+      "bindings": {
+        "___security_cookie": "0x406024",
+        "_GetFileVersionInfoSizeA@8": "0x4038b2",
+        "??_U@YAPAXI@Z": "0x403988",
+        "_GetFileVersionInfoA@16": "0x4038ac",
+        "_memset": "0x403982",
+        "_VerQueryValueA@16": "0x4038a6",
+        "__imp__sprintf": "0x40418c",
+        "__imp__strrchr": "0x40417c",
+        "__imp__strncpy": "0x404180",
+        "??3@YAXPAX@Z": "0x40397c",
+        "@__security_check_cookie@4": "0x403961"
+      },
+      "internal_bindings": [
+        {
+          "section": 32,
+          "offset": 0,
+          "address": "0x404558"
+        }
+      ]
+    },
+    {
+      "id": "aim.query_file_version.section.32",
+      "object": "components.obj",
+      "section_index": 32,
+      "section": ".rdata",
+      "address": "0x404558",
+      "size": 3,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.record_component_error.section.33",
+      "object": "components.obj",
+      "section_index": 33,
+      "section": ".text",
+      "address": "0x4018fe",
+      "size": 104,
+      "bindings": {
+        "_strcpy": "0x403976"
+      },
+      "internal_bindings": [
+        {
+          "section": 4,
+          "offset": 0,
+          "address": "0x406240"
+        },
+        {
+          "section": 4,
+          "offset": 8,
+          "address": "0x406140"
+        },
+        {
+          "section": 4,
+          "offset": 144,
+          "address": "0x406040"
+        },
+        {
+          "section": 4,
+          "offset": 408,
+          "address": "0x4061c0"
+        }
+      ]
+    },
+    {
+      "id": "aim.component_end.section.47",
+      "object": "components.obj",
+      "section_index": 47,
+      "section": ".text",
+      "address": "0x401b47",
+      "size": 11,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.registry_writable.section.41",
+      "object": "registration.obj",
+      "section_index": 41,
+      "section": ".text",
+      "address": "0x401b52",
+      "size": 140,
+      "bindings": {
+        "__imp_??1TBstr@XPRT@@QAE@XZ": "0x404228",
+        "__EH_prolog": "0x4039a0",
+        "__imp_??0TBstr@XPRT@@QAE@PBD@Z": "0x404204",
+        "__imp_?Append@TBstr@XPRT@@QAEAAV12@PBD@Z": "0x4041fc",
+        "__imp_?GetMultibyteString@TBstr@XPRT@@QBEPBDXZ": "0x404214",
+        "__imp___access": "0x404170",
+        "__except_list": "0x0"
+      },
+      "internal_bindings": [
+        {
+          "section": 42,
+          "offset": 9,
+          "address": "0x403dcf"
+        },
+        {
+          "section": 43,
+          "offset": 0,
+          "address": "0x4045e4"
+        }
+      ]
+    },
+    {
+      "id": "aim.registry_writable.section.42",
+      "object": "registration.obj",
+      "section_index": 42,
+      "section": ".text$x",
+      "address": "0x403dc6",
+      "size": 19,
+      "bindings": {
+        "__imp_??1TBstr@XPRT@@QAE@XZ": "0x404228",
+        "___CxxFrameHandler": "0x40398e"
+      },
+      "internal_bindings": [
+        {
+          "section": 44,
+          "offset": 8,
+          "address": "0x404d54"
+        }
+      ]
+    },
+    {
+      "id": "aim.registry_writable.section.44",
+      "object": "registration.obj",
+      "section_index": 44,
+      "section": ".xdata$x",
+      "address": "0x404d4c",
+      "size": 36,
+      "bindings": {},
+      "internal_bindings": [
+        {
+          "section": 42,
+          "offset": 0,
+          "address": "0x403dc6"
+        },
+        {
+          "section": 44,
+          "offset": 0,
+          "address": "0x404d4c"
+        }
+      ]
+    },
+    {
+      "id": "aim.registry_writable.section.43",
+      "object": "registration.obj",
+      "section_index": 43,
+      "section": ".rdata",
+      "address": "0x4045e4",
+      "size": 19,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.show_startup_error.section.49",
+      "object": "components.obj",
+      "section_index": 49,
+      "section": ".text",
+      "address": "0x401bde",
+      "size": 51,
+      "bindings": {
+        "__imp__LoadLibraryA@4": "0x4040e8",
+        "_OscoreInitLpShare@8": "0x4038f4",
+        "_ErrorBox": "0x4038ee",
+        "__imp__FreeLibrary@4": "0x404098"
+      },
+      "internal_bindings": [
+        {
+          "section": 50,
+          "offset": 0,
+          "address": "0x4045f8"
+        },
+        {
+          "section": 4,
+          "offset": 536,
+          "address": "0x406038"
+        }
+      ]
+    },
+    {
+      "id": "aim.show_startup_error.section.50",
+      "object": "components.obj",
+      "section_index": 50,
+      "section": ".rdata",
+      "address": "0x4045f8",
+      "size": 11,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.show_component_error.section.52",
+      "object": "components.obj",
+      "section_index": 52,
+      "section": ".text",
+      "address": "0x401c11",
+      "size": 90,
+      "bindings": {
+        "__imp__LoadLibraryA@4": "0x4040e8",
+        "_OscoreInitLpShare@8": "0x4038f4",
+        "_ErrorBox": "0x4038ee",
+        "__imp__FreeLibrary@4": "0x404098"
+      },
+      "internal_bindings": [
+        {
+          "section": 50,
+          "offset": 0,
+          "address": "0x4045f8"
+        },
+        {
+          "section": 53,
+          "offset": 0,
+          "address": "0x404418"
+        },
+        {
+          "section": 4,
+          "offset": 536,
+          "address": "0x406038"
+        },
+        {
+          "section": 4,
+          "offset": 0,
+          "address": "0x406240"
+        },
+        {
+          "section": 4,
+          "offset": 8,
+          "address": "0x406140"
+        },
+        {
+          "section": 4,
+          "offset": 408,
+          "address": "0x4061c0"
+        },
+        {
+          "section": 4,
+          "offset": 144,
+          "address": "0x406040"
+        }
+      ]
+    },
+    {
+      "id": "aim.show_component_error.section.50",
+      "object": "components.obj",
+      "section_index": 50,
+      "section": ".rdata",
+      "address": "0x4045f8",
+      "size": 11,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.show_component_error.section.53",
+      "object": "components.obj",
+      "section_index": 53,
+      "section": ".rdata",
+      "address": "0x404418",
+      "size": 1,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.file_time_before.section.5",
+      "object": "utilities.obj",
+      "section_index": 5,
+      "section": ".text",
       "address": "0x401c6b",
       "size": 35,
-      "bindings": {}
+      "bindings": {},
+      "internal_bindings": []
     },
     {
-      "id": "aim.allocate_zeroed",
-      "object": "allocate_zeroed.obj",
+      "id": "aim.register_servers.section.32",
+      "object": "registration.obj",
+      "section_index": 32,
+      "section": ".text",
+      "address": "0x401f09",
+      "size": 599,
+      "bindings": {
+        "__imp_??1TBstr@XPRT@@QAE@XZ": "0x404228",
+        "__EH_prolog": "0x4039a0",
+        "___security_cookie": "0x406024",
+        "__imp__GetModuleHandleA@4": "0x4040b4",
+        "__imp__GetModuleFileNameA@12": "0x404094",
+        "?show_startup_error@@YAHXZ": "0x401bde",
+        "__imp_??0TBstr@XPRT@@QAE@PBD@Z": "0x404204",
+        "__imp_?ReverseFind@TBstr@XPRT@@QBEHG@Z": "0x404210",
+        "__imp_?Left@TBstr@XPRT@@QBE?AV12@H@Z": "0x40420c",
+        "__imp_?Assign@TBstr@XPRT@@QAEAAV12@ABV12@@Z": "0x404200",
+        "__imp_?GetMultibyteString@TBstr@XPRT@@QBEPBDXZ": "0x404214",
+        "__imp_?Append@TBstr@XPRT@@QAEAAV12@PBD@Z": "0x4041fc",
+        "__imp_??0TBstr@XPRT@@QAE@ABV01@@Z": "0x404208",
+        "__imp__LoadLibraryA@4": "0x4040e8",
+        "__imp__GetProcAddress@8": "0x4040b8",
+        "__imp__FreeLibrary@4": "0x404098",
+        "_IID_IUnknown": "0x404c84",
+        "__imp__CoCreateInstance@20": "0x404230",
+        "__except_list": "0x0",
+        "@__security_check_cookie@4": "0x403961"
+      },
+      "internal_bindings": [
+        {
+          "section": 33,
+          "offset": 48,
+          "address": "0x403e09"
+        },
+        {
+          "section": 3,
+          "offset": 0,
+          "address": "0x40100f"
+        },
+        {
+          "section": 38,
+          "offset": 0,
+          "address": "0x404628"
+        },
+        {
+          "section": 37,
+          "offset": 0,
+          "address": "0x40461c"
+        },
+        {
+          "section": 36,
+          "offset": 0,
+          "address": "0x404610"
+        },
+        {
+          "section": 35,
+          "offset": 0,
+          "address": "0x404ae4"
+        },
+        {
+          "section": 34,
+          "offset": 0,
+          "address": "0x404608"
+        }
+      ]
+    },
+    {
+      "id": "aim.register_servers.section.33",
+      "object": "registration.obj",
+      "section_index": 33,
+      "section": ".text$x",
+      "address": "0x403dd9",
+      "size": 58,
+      "bindings": {
+        "__imp_??1TBstr@XPRT@@QAE@XZ": "0x404228",
+        "___CxxFrameHandler": "0x40398e"
+      },
+      "internal_bindings": [
+        {
+          "section": 39,
+          "offset": 32,
+          "address": "0x404d90"
+        }
+      ]
+    },
+    {
+      "id": "aim.register_servers.section.39",
+      "object": "registration.obj",
+      "section_index": 39,
+      "section": ".xdata$x",
+      "address": "0x404d70",
+      "size": 60,
+      "bindings": {},
+      "internal_bindings": [
+        {
+          "section": 33,
+          "offset": 0,
+          "address": "0x403dd9"
+        },
+        {
+          "section": 33,
+          "offset": 12,
+          "address": "0x403de5"
+        },
+        {
+          "section": 33,
+          "offset": 24,
+          "address": "0x403df1"
+        },
+        {
+          "section": 33,
+          "offset": 36,
+          "address": "0x403dfd"
+        },
+        {
+          "section": 39,
+          "offset": 0,
+          "address": "0x404d70"
+        }
+      ]
+    },
+    {
+      "id": "aim.register_servers.section.38",
+      "object": "registration.obj",
+      "section_index": 38,
+      "section": ".rdata",
+      "address": "0x404628",
+      "size": 18,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_servers.section.37",
+      "object": "registration.obj",
+      "section_index": 37,
+      "section": ".rdata",
+      "address": "0x40461c",
+      "size": 11,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_servers.section.36",
+      "object": "registration.obj",
+      "section_index": 36,
+      "section": ".rdata",
+      "address": "0x404610",
+      "size": 12,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_servers.section.35",
+      "object": "registration.obj",
+      "section_index": 35,
+      "section": ".rdata",
+      "address": "0x404ae4",
+      "size": 16,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_servers.section.34",
+      "object": "registration.obj",
+      "section_index": 34,
+      "section": ".rdata",
+      "address": "0x404608",
+      "size": 7,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.allocate_zeroed.section.7",
+      "object": "utilities.obj",
+      "section_index": 7,
+      "section": ".text",
       "address": "0x402160",
       "size": 37,
       "bindings": {
         "__imp__malloc": "0x404168",
         "_memset": "0x403982"
-      }
+      },
+      "internal_bindings": []
     },
     {
-      "id": "aim.registry.body",
-      "object": "registry_writable.obj",
+      "id": "aim.copy_dll_registration.section.7",
+      "object": "components.obj",
+      "section_index": 7,
       "section": ".text",
-      "address": "0x401b52",
-      "size": 140,
+      "address": "0x402185",
+      "size": 47,
       "bindings": {
-        "__EH_prolog": "0x4039a0",
-        "__imp_??0TBstr@XPRT@@QAE@PBD@Z": "0x404204",
-        "__imp_?Append@TBstr@XPRT@@QAEAAV12@PBD@Z": "0x4041fc",
-        "__imp_?GetMultibyteString@TBstr@XPRT@@QBEPBDXZ": "0x404214",
-        "__imp___access": "0x404170",
-        "__imp_??1TBstr@XPRT@@QAE@XZ": "0x404228",
-        "__except_list": "0x0",
-        "___CxxFrameHandler": "0x40398e"
+        "?guid_equal@@YAHPBU_GUID@@0@Z": "0x401650",
+        "__imp__xprt_wcscpy": "0x404220"
       },
       "internal_bindings": [
         {
-          "section": 4,
+          "section": 3,
           "offset": 0,
-          "address": "0x403dc6"
-        },
-        {
-          "section": 4,
-          "offset": 9,
-          "address": "0x403dcf"
-        },
-        {
-          "section": 5,
-          "offset": 0,
-          "address": "0x4045e4"
-        },
-        {
-          "section": 6,
-          "offset": 0,
-          "address": "0x404d4c"
-        },
-        {
-          "section": 6,
-          "offset": 8,
-          "address": "0x404d54"
+          "address": "0x40426c"
         }
       ]
     },
     {
-      "id": "aim.registry.cleanup",
-      "object": "registry_writable.obj",
+      "id": "aim.copy_build_version.section.9",
+      "object": "components.obj",
+      "section_index": 9,
+      "section": ".text",
+      "address": "0x4021b4",
+      "size": 47,
+      "bindings": {
+        "?guid_equal@@YAHPBU_GUID@@0@Z": "0x401650",
+        "__imp__xprt_wcscpy": "0x404220"
+      },
+      "internal_bindings": [
+        {
+          "section": 3,
+          "offset": 0,
+          "address": "0x40426c"
+        }
+      ]
+    },
+    {
+      "id": "aim.register_cool_utils.section.45",
+      "object": "registration.obj",
+      "section_index": 45,
+      "section": ".text",
+      "address": "0x4021e3",
+      "size": 262,
+      "bindings": {
+        "__imp_??1TBstr@XPRT@@QAE@XZ": "0x404228",
+        "__EH_prolog": "0x4039a0",
+        "___security_cookie": "0x406024",
+        "__imp_??0TBstr@XPRT@@QAE@PBD@Z": "0x404204",
+        "__imp_?Append@TBstr@XPRT@@QAEAAV12@PBD@Z": "0x4041fc",
+        "__imp_?GetString@TBstr@XPRT@@QBEPBGXZ": "0x404218",
+        "__imp__XpcsCLSIDFromString@8": "0x4041f0",
+        "__imp__XpcsRegisterClass@8": "0x4041e8",
+        "__except_list": "0x0",
+        "@__security_check_cookie@4": "0x403961"
+      },
+      "internal_bindings": [
+        {
+          "section": 46,
+          "offset": 36,
+          "address": "0x403e37"
+        },
+        {
+          "section": 50,
+          "offset": 0,
+          "address": "0x4046b4"
+        },
+        {
+          "section": 49,
+          "offset": 0,
+          "address": "0x40468c"
+        },
+        {
+          "section": 48,
+          "offset": 0,
+          "address": "0x404664"
+        },
+        {
+          "section": 47,
+          "offset": 0,
+          "address": "0x40463c"
+        }
+      ]
+    },
+    {
+      "id": "aim.register_cool_utils.section.46",
+      "object": "registration.obj",
+      "section_index": 46,
       "section": ".text$x",
-      "address": "0x403dc6",
-      "size": 19,
+      "address": "0x403e13",
+      "size": 46,
       "bindings": {
-        "__EH_prolog": "0x4039a0",
-        "__imp_??0TBstr@XPRT@@QAE@PBD@Z": "0x404204",
-        "__imp_?Append@TBstr@XPRT@@QAEAAV12@PBD@Z": "0x4041fc",
-        "__imp_?GetMultibyteString@TBstr@XPRT@@QBEPBDXZ": "0x404214",
-        "__imp___access": "0x404170",
         "__imp_??1TBstr@XPRT@@QAE@XZ": "0x404228",
-        "__except_list": "0x0",
         "___CxxFrameHandler": "0x40398e"
       },
       "internal_bindings": [
         {
-          "section": 4,
-          "offset": 0,
-          "address": "0x403dc6"
-        },
-        {
-          "section": 4,
-          "offset": 9,
-          "address": "0x403dcf"
-        },
-        {
-          "section": 5,
-          "offset": 0,
-          "address": "0x4045e4"
-        },
-        {
-          "section": 6,
-          "offset": 0,
-          "address": "0x404d4c"
-        },
-        {
-          "section": 6,
-          "offset": 8,
-          "address": "0x404d54"
+          "section": 51,
+          "offset": 32,
+          "address": "0x404dcc"
         }
       ]
     },
     {
-      "id": "aim.registry.unwind",
-      "object": "registry_writable.obj",
+      "id": "aim.register_cool_utils.section.51",
+      "object": "registration.obj",
+      "section_index": 51,
       "section": ".xdata$x",
-      "address": "0x404d4c",
-      "size": 36,
-      "bindings": {
-        "__EH_prolog": "0x4039a0",
-        "__imp_??0TBstr@XPRT@@QAE@PBD@Z": "0x404204",
-        "__imp_?Append@TBstr@XPRT@@QAEAAV12@PBD@Z": "0x4041fc",
-        "__imp_?GetMultibyteString@TBstr@XPRT@@QBEPBDXZ": "0x404214",
-        "__imp___access": "0x404170",
-        "__imp_??1TBstr@XPRT@@QAE@XZ": "0x404228",
-        "__except_list": "0x0",
-        "___CxxFrameHandler": "0x40398e"
-      },
+      "address": "0x404dac",
+      "size": 60,
+      "bindings": {},
       "internal_bindings": [
         {
-          "section": 4,
+          "section": 46,
           "offset": 0,
-          "address": "0x403dc6"
+          "address": "0x403e13"
         },
         {
-          "section": 4,
+          "section": 46,
           "offset": 9,
-          "address": "0x403dcf"
+          "address": "0x403e1c"
         },
         {
-          "section": 5,
+          "section": 46,
+          "offset": 18,
+          "address": "0x403e25"
+        },
+        {
+          "section": 46,
+          "offset": 27,
+          "address": "0x403e2e"
+        },
+        {
+          "section": 51,
           "offset": 0,
-          "address": "0x4045e4"
-        },
-        {
-          "section": 6,
-          "offset": 0,
-          "address": "0x404d4c"
-        },
-        {
-          "section": 6,
-          "offset": 8,
-          "address": "0x404d54"
+          "address": "0x404dac"
         }
       ]
     },
     {
-      "id": "aim.registry.string",
-      "object": "registry_writable.obj",
+      "id": "aim.register_cool_utils.section.50",
+      "object": "registration.obj",
+      "section_index": 50,
+      "section": ".rdata",
+      "address": "0x4046b4",
+      "size": 14,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_cool_utils.section.49",
+      "object": "registration.obj",
+      "section_index": 49,
+      "section": ".rdata",
+      "address": "0x40468c",
+      "size": 39,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_cool_utils.section.48",
+      "object": "registration.obj",
+      "section_index": 48,
+      "section": ".rdata",
+      "address": "0x404664",
+      "size": 39,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.register_cool_utils.section.47",
+      "object": "registration.obj",
+      "section_index": 47,
+      "section": ".rdata",
+      "address": "0x40463c",
+      "size": 39,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.registry_needs_update.section.55",
+      "object": "components.obj",
+      "section_index": 55,
+      "section": ".text",
+      "address": "0x4022e9",
+      "size": 265,
+      "bindings": {
+        "__imp_??1TBstr@XPRT@@QAE@XZ": "0x404228",
+        "__EH_prolog": "0x4039a0",
+        "___security_cookie": "0x406024",
+        "__imp__XpcsEnumRegistrations@8": "0x4041d8",
+        "__imp_??0TBstr@XPRT@@QAE@PBG@Z": "0x404224",
+        "__imp_??0TBstr@XPRT@@QAE@PBD@Z": "0x404204",
+        "__imp_?GetMultibyteString@TBstr@XPRT@@QBEPBDXZ": "0x404214",
+        "__imp_?GetString@TBstr@XPRT@@QBEPBGXZ": "0x404218",
+        "__imp_?CompareNoCase@TBstr@XPRT@@QBEHPBG@Z": "0x40421c",
+        "__imp_?Append@TBstr@XPRT@@QAEAAV12@PBD@Z": "0x4041fc",
+        "?registry_writable@@YAHPBD@Z": "0x401b52",
+        "__except_list": "0x0",
+        "@__security_check_cookie@4": "0x403961"
+      },
+      "internal_bindings": [
+        {
+          "section": 56,
+          "offset": 36,
+          "address": "0x403e65"
+        },
+        {
+          "section": 9,
+          "offset": 0,
+          "address": "0x4021b4"
+        },
+        {
+          "section": 21,
+          "offset": 0,
+          "address": "0x404494"
+        },
+        {
+          "section": 57,
+          "offset": 0,
+          "address": "0x4045e4"
+        }
+      ]
+    },
+    {
+      "id": "aim.registry_needs_update.section.56",
+      "object": "components.obj",
+      "section_index": 56,
+      "section": ".text$x",
+      "address": "0x403e41",
+      "size": 46,
+      "bindings": {
+        "__imp_??1TBstr@XPRT@@QAE@XZ": "0x404228",
+        "___CxxFrameHandler": "0x40398e"
+      },
+      "internal_bindings": [
+        {
+          "section": 58,
+          "offset": 24,
+          "address": "0x404e00"
+        }
+      ]
+    },
+    {
+      "id": "aim.registry_needs_update.section.58",
+      "object": "components.obj",
+      "section_index": 58,
+      "section": ".xdata$x",
+      "address": "0x404de8",
+      "size": 52,
+      "bindings": {},
+      "internal_bindings": [
+        {
+          "section": 56,
+          "offset": 0,
+          "address": "0x403e41"
+        },
+        {
+          "section": 56,
+          "offset": 12,
+          "address": "0x403e4d"
+        },
+        {
+          "section": 56,
+          "offset": 24,
+          "address": "0x403e59"
+        },
+        {
+          "section": 58,
+          "offset": 0,
+          "address": "0x404de8"
+        }
+      ]
+    },
+    {
+      "id": "aim.registry_needs_update.section.21",
+      "object": "components.obj",
+      "section_index": 21,
+      "section": ".rdata",
+      "address": "0x404494",
+      "size": 5,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.registry_needs_update.section.57",
+      "object": "components.obj",
+      "section_index": 57,
       "section": ".rdata",
       "address": "0x4045e4",
       "size": 19,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.component_start.section.66",
+      "object": "components.obj",
+      "section_index": 66,
+      "section": ".text",
+      "address": "0x402652",
+      "size": 105,
       "bindings": {
-        "__EH_prolog": "0x4039a0",
-        "__imp_??0TBstr@XPRT@@QAE@PBD@Z": "0x404204",
-        "__imp_?Append@TBstr@XPRT@@QAEAAV12@PBD@Z": "0x4041fc",
-        "__imp_?GetMultibyteString@TBstr@XPRT@@QBEPBDXZ": "0x404214",
-        "__imp___access": "0x404170",
-        "__imp_??1TBstr@XPRT@@QAE@XZ": "0x404228",
-        "__except_list": "0x0",
-        "___CxxFrameHandler": "0x40398e"
+        "__imp___stricmp": "0x404138"
+      },
+      "internal_bindings": [
+        {
+          "section": 69,
+          "offset": 0,
+          "address": "0x4046fc"
+        },
+        {
+          "section": 11,
+          "offset": 0,
+          "address": "0x401668"
+        },
+        {
+          "section": 68,
+          "offset": 0,
+          "address": "0x4046e8"
+        },
+        {
+          "section": 60,
+          "offset": 0,
+          "address": "0x4023f2"
+        },
+        {
+          "section": 67,
+          "offset": 0,
+          "address": "0x4046dc"
+        },
+        {
+          "section": 35,
+          "offset": 0,
+          "address": "0x401966"
+        }
+      ]
+    },
+    {
+      "id": "aim.component_start.section.69",
+      "object": "components.obj",
+      "section_index": 69,
+      "section": ".rdata",
+      "address": "0x4046fc",
+      "size": 11,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.component_start.section.68",
+      "object": "components.obj",
+      "section_index": 68,
+      "section": ".rdata",
+      "address": "0x4046e8",
+      "size": 17,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.component_start.section.67",
+      "object": "components.obj",
+      "section_index": 67,
+      "section": ".rdata",
+      "address": "0x4046dc",
+      "size": 11,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.parse_components.section.70",
+      "object": "components.obj",
+      "section_index": 70,
+      "section": ".text",
+      "address": "0x4026bb",
+      "size": 247,
+      "bindings": {
+        "_XML_ParserCreate": "0x4038e2",
+        "?allocate_zeroed@@YAPAXI@Z": "0x402160",
+        "_strcpy": "0x403976",
+        "_XML_SetUserData": "0x4038dc",
+        "_XML_SetElementHandler": "0x4038d6",
+        "_strlen": "0x4039c6",
+        "_XML_Parse": "0x4038d0",
+        "_XML_GetCurrentLineNumber": "0x4038ca",
+        "_XML_GetErrorCode": "0x4038c4",
+        "_XML_ErrorString": "0x4038be",
+        "__imp__strncpy": "0x404180",
+        "__imp___itoa": "0x40415c",
+        "_XML_ParserFree": "0x4038b8",
+        "__imp__free": "0x404164"
+      },
+      "internal_bindings": [
+        {
+          "section": 47,
+          "offset": 0,
+          "address": "0x401b47"
+        },
+        {
+          "section": 66,
+          "offset": 0,
+          "address": "0x402652"
+        },
+        {
+          "section": 4,
+          "offset": 144,
+          "address": "0x406040"
+        },
+        {
+          "section": 4,
+          "offset": 408,
+          "address": "0x4061c0"
+        },
+        {
+          "section": 4,
+          "offset": 0,
+          "address": "0x406240"
+        }
+      ]
+    },
+    {
+      "id": "aim.parse_component_resource.section.71",
+      "object": "components.obj",
+      "section_index": 71,
+      "section": ".text",
+      "address": "0x4027b2",
+      "size": 148,
+      "bindings": {
+        "__imp__FindResourceA@12": "0x4040cc",
+        "__imp__LoadResource@8": "0x4040c8",
+        "__imp__LockResource@4": "0x4040c4",
+        "__imp__SizeofResource@8": "0x4040c0",
+        "?allocate_zeroed@@YAPAXI@Z": "0x402160",
+        "__imp__strncpy": "0x404180",
+        "__imp__free": "0x404164",
+        "__imp__FreeResource@4": "0x4040bc"
+      },
+      "internal_bindings": [
+        {
+          "section": 72,
+          "offset": 0,
+          "address": "0x404708"
+        },
+        {
+          "section": 4,
+          "offset": 136,
+          "address": "0x406244"
+        },
+        {
+          "section": 70,
+          "offset": 0,
+          "address": "0x4026bb"
+        }
+      ]
+    },
+    {
+      "id": "aim.parse_component_resource.section.72",
+      "object": "components.obj",
+      "section_index": 72,
+      "section": ".rdata",
+      "address": "0x404708",
+      "size": 7,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.describe_address.section.3",
+      "object": "crash.obj",
+      "section_index": 3,
+      "section": ".text",
+      "address": "0x402c05",
+      "size": 236,
+      "bindings": {
+        "__imp__lstrcpynA@12": "0x4040dc",
+        "__imp__VirtualQuery@12": "0x4040d8",
+        "__imp__GetModuleFileNameA@12": "0x404094",
+        "__imp__IsBadReadPtr@8": "0x4040d4"
       },
       "internal_bindings": [
         {
           "section": 4,
           "offset": 0,
-          "address": "0x403dc6"
+          "address": "0x40471c"
+        }
+      ]
+    },
+    {
+      "id": "aim.describe_address.section.4",
+      "object": "crash.obj",
+      "section_index": 4,
+      "section": ".rdata",
+      "address": "0x40471c",
+      "size": 10,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.5",
+      "object": "crash.obj",
+      "section_index": 5,
+      "section": ".text",
+      "address": "0x402cf1",
+      "size": 349,
+      "bindings": {
+        "__imp__GetModuleHandleA@4": "0x4040b4",
+        "__imp__FormatMessageA@28": "0x4040e0"
+      },
+      "internal_bindings": [
+        {
+          "section": 29,
+          "offset": 0,
+          "address": "0x4048bc"
         },
         {
-          "section": 4,
-          "offset": 9,
-          "address": "0x403dcf"
+          "section": 28,
+          "offset": 0,
+          "address": "0x4048b0"
+        },
+        {
+          "section": 27,
+          "offset": 0,
+          "address": "0x4048a4"
+        },
+        {
+          "section": 26,
+          "offset": 0,
+          "address": "0x40488c"
+        },
+        {
+          "section": 25,
+          "offset": 0,
+          "address": "0x404880"
+        },
+        {
+          "section": 24,
+          "offset": 0,
+          "address": "0x404870"
+        },
+        {
+          "section": 23,
+          "offset": 0,
+          "address": "0x404858"
+        },
+        {
+          "section": 22,
+          "offset": 0,
+          "address": "0x404844"
+        },
+        {
+          "section": 21,
+          "offset": 0,
+          "address": "0x404828"
+        },
+        {
+          "section": 20,
+          "offset": 0,
+          "address": "0x404814"
+        },
+        {
+          "section": 19,
+          "offset": 0,
+          "address": "0x404804"
+        },
+        {
+          "section": 18,
+          "offset": 0,
+          "address": "0x4047ec"
+        },
+        {
+          "section": 5,
+          "offset": 313,
+          "address": "0x402e2a"
+        },
+        {
+          "section": 17,
+          "offset": 0,
+          "address": "0x4047d8"
+        },
+        {
+          "section": 16,
+          "offset": 0,
+          "address": "0x4047c4"
+        },
+        {
+          "section": 15,
+          "offset": 0,
+          "address": "0x4047ac"
+        },
+        {
+          "section": 14,
+          "offset": 0,
+          "address": "0x40479c"
+        },
+        {
+          "section": 13,
+          "offset": 0,
+          "address": "0x40478c"
+        },
+        {
+          "section": 12,
+          "offset": 0,
+          "address": "0x40477c"
+        },
+        {
+          "section": 11,
+          "offset": 0,
+          "address": "0x404768"
+        },
+        {
+          "section": 10,
+          "offset": 0,
+          "address": "0x404758"
+        },
+        {
+          "section": 9,
+          "offset": 0,
+          "address": "0x404744"
+        },
+        {
+          "section": 8,
+          "offset": 0,
+          "address": "0x404734"
+        },
+        {
+          "section": 7,
+          "offset": 1344,
+          "address": "0x406258"
+        },
+        {
+          "section": 6,
+          "offset": 0,
+          "address": "0x404728"
+        },
+        {
+          "section": 5,
+          "offset": 209,
+          "address": "0x402dc2"
+        },
+        {
+          "section": 5,
+          "offset": 215,
+          "address": "0x402dc8"
+        },
+        {
+          "section": 5,
+          "offset": 221,
+          "address": "0x402dce"
+        },
+        {
+          "section": 5,
+          "offset": 227,
+          "address": "0x402dd4"
+        },
+        {
+          "section": 5,
+          "offset": 233,
+          "address": "0x402dda"
+        },
+        {
+          "section": 5,
+          "offset": 239,
+          "address": "0x402de0"
+        },
+        {
+          "section": 5,
+          "offset": 245,
+          "address": "0x402de6"
+        },
+        {
+          "section": 5,
+          "offset": 251,
+          "address": "0x402dec"
+        },
+        {
+          "section": 5,
+          "offset": 257,
+          "address": "0x402df2"
+        }
+      ]
+    },
+    {
+      "id": "aim.exception_name.section.29",
+      "object": "crash.obj",
+      "section_index": 29,
+      "section": ".rdata",
+      "address": "0x4048bc",
+      "size": 17,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.28",
+      "object": "crash.obj",
+      "section_index": 28,
+      "section": ".rdata",
+      "address": "0x4048b0",
+      "size": 12,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.27",
+      "object": "crash.obj",
+      "section_index": 27,
+      "section": ".rdata",
+      "address": "0x4048a4",
+      "size": 11,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.26",
+      "object": "crash.obj",
+      "section_index": 26,
+      "section": ".rdata",
+      "address": "0x40488c",
+      "size": 22,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.25",
+      "object": "crash.obj",
+      "section_index": 25,
+      "section": ".rdata",
+      "address": "0x404880",
+      "size": 11,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.24",
+      "object": "crash.obj",
+      "section_index": 24,
+      "section": ".rdata",
+      "address": "0x404870",
+      "size": 14,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.23",
+      "object": "crash.obj",
+      "section_index": 23,
+      "section": ".rdata",
+      "address": "0x404858",
+      "size": 22,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.22",
+      "object": "crash.obj",
+      "section_index": 22,
+      "section": ".rdata",
+      "address": "0x404844",
+      "size": 20,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.21",
+      "object": "crash.obj",
+      "section_index": 21,
+      "section": ".rdata",
+      "address": "0x404828",
+      "size": 25,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.20",
+      "object": "crash.obj",
+      "section_index": 20,
+      "section": ".rdata",
+      "address": "0x404814",
+      "size": 20,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.19",
+      "object": "crash.obj",
+      "section_index": 19,
+      "section": ".rdata",
+      "address": "0x404804",
+      "size": 15,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.18",
+      "object": "crash.obj",
+      "section_index": 18,
+      "section": ".rdata",
+      "address": "0x4047ec",
+      "size": 21,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.17",
+      "object": "crash.obj",
+      "section_index": 17,
+      "section": ".rdata",
+      "address": "0x4047d8",
+      "size": 19,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.16",
+      "object": "crash.obj",
+      "section_index": 16,
+      "section": ".rdata",
+      "address": "0x4047c4",
+      "size": 19,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.15",
+      "object": "crash.obj",
+      "section_index": 15,
+      "section": ".rdata",
+      "address": "0x4047ac",
+      "size": 22,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.14",
+      "object": "crash.obj",
+      "section_index": 14,
+      "section": ".rdata",
+      "address": "0x40479c",
+      "size": 13,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.13",
+      "object": "crash.obj",
+      "section_index": 13,
+      "section": ".rdata",
+      "address": "0x40478c",
+      "size": 16,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.12",
+      "object": "crash.obj",
+      "section_index": 12,
+      "section": ".rdata",
+      "address": "0x40477c",
+      "size": 14,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.11",
+      "object": "crash.obj",
+      "section_index": 11,
+      "section": ".rdata",
+      "address": "0x404768",
+      "size": 19,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.10",
+      "object": "crash.obj",
+      "section_index": 10,
+      "section": ".rdata",
+      "address": "0x404758",
+      "size": 13,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.9",
+      "object": "crash.obj",
+      "section_index": 9,
+      "section": ".rdata",
+      "address": "0x404744",
+      "size": 17,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.8",
+      "object": "crash.obj",
+      "section_index": 8,
+      "section": ".rdata",
+      "address": "0x404734",
+      "size": 15,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.exception_name.section.6",
+      "object": "crash.obj",
+      "section_index": 6,
+      "section": ".rdata",
+      "address": "0x404728",
+      "size": 10,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.report_property.section.31",
+      "object": "crash.obj",
+      "section_index": 31,
+      "section": ".text",
+      "address": "0x402e4e",
+      "size": 39,
+      "bindings": {
+        "__imp__wvsprintfA@12": "0x4041b0",
+        "_PHSetString@12": "0x4038fa"
+      },
+      "internal_bindings": [
+        {
+          "section": 7,
+          "offset": 40,
+          "address": "0x406360"
+        },
+        {
+          "section": 32,
+          "offset": 0,
+          "address": "0x4048d0"
+        }
+      ]
+    },
+    {
+      "id": "aim.report_property.section.32",
+      "object": "crash.obj",
+      "section_index": 32,
+      "section": ".rdata",
+      "address": "0x4048d0",
+      "size": 10,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.report_calltrace.section.34",
+      "object": "crash.obj",
+      "section_index": 34,
+      "section": ".text",
+      "address": "0x402e75",
+      "size": 212,
+      "bindings": {
+        "__imp__wsprintfA": "0x4041a8",
+        "__imp__IsBadReadPtr@8": "0x4040d4"
+      },
+      "internal_bindings": [
+        {
+          "section": 7,
+          "offset": 1080,
+          "address": "0x406688"
+        },
+        {
+          "section": 3,
+          "offset": 0,
+          "address": "0x402c05"
+        },
+        {
+          "section": 36,
+          "offset": 0,
+          "address": "0x4048ec"
+        },
+        {
+          "section": 7,
+          "offset": 4,
+          "address": "0x406668"
+        },
+        {
+          "section": 35,
+          "offset": 0,
+          "address": "0x4048dc"
+        },
+        {
+          "section": 31,
+          "offset": 0,
+          "address": "0x402e4e"
+        }
+      ]
+    },
+    {
+      "id": "aim.report_calltrace.section.36",
+      "object": "crash.obj",
+      "section_index": 36,
+      "section": ".rdata",
+      "address": "0x4048ec",
+      "size": 12,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.report_calltrace.section.35",
+      "object": "crash.obj",
+      "section_index": 35,
+      "section": ".rdata",
+      "address": "0x4048dc",
+      "size": 13,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.report_exception.section.38",
+      "object": "crash.obj",
+      "section_index": 38,
+      "section": ".text",
+      "address": "0x402f49",
+      "size": 214,
+      "bindings": {},
+      "internal_bindings": [
+        {
+          "section": 7,
+          "offset": 816,
+          "address": "0x406790"
+        },
+        {
+          "section": 3,
+          "offset": 0,
+          "address": "0x402c05"
         },
         {
           "section": 5,
           "offset": 0,
-          "address": "0x4045e4"
+          "address": "0x402cf1"
         },
+        {
+          "section": 42,
+          "offset": 0,
+          "address": "0x40498c"
+        },
+        {
+          "section": 41,
+          "offset": 0,
+          "address": "0x404984"
+        },
+        {
+          "section": 31,
+          "offset": 0,
+          "address": "0x402e4e"
+        },
+        {
+          "section": 40,
+          "offset": 0,
+          "address": "0x404900"
+        },
+        {
+          "section": 39,
+          "offset": 0,
+          "address": "0x4048f8"
+        },
+        {
+          "section": 34,
+          "offset": 0,
+          "address": "0x402e75"
+        }
+      ]
+    },
+    {
+      "id": "aim.report_exception.section.42",
+      "object": "crash.obj",
+      "section_index": 42,
+      "section": ".rdata",
+      "address": "0x40498c",
+      "size": 32,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.report_exception.section.41",
+      "object": "crash.obj",
+      "section_index": 41,
+      "section": ".rdata",
+      "address": "0x404984",
+      "size": 5,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.report_exception.section.40",
+      "object": "crash.obj",
+      "section_index": 40,
+      "section": ".rdata",
+      "address": "0x404900",
+      "size": 130,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.report_exception.section.39",
+      "object": "crash.obj",
+      "section_index": 39,
+      "section": ".rdata",
+      "address": "0x4048f8",
+      "size": 5,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.client_exception_filter.section.43",
+      "object": "crash.obj",
+      "section_index": 43,
+      "section": ".text",
+      "address": "0x40301f",
+      "size": 59,
+      "bindings": {
+        "_PHSetGeneralInfo": "0x403900"
+      },
+      "internal_bindings": [
+        {
+          "section": 7,
+          "offset": 1604,
+          "address": "0x406250"
+        },
+        {
+          "section": 38,
+          "offset": 0,
+          "address": "0x402f49"
+        },
+        {
+          "section": 7,
+          "offset": 0,
+          "address": "0x40624c"
+        }
+      ]
+    },
+    {
+      "id": "aim.install_exception_filter.section.45",
+      "object": "crash.obj",
+      "section_index": 45,
+      "section": ".text",
+      "address": "0x40305a",
+      "size": 23,
+      "bindings": {
+        "__imp__SetUnhandledExceptionFilter@4": "0x4040d0"
+      },
+      "internal_bindings": [
+        {
+          "section": 43,
+          "offset": 0,
+          "address": "0x40301f"
+        },
+        {
+          "section": 7,
+          "offset": 0,
+          "address": "0x40624c"
+        }
+      ]
+    },
+    {
+      "id": "aim.repair_shortcut.section.3",
+      "object": "startup.obj",
+      "section_index": 3,
+      "section": ".text",
+      "address": "0x403071",
+      "size": 524,
+      "bindings": {
+        "___security_cookie": "0x406024",
+        "__imp__SHGetMalloc@4": "0x404198",
+        "_RDBLoadString@16": "0x40392a",
+        "__imp__lstrcatA@8": "0x404090",
+        "__imp__lstrcpyA@8": "0x404088",
+        "__imp__GetFileAttributesA@4": "0x4040e4",
+        "__imp__SHGetSpecialFolderLocation@12": "0x40419c",
+        "__imp__SHGetPathFromIDListA@8": "0x4041a0",
+        "_strlen": "0x4039c6",
+        "__imp__FindFirstFileA@8": "0x4040b0",
+        "__imp__FindNextFileA@8": "0x4040ac",
+        "__imp__FindClose@4": "0x4040a8",
+        "__imp__MoveFileA@8": "0x4040a4",
+        "@__security_check_cookie@4": "0x403961"
+      },
+      "internal_bindings": [
         {
           "section": 6,
           "offset": 0,
-          "address": "0x404d4c"
+          "address": "0x4049b8"
         },
         {
-          "section": 6,
-          "offset": 8,
-          "address": "0x404d54"
+          "section": 5,
+          "offset": 0,
+          "address": "0x4049b4"
+        },
+        {
+          "section": 4,
+          "offset": 0,
+          "address": "0x4049b0"
         }
       ]
+    },
+    {
+      "id": "aim.repair_shortcut.section.6",
+      "object": "startup.obj",
+      "section_index": 6,
+      "section": ".rdata",
+      "address": "0x4049b8",
+      "size": 5,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.repair_shortcut.section.5",
+      "object": "startup.obj",
+      "section_index": 5,
+      "section": ".rdata",
+      "address": "0x4049b4",
+      "size": 2,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.repair_shortcut.section.4",
+      "object": "startup.obj",
+      "section_index": 4,
+      "section": ".rdata",
+      "address": "0x4049b0",
+      "size": 2,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.classify_command.section.8",
+      "object": "startup.obj",
+      "section_index": 8,
+      "section": ".text",
+      "address": "0x40327d",
+      "size": 174,
+      "bindings": {
+        "__chkstk": "0x403a10",
+        "___security_cookie": "0x406024",
+        "__imp__lstrcpynA@12": "0x4040dc",
+        "__imp__lstrcatA@8": "0x404090",
+        "__imp__strchr": "0x404150",
+        "__imp__lstrcpyA@8": "0x404088",
+        "__imp___strupr": "0x404130",
+        "__imp__LoadStringA@16": "0x4041ac",
+        "__imp__strstr": "0x404154",
+        "@__security_check_cookie@4": "0x403961"
+      },
+      "internal_bindings": [
+        {
+          "section": 9,
+          "offset": 0,
+          "address": "0x4049c0"
+        }
+      ]
+    },
+    {
+      "id": "aim.classify_command.section.9",
+      "object": "startup.obj",
+      "section_index": 9,
+      "section": ".rdata",
+      "address": "0x4049c0",
+      "size": 2,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.load_oscore.section.10",
+      "object": "startup.obj",
+      "section_index": 10,
+      "section": ".text",
+      "address": "0x40332b",
+      "size": 110,
+      "bindings": {
+        "__imp__GetModuleFileNameA@12": "0x404094",
+        "__imp__strrchr": "0x40417c",
+        "__imp__lstrcpyA@8": "0x404088",
+        "__imp__lstrcatA@8": "0x404090",
+        "__imp__LoadLibraryA@4": "0x4040e8"
+      },
+      "internal_bindings": [
+        {
+          "section": 12,
+          "offset": 532,
+          "address": "0x406aa8"
+        },
+        {
+          "section": 12,
+          "offset": 272,
+          "address": "0x406898"
+        },
+        {
+          "section": 12,
+          "offset": 8,
+          "address": "0x4069a0"
+        },
+        {
+          "section": 11,
+          "offset": 0,
+          "address": "0x4049c4"
+        }
+      ]
+    },
+    {
+      "id": "aim.load_oscore.section.11",
+      "object": "startup.obj",
+      "section_index": 11,
+      "section": ".rdata",
+      "address": "0x4049c4",
+      "size": 12,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.enable_aim_today.section.21",
+      "object": "startup.obj",
+      "section_index": 21,
+      "section": ".text",
+      "address": "0x40349a",
+      "size": 41,
+      "bindings": {
+        "_AIMToday_init": "0x403924",
+        "_AIMToday_createWindow@4": "0x40391e",
+        "_AIMToday_destroyWindow": "0x403918",
+        "_AIMToday_uninit": "0x403912"
+      },
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.explorer_installed.section.23",
+      "object": "startup.obj",
+      "section_index": 23,
+      "section": ".text",
+      "address": "0x4034c3",
+      "size": 137,
+      "bindings": {
+        "___security_cookie": "0x406024",
+        "__imp__RegOpenKeyExA@20": "0x404004",
+        "__imp__RegQueryValueExA@24": "0x404008",
+        "__imp__RegCloseKey@4": "0x404010",
+        "@__security_check_cookie@4": "0x403961"
+      },
+      "internal_bindings": [
+        {
+          "section": 25,
+          "offset": 0,
+          "address": "0x404a28"
+        },
+        {
+          "section": 24,
+          "offset": 0,
+          "address": "0x404a1c"
+        }
+      ]
+    },
+    {
+      "id": "aim.explorer_installed.section.25",
+      "object": "startup.obj",
+      "section_index": 25,
+      "section": ".rdata",
+      "address": "0x404a28",
+      "size": 50,
+      "bindings": {},
+      "internal_bindings": []
+    },
+    {
+      "id": "aim.explorer_installed.section.24",
+      "object": "startup.obj",
+      "section_index": 24,
+      "section": ".rdata",
+      "address": "0x404a1c",
+      "size": 12,
+      "bindings": {},
+      "internal_bindings": []
     }
   ],
   "abi_hypotheses": [
-    "XPRT::TBstr complete-object extent is eight bytes; base versus direct storage remains ambiguous."
+    "TBstr storage is eight bytes; direct fields versus nonvirtual base remains ambiguous."
   ]
 }

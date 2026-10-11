@@ -17,6 +17,31 @@ def fixture(label=b'local', external=False, addend=b'\0\0\0\0'):
 
 
 class CoffTests(unittest.TestCase):
+    def test_section_index_selects_between_same_named_contributions(self):
+        original = Path(__file__).resolve().parents[2] / 'originals/AIM/idlemon.dll'
+        image = pefile.PE(str(original))
+        address = image.OPTIONAL_HEADER.ImageBase + image.OPTIONAL_HEADER.AddressOfEntryPoint
+        expected = image.get_data(image.OPTIONAL_HEADER.AddressOfEntryPoint, 4)
+        image.close()
+        header = struct.pack('<HHIIIHH', 0x14c, 2, 0, 108, 0, 0, 0)
+        sections = b''.join(struct.pack('<8sIIIIIIHHI', b'.text', 0, 0, 4,
+                                       pointer, 0, 0, 0, 0, 0x60000020)
+                            for pointer in (100, 104))
+        wrong = bytes([expected[0] ^ 1]) + expected[1:]
+        raw = header + sections + wrong + expected + struct.pack('<I', 4)
+        item = {'id': 'second', 'object': 'group.obj', 'section': '.text',
+                'address': hex(address), 'size': 4, 'bindings': {}}
+        manifest = {'schema': 1, 'original_sha256': hashlib.sha256(original.read_bytes()).hexdigest(),
+                    'functions': [item]}
+        with tempfile.TemporaryDirectory() as directory:
+            Path(directory, 'group.obj').write_bytes(raw)
+            with self.assertRaisesRegex(ValueError, 'exactly one'):
+                compare_contributions(original, directory, manifest)
+            item['section_index'] = 2
+            self.assertTrue(compare_contributions(original, directory, manifest)['exact'])
+            item['section_index'] = 1
+            self.assertFalse(compare_contributions(original, directory, manifest)['exact'])
+
     def test_full_contribution_comparison_rejects_wrong_target_extent_and_hash(self):
         original = Path(__file__).resolve().parents[2] / 'originals/AIM/idlemon.dll'
         image = pefile.PE(str(original))
@@ -31,6 +56,13 @@ class CoffTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             Path(directory, 'test.obj').write_bytes(fixture(b'api', True))
             self.assertTrue(compare_contributions(original, directory, manifest)['exact'])
+            item['section_index'] = 1
+            self.assertTrue(compare_contributions(original, directory, manifest)['exact'])
+            for invalid in (0, 2, True, '1'):
+                item['section_index'] = invalid
+                with self.assertRaisesRegex(ValueError, 'section index'):
+                    compare_contributions(original, directory, manifest)
+            del item['section_index']
             item['bindings']['api'] = hex(word + 1)
             self.assertFalse(compare_contributions(original, directory, manifest)['exact'])
             item['bindings']['api'] = hex(word)

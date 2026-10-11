@@ -124,15 +124,11 @@
         "files": [
           "build.cmd",
           "fixture-manifest.json",
-          "src/allocate_zeroed.cpp",
           "src/client.h",
           "src/components.cpp",
           "src/crash.cpp",
-          "src/file_time_before.cpp",
-          "src/guid_equal.cpp",
           "src/import_aliases.h",
           "src/registration.cpp",
-          "src/registry_writable.cpp",
           "src/startup.cpp",
           "src/xprt.h",
           "deps/aim.res",
@@ -141,11 +137,17 @@
           "deps/oscore.def",
           "deps/oscres.def",
           "deps/Xpcs.def",
-          "deps/Xprt.def"
+          "deps/Xprt.def",
+          "src/utilities.cpp"
         ],
         "artifacts": [
           "builds/aim.exe",
-          "builds/aim.map"
+          "builds/aim.map",
+          "builds/utilities.obj",
+          "builds/registration.obj",
+          "builds/components.obj",
+          "builds/crash.obj",
+          "builds/startup.obj"
         ],
         "flags": "/O1 /MD /EHsc /GS"
       }
